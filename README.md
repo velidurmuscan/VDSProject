@@ -31,7 +31,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/velidurmuscan/VDSProject_Group6">
-    <img src="doc/TUKL_LOGO_4C.png" alt="Logo" width="80" height="80">
+    <img src="doc/TUKL_LOGO_4C.png" alt="Logo" width="400" height="200">
   </a>
 
   <h3 align="center">
@@ -89,7 +89,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-_Will _be _updated _later.
+_Will be updated later._
 <!--
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
@@ -110,7 +110,7 @@ Use the `BLANK_README.md` to get started.
 
 ### Built With
 
-_Will _be _updated _later.
+_Will be updated later._
 <!--
 This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
 
@@ -130,7 +130,7 @@ This section should list any major frameworks/libraries used to bootstrap your p
 <!-- GETTING STARTED -->
 ## Getting Started
 
-_Will _be _updated _later.
+_Will be updated later._
 <!--
 This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
@@ -139,7 +139,7 @@ To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-_Will _be _updated _later.
+_Will be updated later._
 <!--
 This is an example of how to list things you need to use the software and how to install them.
 * npm
@@ -151,7 +151,7 @@ This is an example of how to list things you need to use the software and how to
 
 ### Installation
 
-_Will _be _updated _later.
+_Will be updated later._
 <!--
 _Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
 
@@ -176,7 +176,7 @@ _Below is an example of how you can instruct your audience on installing and set
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-_Will _be _updated _later.
+_Will be updated later._
 <!--
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
@@ -189,7 +189,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- ROADMAP -->
 ## Roadmap
 
-_Will _be _updated _later.
+_Will be updated later._
 
 - [X] README implementation
 - [ ] CI reading&understanding
@@ -240,7 +240,7 @@ Don't forget to give the project a star! Thanks again!
 <!-- LICENSE -->
 ## License
 
-_Will _be _updated _later.
+_Will be updated later._
 <!--
 Distributed under the MIT License. See `LICENSE.txt` for more information.
 -->
@@ -253,7 +253,9 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <!-- Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com -->
 Veli Durmuşcan - durmusc@rhrk.uni-kl.de
+
 Shreya Vithal Kulhalli - kulhalli@rhrk.uni-kl.de
+
 Osama Omar Youssif Ayoub - ayoub@rhrk.uni-kl.de
 
 <!-- Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name) -->
@@ -300,13 +302,13 @@ You might find helpful links below.
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/velidurmuscan/VDSProject_Group6.svg?style=for-the-badge
 [contributors-url]: https://github.com/velidurmuscan/VDSProject_Group6/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
+[forks-shield]: https://img.shields.io/github/forks/velidurmuscan/VDSProject_Group6.svg?style=for-the-badge
 [forks-url]: https://github.com/velidurmuscan/VDSProject_Group6/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/velidurmuscan/VDSProject_Group6.svg?style=for-the-badge
 [stars-url]: https://github.com/velidurmuscan/VDSProject_Group6/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/velidurmuscan/VDSProject_Group6.svg?style=for-the-badge
 [issues-url]: https://github.com/velidurmuscan/VDSProject_Group6/issues
 <!--
 [license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
