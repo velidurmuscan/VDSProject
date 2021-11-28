@@ -43,7 +43,7 @@
   </h3>
 
   <p align="center">
-    An awesome README template to jumpstart your projects!
+    GitHub repository for Verification of Digital Systems Class Project
     <br />
     <a href="https://github.com/velidurmuscan/VDSProject_Group6"><strong>Explore the docs »</strong></a>
     <br />
@@ -56,6 +56,9 @@
   </p>
 </div>
 
+
+<br />
+<br />
 
 
 <!-- TABLE OF CONTENTS -->
@@ -272,7 +275,7 @@ You might find helpful links below.
 
 ### Project Related Resources
 
-### Given Task Links
+#### Given Task Links
 
 * [Google Test](https://github.com/google/googletest)
 * [GitHub CI Interactive Tutorial](https://lab.github.com/githubtraining/github-actions:-hello-world)
@@ -281,7 +284,7 @@ You might find helpful links below.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-### Additional Materials
+#### Additional Materials
 
 * [README Template](https://github.com/othneildrew/Best-README-Template)
 * [Travis CI Examples](https://github.com/deftio/travis-ci-cpp-example)
