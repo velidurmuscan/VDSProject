@@ -8,4 +8,13 @@
 #include "gtest/gtest.h"
 #include "../Manager.h"
 
+TEST(Test1,Subttest_1){
+
+    ASSERT_TRUE(1 == 1);
+}
+
+TEST(Test1,Subttest_2){
+
+    ASSERT_TRUE(1 == 1);
+}
 #endif

@@ -11,3 +11,12 @@ link_directories(${CMAKE_SOURCE_DIR}/src/test/)
 add_subdirectory(src)
 add_executable(VDSProject src/main.cpp)
 target_link_libraries(VDSProject Manager)
+
+enable_testing()
+
+set(TEST_NAME ${PROJECT_NAME}_tests)
+add_executable(${TEST_NAME} src/test/main_test.cpp)
+target_link_libraries(${TEST_NAME} gtest_main)
+
+include(GoogleTest)
+gtest_discover_tests(${TEST_NAME})
