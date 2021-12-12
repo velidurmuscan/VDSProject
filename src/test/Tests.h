@@ -40,14 +40,15 @@ TEST(ROBDD,FalseFuncTest){
     EXPECT_EQ(0,Test_ROBDD.False());
 }
 
-/*
-TEST(Test1,Subttest_1){
-
-    ASSERT_TRUE(1 == 1);
+//Testing isConstant function
+TEST(ROBDD, isConstantFuncTest){
+    ClassProject::Manager Test_ROBDD;
+    // @TODO: Further implementation by checking the unique table in isConstant function
+    for(int i = 0 ; i < 2 ; i++) {
+        EXPECT_TRUE(Test_ROBDD.isConstant(i));
+    }
+    for(int i = 2 ; i < 100 ; i++) { // @TODO: Change the 100 later with the size of the ROBDD
+        EXPECT_FALSE(Test_ROBDD.isConstant(i));
+    }
 }
-
-TEST(Test1,Subttest_2){
-
-    ASSERT_TRUE(1 == 1);
-}*/
 #endif
