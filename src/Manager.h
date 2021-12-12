@@ -14,7 +14,7 @@ namespace ClassProject {
 
     struct table_line {
         BDD_ID bdd_id;
-        std::string label = "Default";
+        std::string label;// = "Default";
         BDD_ID high_id;
         BDD_ID low_id;
         BDD_ID top_var;
