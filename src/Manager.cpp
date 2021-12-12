@@ -12,12 +12,10 @@ using namespace ClassProject;
 Manager::Manager() {
 
     std::cout << "An ROBDD has been initialized\r\n";
-    createVar("VarFalse");
-    createVar("VarTrue");
-    table_line newLine = {.bdd_id=0, .label="VarFalse", .high_id=0, .low_id=0, .top_var=0};
+   /* table_line newLine = {.bdd_id=0, .label="VarFalse", .high_id=0, .low_id=0, .top_var=0};
     unique_table.push_back(newLine);
-    newLine = {.bdd_id=0, .label="VarTrue", .high_id=0, .low_id=0, .top_var=0};
-    unique_table.push_back(newLine);
+    newLine = {.bdd_id=1, .label="VarTrue", .high_id=1, .low_id=1, .top_var=1};
+    unique_table.push_back(newLine);*/
 
 }
 
