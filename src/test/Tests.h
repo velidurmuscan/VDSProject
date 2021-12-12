@@ -71,4 +71,20 @@ TEST(ROBDD, topVarFuncTest){
         EXPECT_EQ(Test_ROBDD.topVar(i), Test_ROBDD.unique_table[i].top_var);
     }
 }
+
+//Testing CreateVar function
+TEST(ROBDD, CreateVarFunTest){
+    ClassProject::Manager Test_ROBDD;
+    BDD_ID TempID;
+    for(int i = 2; i < 100; i++){
+        TempID = Test_ROBDD.createVar("TestLabel");
+        EXPECT_EQ(TempID, Test_ROBDD.unique_table[i].bdd_id);
+        EXPECT_EQ(1, Test_ROBDD.unique_table[i].high_id);
+        EXPECT_EQ(0, Test_ROBDD.unique_table[i].low_id);
+        EXPECT_EQ(TempID, Test_ROBDD.unique_table[i].top_var);
+    }
+
+}
+
+
 #endif

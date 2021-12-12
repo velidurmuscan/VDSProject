@@ -21,12 +21,12 @@ Manager::Manager() {
 
 BDD_ID Manager::createVar(const std::string &label) {
     struct table_line newLine;
-    newLine.bdd_id = unique_table.size();
+    /*newLine.bdd_id = unique_table.size();
     newLine.label = label;
-    newLine.high_id = 0;    //@TODO: Implement correctly !!!
-    newLine.low_id = 0;     //@TODO: Implement correctly !!!
-    newLine.top_var = 0;    //@TODO: Implement correctly !!!
-    unique_table.push_back(newLine);
+    newLine.high_id = 1;
+    newLine.low_id = 0;
+    newLine.top_var = unique_table.size();
+    unique_table.push_back(newLine);*/
     return newLine.bdd_id;
 }
 
@@ -63,21 +63,55 @@ BDD_ID Manager::topVar(BDD_ID f) {
 }
 
 BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e) {
+
+ /*   if(i == 1){
+        return t;
+    } else if (i == 0 ){
+        return e;
+    } else if (t == 1 && e == 0){
+        return i;
+    } else if (t == e){
+        return i;
+    } else if (t == 0 && e == 1){
+        return neg(i);
+    }*/
+
+
+
+  //  a) ite(1, f, g) = ite(0, g, f) = ite(f, 1, 0) = ite(g, f, f) = f
+  //  b) ite(f, 0, 1) =f
+
 //  @TODO: Implement the function !!!
     BDD_ID tmp = 0;
     return tmp;
 }
 
 BDD_ID Manager::coFactorTrue(BDD_ID f, BDD_ID x) {
-//  @TODO: Implement the function !!!
-    BDD_ID tmp = 0;
-    return tmp;
+    BDD_ID T,F;
+    if (isConstant(f)){
+        return f;
+    }
+    if(topVar(f) == x){
+        return unique_table[f].high_id;
+    } else {
+        T = coFactorTrue(unique_table[f].high_id, x);
+        F = coFactorTrue(unique_table[f].low_id, x);
+        return  ite(unique_table[f].top_var,T,F);
+    }
 }
 
 BDD_ID Manager::coFactorFalse(BDD_ID f, BDD_ID x) {
-//  @TODO: Implement the function !!!
-    BDD_ID tmp = 0;
-    return tmp;
+    BDD_ID T,F;
+    if (isConstant(f)){
+        return f;
+    }
+    if(topVar(f) == x){
+        return unique_table[f].low_id;
+    } else {
+        T = coFactorFalse(unique_table[f].high_id, x);
+        F = coFactorFalse(unique_table[f].low_id, x);
+        return  ite(unique_table[f].top_var,T,F);
+    }
 }
 
 BDD_ID Manager::coFactorTrue(BDD_ID f) {
