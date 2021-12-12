@@ -51,4 +51,16 @@ TEST(ROBDD, isConstantFuncTest){
         EXPECT_FALSE(Test_ROBDD.isConstant(i));
     }
 }
+
+//Testing isVariable function
+TEST(ROBDD, isVariableFuncTest){
+    ClassProject::Manager Test_ROBDD;
+    // @TODO: Further implementation by checking the unique table in isVariable function
+    for(int i = 0 ; i < 2 ; i++) {
+        EXPECT_FALSE(Test_ROBDD.isVariable(i));
+    }
+    for(int i = 2 ; i < 100 ; i++) { // @TODO: Change the 100 later with the size of the ROBDD
+        EXPECT_TRUE(Test_ROBDD.isVariable(i));
+    }
+}
 #endif

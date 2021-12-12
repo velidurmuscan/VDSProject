@@ -39,7 +39,7 @@ const BDD_ID& Manager::False() {
 }
 
 bool Manager::isConstant(BDD_ID f) {
-//  @TODO: Implement the function !!!
+// @TODO: Further implementation by checking the unique table in isConstant function
     bool isConstantVar = false;
     if(f == 1 || f == 0){
         isConstantVar = true;
