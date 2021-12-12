@@ -21,12 +21,12 @@ Manager::Manager() {
 
 BDD_ID Manager::createVar(const std::string &label) {
     struct table_line newLine;
-    /*newLine.bdd_id = unique_table.size();
+    newLine.bdd_id = unique_table.size();
     newLine.label = label;
     newLine.high_id = 1;
     newLine.low_id = 0;
     newLine.top_var = unique_table.size();
-    unique_table.push_back(newLine);*/
+    unique_table.push_back(newLine);
     return newLine.bdd_id;
 }
 
