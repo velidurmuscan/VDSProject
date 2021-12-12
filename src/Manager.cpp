@@ -49,9 +49,12 @@ bool Manager::isConstant(BDD_ID f) {
 }
 
 bool Manager::isVariable(BDD_ID x) {
-//  @TODO: Implement the function !!!
-    bool tmp = true;
-    return tmp;
+// @TODO: Further implementation by checking the unique table in isVariable function
+    bool isVariableVar = false;
+    if(x > 1){
+        isVariableVar = true;
+    }
+    return isVariableVar;
 }
 
 BDD_ID Manager::topVar(BDD_ID f) {
