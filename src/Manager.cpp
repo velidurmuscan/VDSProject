@@ -31,11 +31,11 @@ BDD_ID Manager::createVar(const std::string &label) {
 }
 
 const BDD_ID& Manager::True() {
-    return unique_table[1].bdd_id;
+    return unique_table[0].bdd_id;
 }
 
 const BDD_ID& Manager::False() {
-    return unique_table[0].bdd_id;
+    return unique_table[1].bdd_id;
 }
 
 bool Manager::isConstant(BDD_ID f) {

@@ -18,5 +18,7 @@ int main(int argc, char* argv[])
     my_ROBDD.createVar("var_3");
     my_ROBDD.print_table();
 
+
+
     return 0;
 }
