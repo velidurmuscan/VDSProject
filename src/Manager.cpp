@@ -40,8 +40,12 @@ const BDD_ID& Manager::False() {
 
 bool Manager::isConstant(BDD_ID f) {
 //  @TODO: Implement the function !!!
-    bool tmp = true;
-    return tmp;
+    bool isConstantVar = false;
+    if(f == 1 || f == 0){
+        isConstantVar = true;
+    }
+    return isConstantVar;
+
 }
 
 bool Manager::isVariable(BDD_ID x) {
