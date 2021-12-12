@@ -63,4 +63,12 @@ TEST(ROBDD, isVariableFuncTest){
         EXPECT_TRUE(Test_ROBDD.isVariable(i));
     }
 }
+
+//Testing isVariable function
+TEST(ROBDD, topVarFuncTest){
+    ClassProject::Manager Test_ROBDD;
+    for(int i = 0; i < Test_ROBDD.unique_table.size(); i++){
+        EXPECT_EQ(Test_ROBDD.topVar(i), Test_ROBDD.unique_table[i].top_var);
+    }
+}
 #endif
