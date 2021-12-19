@@ -109,12 +109,12 @@ TEST(ROBDD, iteRecompTest){
     Test_ROBDD.createVar("c or d");
     Test_ROBDD.unique_table[7].low_id = 5;
     Test_ROBDD.unique_table[7].high_id = 1;
-    Test_ROBDD.createVar("a and c");
-    Test_ROBDD.unique_table[6].low_id = 0;
-    Test_ROBDD.unique_table[6].high_id = 4;
     Test_ROBDD.createVar("a and d");
-    Test_ROBDD.unique_table[6].low_id = 0;
-    Test_ROBDD.unique_table[6].high_id = 5;
-    EXPECT_EQ(7, Test_ROBDD.ite(2, 4, 0));
+    Test_ROBDD.unique_table[8].low_id = 0;
+    Test_ROBDD.unique_table[8].high_id = 5;
+    Test_ROBDD.createVar("a and c");
+    Test_ROBDD.unique_table[9].low_id = 0;
+    Test_ROBDD.unique_table[9].high_id = 4;
+    EXPECT_EQ(8, Test_ROBDD.ite(2, 5, 0));
 }
 #endif

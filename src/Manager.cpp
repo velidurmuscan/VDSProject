@@ -88,20 +88,6 @@ BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e) {
         return ExistingID;
     }
 
- /*   if(i == 1){
-        return t;
-    } else if (i == 0 ){
-        return e;
-    } else if (t == 1 && e == 0){
-        return i;
-    } else if (t == e){
-        return i;
-    } else if (t == 0 && e == 1){
-        return neg(i);
-    }*/
-
-
-
   //  a) ite(1, f, g) = ite(0, g, f) = ite(f, 1, 0) = ite(g, f, f) = f
   //  b) ite(f, 0, 1) =f
 
