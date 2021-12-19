@@ -64,6 +64,17 @@ BDD_ID Manager::topVar(BDD_ID f) {
 
 BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e) {
 
+   /* if ( i == 1 ){
+        return t;
+    } else if( i == 0){
+        return e;
+    } else if( t == 1 && e == 0 ){
+        return i;
+    } else if( t == e){
+        return t;
+    } else if( t == 0 && e == 1){
+        return !i;
+    }*/
  /*   if(i == 1){
         return t;
     } else if (i == 0 ){

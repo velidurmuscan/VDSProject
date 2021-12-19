@@ -86,5 +86,14 @@ TEST(ROBDD, CreateVarFunTest){
 
 }
 
+//Testing CreateVar function
+TEST(ROBDD, ITETerminalFunTest){
+    ClassProject::Manager Test_ROBDD;
 
+    EXPECT_EQ(15, Test_ROBDD.ite(1,15,14));
+    EXPECT_EQ(14, Test_ROBDD.ite(0,15,14));
+    EXPECT_EQ(16, Test_ROBDD.ite(16,1,0));
+    EXPECT_EQ(14, Test_ROBDD.ite(16,14,14) );
+
+}
 #endif
