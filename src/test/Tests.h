@@ -86,14 +86,35 @@ TEST(ROBDD, CreateVarFunTest){
 
 }
 
-//Testing CreateVar function
-TEST(ROBDD, ITETerminalFunTest){
+//Testing ite terminal cases function
+TEST(ROBDD, iteTerminalFunTest){
     ClassProject::Manager Test_ROBDD;
-
     EXPECT_EQ(15, Test_ROBDD.ite(1,15,14));
     EXPECT_EQ(14, Test_ROBDD.ite(0,15,14));
     EXPECT_EQ(16, Test_ROBDD.ite(16,1,0));
     EXPECT_EQ(14, Test_ROBDD.ite(16,14,14) );
+}
 
+//Testing ite not recomputing function
+TEST(ROBDD, iteRecompTest){
+    ClassProject::Manager Test_ROBDD;
+    Test_ROBDD.createVar("a");
+    Test_ROBDD.createVar("b");
+    Test_ROBDD.createVar("c");
+    Test_ROBDD.createVar("d");
+    // @TODO: Use and,or, ...etc functions
+    Test_ROBDD.createVar("a and b");
+    Test_ROBDD.unique_table[6].low_id = 0;
+    Test_ROBDD.unique_table[6].high_id = 3;
+    Test_ROBDD.createVar("c or d");
+    Test_ROBDD.unique_table[7].low_id = 5;
+    Test_ROBDD.unique_table[7].high_id = 1;
+    Test_ROBDD.createVar("a and c");
+    Test_ROBDD.unique_table[6].low_id = 0;
+    Test_ROBDD.unique_table[6].high_id = 4;
+    Test_ROBDD.createVar("a and d");
+    Test_ROBDD.unique_table[6].low_id = 0;
+    Test_ROBDD.unique_table[6].high_id = 5;
+    EXPECT_EQ(7, Test_ROBDD.ite(2, 4, 0));
 }
 #endif

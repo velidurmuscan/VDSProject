@@ -64,6 +64,16 @@ BDD_ID Manager::topVar(BDD_ID f) {
 
 BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e) {
 
+    //Unique table i already exists in the unique table
+    bool Exist = false;
+    int ExistingID = 0;
+    for(int c = 0 ; c <= unique_table.size() ; c++){
+        if(unique_table[c].high_id == t && unique_table[c].low_id == e){
+            Exist = true;
+            ExistingID = c;
+            break;
+        }
+    }
    if ( i == 1 ){
         return t;
     } else if( i == 0){
@@ -74,7 +84,10 @@ BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e) {
         return t;
     } else if( t == 0 && e == 1){
         return !i;
-    }
+    } /*else if (Exist){
+        return ExistingID;
+    }*/
+
  /*   if(i == 1){
         return t;
     } else if (i == 0 ){
