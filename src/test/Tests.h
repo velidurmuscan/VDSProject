@@ -115,6 +115,67 @@ TEST(ROBDD, iteRecompTest){
     Test_ROBDD.createVar("a and c");
     Test_ROBDD.unique_table[9].low_id = 0;
     Test_ROBDD.unique_table[9].high_id = 4;
-    EXPECT_EQ(8, Test_ROBDD.ite(2, 5, 0));
+    EXPECT_EQ(7, Test_ROBDD.ite(4, 1, 5));
+}
+
+//Testing neg function
+TEST(ROBDD, negFuncTest){
+    ClassProject::Manager Test_ROBDD;
+    EXPECT_EQ(1, Test_ROBDD.neg(0));
+    EXPECT_EQ(0, Test_ROBDD.neg(1));
+}
+
+//Testing and2 function
+TEST(ROBDD, and2FuncTest){
+    ClassProject::Manager Test_ROBDD;
+    EXPECT_EQ(0, Test_ROBDD.and2(0,1));
+    EXPECT_EQ(0, Test_ROBDD.and2(1,0));
+    EXPECT_EQ(0, Test_ROBDD.and2(0,0));
+    EXPECT_EQ(1, Test_ROBDD.and2(1,1));
+}
+
+//Testing nand2 function
+TEST(ROBDD, nand2FuncTest){
+    ClassProject::Manager Test_ROBDD;
+    EXPECT_EQ(1, Test_ROBDD.nand2(0,1));
+    EXPECT_EQ(1, Test_ROBDD.nand2(1,0));
+    EXPECT_EQ(1, Test_ROBDD.nand2(0,0));
+    EXPECT_EQ(0, Test_ROBDD.nand2(1,1));
+}
+
+//Testing or2 function
+TEST(ROBDD, or2FuncTest){
+    ClassProject::Manager Test_ROBDD;
+    EXPECT_EQ(1, Test_ROBDD.or2(0,1));
+    EXPECT_EQ(1, Test_ROBDD.or2(1,0));
+    EXPECT_EQ(0, Test_ROBDD.or2(0,0));
+    EXPECT_EQ(1, Test_ROBDD.or2(1,1));
+}
+
+//Testing nor2 function
+TEST(ROBDD, nor2FuncTest){
+    ClassProject::Manager Test_ROBDD;
+    EXPECT_EQ(0, Test_ROBDD.nor2(0,1));
+    EXPECT_EQ(0, Test_ROBDD.nor2(1,0));
+    EXPECT_EQ(1, Test_ROBDD.nor2(0,0));
+    EXPECT_EQ(0, Test_ROBDD.nor2(1,1));
+}
+
+//Testing xor2 function
+TEST(ROBDD, xor2FuncTest){
+    ClassProject::Manager Test_ROBDD;
+    EXPECT_EQ(1, Test_ROBDD.xor2(0,1));
+    EXPECT_EQ(1, Test_ROBDD.xor2(1,0));
+    EXPECT_EQ(0, Test_ROBDD.xor2(0,0));
+    EXPECT_EQ(0, Test_ROBDD.xor2(1,1));
+}
+
+//Testing xnor2 function
+TEST(ROBDD, xnor2FuncTest){
+    ClassProject::Manager Test_ROBDD;
+    EXPECT_EQ(0, Test_ROBDD.xnor2(0,1));
+    EXPECT_EQ(0, Test_ROBDD.xnor2(1,0));
+    EXPECT_EQ(1, Test_ROBDD.xnor2(0,0));
+    EXPECT_EQ(1, Test_ROBDD.xnor2(1,1));
 }
 #endif
