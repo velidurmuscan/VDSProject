@@ -84,9 +84,9 @@ BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e) {
         return t;
     } else if( t == 0 && e == 1){
         return !i;
-    } /*else if (Exist){
+    } else if (Exist){
         return ExistingID;
-    }*/
+    }
 
  /*   if(i == 1){
         return t;
