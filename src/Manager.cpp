@@ -137,31 +137,31 @@ BDD_ID Manager::coFactorFalse(BDD_ID f) {
 }
 
 BDD_ID Manager::neg(BDD_ID a) {
-    return 15; //ite(a, 0, 1);
+    return ite(a, 0, 1);
 }
 
 BDD_ID Manager::and2(BDD_ID a, BDD_ID b) {
-    return 15; //ite(a, b, 0);
+    return ite(a, b, 0);
 }
 
 BDD_ID Manager::or2(BDD_ID a, BDD_ID b) {
-    return 15; //ite(a,1, b);
+    return ite(a,1, b);
 }
 
 BDD_ID Manager::xor2(BDD_ID a, BDD_ID b) {
-    return 15; //ite(a,neg(b),b);
+    return ite(a,neg(b),b);
 }
 
 BDD_ID Manager::nand2(BDD_ID a, BDD_ID b) {
-    return 15; //neg(and2(a,b));
+    return neg(and2(a,b));
 }
 
 BDD_ID Manager::nor2(BDD_ID a, BDD_ID b) {
-    return 15; //neg(or2(a,b));
+    return neg(or2(a,b));
 }
 
 BDD_ID Manager::xnor2(BDD_ID a, BDD_ID b) {
-    return 15; //neg(xor2(a,b));
+    return neg(xor2(a,b));
 }
 
 std::string Manager::getTopVarName(const BDD_ID &root) {
