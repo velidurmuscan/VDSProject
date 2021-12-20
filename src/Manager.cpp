@@ -109,7 +109,11 @@ BDD_ID Manager::coFactorTrue(BDD_ID f, BDD_ID x = 0) {
     }
 }
 
-BDD_ID Manager::coFactorFalse(BDD_ID f, BDD_ID x) {
+BDD_ID Manager::coFactorFalse(BDD_ID f, BDD_ID x = 0) {
+  /*  if(x == 0){
+        x = topVar(f);
+    }
+
     BDD_ID T,F;
     if (isConstant(f)){
         return f;
@@ -120,9 +124,9 @@ BDD_ID Manager::coFactorFalse(BDD_ID f, BDD_ID x) {
         T = coFactorFalse(unique_table[f].high_id, x);
         F = coFactorFalse(unique_table[f].low_id, x);
         return  ite(unique_table[f].top_var,T,F);
-    }
+    }*/ return 0;
 }
-
+/*
 BDD_ID Manager::coFactorTrue(BDD_ID f) {
 //  @TODO: Implement the function !!!
     BDD_ID tmp = 0;
@@ -134,7 +138,7 @@ BDD_ID Manager::coFactorFalse(BDD_ID f) {
     BDD_ID tmp = 0;
     return tmp;
 }
-
+*/
 BDD_ID Manager::neg(BDD_ID a) {
     return ite(a, 0, 1);
 }
