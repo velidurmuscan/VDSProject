@@ -86,10 +86,16 @@ BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e) {
         return !i;
     } else if (Exist){
         return ExistingID;
-    }
+    } else{
+        return 0;
+   }
 }
 
-BDD_ID Manager::coFactorTrue(BDD_ID f, BDD_ID x = topVar(f)) {
+BDD_ID Manager::coFactorTrue(BDD_ID f, BDD_ID x = 0) {
+
+    if(x == 0){
+        x = topVar(f);
+    }
     BDD_ID T,F;
     if (isConstant(f)){
         return f;
@@ -117,7 +123,7 @@ BDD_ID Manager::coFactorFalse(BDD_ID f, BDD_ID x) {
     }
 }
 
-/*BDD_ID Manager::coFactorTrue(BDD_ID f) {
+BDD_ID Manager::coFactorTrue(BDD_ID f) {
 //  @TODO: Implement the function !!!
     BDD_ID tmp = 0;
     return tmp;
@@ -127,7 +133,7 @@ BDD_ID Manager::coFactorFalse(BDD_ID f) {
 //  @TODO: Implement the function !!!
     BDD_ID tmp = 0;
     return tmp;
-}*/
+}
 
 BDD_ID Manager::neg(BDD_ID a) {
     return ite(a, 0, 1);

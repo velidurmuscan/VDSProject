@@ -64,7 +64,7 @@ TEST(ROBDD, isVariableFuncTest){
     }
 }
 
-//Testing isVariable function
+//Testing topVar function
 TEST(ROBDD, topVarFuncTest){
     ClassProject::Manager Test_ROBDD;
     for(int i = 0; i < Test_ROBDD.unique_table.size(); i++){
@@ -179,24 +179,5 @@ TEST(ROBDD, xnor2FuncTest){
     EXPECT_EQ(1, Test_ROBDD.xnor2(1,1));
 }
 
-//Testing topVar function
-TEST(ROBDD, topVarFuncTest){
-    ClassProject::Manager Test_ROBDD;
-    ClassProject::Manager Test_ROBDD;
-    Test_ROBDD.createVar("a");
-    Test_ROBDD.createVar("b");
-    Test_ROBDD.createVar("c");
-    Test_ROBDD.createVar("d");
-    // @TODO: Use and,or, ...etc functions
-    Test_ROBDD.createVar("a and b");
-    Test_ROBDD.unique_table[6].low_id = 0;
-    Test_ROBDD.unique_table[6].high_id = 3;
-    Test_ROBDD.unique_table[6].top_var = 2;
-    Test_ROBDD.createVar("c or d");
-    Test_ROBDD.unique_table[7].low_id = 5;
-    Test_ROBDD.unique_table[7].high_id = 1;
-    Test_ROBDD.unique_table[7].top_var = 4;
-    EXPECT_EQ(2, Test_ROBDD.topVar(6));
-    EXPECT_EQ(4, Test_ROBDD.topVar(7));
-}
+
 #endif
