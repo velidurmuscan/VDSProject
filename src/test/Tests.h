@@ -229,8 +229,8 @@ TEST(ROBDD, coFactorFalseFuncTest){
     Test_ROBDD.unique_table[9].low_id = 0;
     Test_ROBDD.unique_table[9].high_id = 4;
     Test_ROBDD.unique_table[9].top_var = 2;
-    EXPECT_EQ(5, Test_ROBDD.coFactorTrue(7,4));
-    EXPECT_EQ(5, Test_ROBDD.coFactorTrue(7));
+    EXPECT_EQ(5, Test_ROBDD.coFactorFalse(7,4));
+    EXPECT_EQ(5, Test_ROBDD.coFactorFalse(7));
 }
 
 
