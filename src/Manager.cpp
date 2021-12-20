@@ -59,7 +59,7 @@ bool Manager::isVariable(BDD_ID x) {
 
 BDD_ID Manager::topVar(BDD_ID f) {
 //  @TODO: Check again after all functions are ready
-    return unique_table[f].top_var;
+    return 0; //cd unique_table[f].top_var;
 }
 
 BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e) {
@@ -87,16 +87,9 @@ BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e) {
     } else if (Exist){
         return ExistingID;
     }
-
-  //  a) ite(1, f, g) = ite(0, g, f) = ite(f, 1, 0) = ite(g, f, f) = f
-  //  b) ite(f, 0, 1) =f
-
-//  @TODO: Implement the function !!!
-    BDD_ID tmp = 0;
-    return tmp;
 }
 
-BDD_ID Manager::coFactorTrue(BDD_ID f, BDD_ID x) {
+BDD_ID Manager::coFactorTrue(BDD_ID f, BDD_ID x = topVar(f)) {
     BDD_ID T,F;
     if (isConstant(f)){
         return f;
@@ -124,7 +117,7 @@ BDD_ID Manager::coFactorFalse(BDD_ID f, BDD_ID x) {
     }
 }
 
-BDD_ID Manager::coFactorTrue(BDD_ID f) {
+/*BDD_ID Manager::coFactorTrue(BDD_ID f) {
 //  @TODO: Implement the function !!!
     BDD_ID tmp = 0;
     return tmp;
@@ -134,7 +127,7 @@ BDD_ID Manager::coFactorFalse(BDD_ID f) {
 //  @TODO: Implement the function !!!
     BDD_ID tmp = 0;
     return tmp;
-}
+}*/
 
 BDD_ID Manager::neg(BDD_ID a) {
     return ite(a, 0, 1);
