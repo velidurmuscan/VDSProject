@@ -121,9 +121,9 @@ BDD_ID Manager::coFactorFalse(BDD_ID f, BDD_ID x = 0) {
     if(topVar(f) == x){
         return unique_table[f].low_id;
     } else {
-        T = coFactorFalse(unique_table[f].high_id, x);
+       T = coFactorFalse(unique_table[f].high_id, x);
         F = coFactorFalse(unique_table[f].low_id, x);
-        return  ite(unique_table[f].top_var,T,F);
+        return   ite(unique_table[f].top_var,T,F);
     }
 }
 /*
