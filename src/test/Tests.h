@@ -206,5 +206,32 @@ TEST(ROBDD, coFactorTrueFuncTest){
     EXPECT_EQ(1, Test_ROBDD.coFactorTrue(7));
 }
 
+//Testing coFactorFalse function
+TEST(ROBDD, coFactorFalseFuncTest){
+    ClassProject::Manager Test_ROBDD;
+    Test_ROBDD.createVar("a");
+    Test_ROBDD.createVar("b");
+    Test_ROBDD.createVar("c");
+    Test_ROBDD.createVar("d");
+    Test_ROBDD.createVar("a and b");
+    Test_ROBDD.unique_table[6].low_id = 0;
+    Test_ROBDD.unique_table[6].high_id = 3;
+    Test_ROBDD.unique_table[6].top_var = 2;
+    Test_ROBDD.createVar("c or d");
+    Test_ROBDD.unique_table[7].low_id = 5;
+    Test_ROBDD.unique_table[7].high_id = 1;
+    Test_ROBDD.unique_table[7].top_var = 4;
+    Test_ROBDD.createVar("a and d");
+    Test_ROBDD.unique_table[8].low_id = 0;
+    Test_ROBDD.unique_table[8].high_id = 5;
+    Test_ROBDD.unique_table[8].top_var = 2;
+    Test_ROBDD.createVar("a and c");
+    Test_ROBDD.unique_table[9].low_id = 0;
+    Test_ROBDD.unique_table[9].high_id = 4;
+    Test_ROBDD.unique_table[9].top_var = 2;
+    EXPECT_EQ(5, Test_ROBDD.coFactorTrue(7,4));
+    EXPECT_EQ(5, Test_ROBDD.coFactorTrue(7));
+}
+
 
 #endif
