@@ -246,4 +246,31 @@ TEST(ROBDD, uniqueTableSizeTest){
     EXPECT_EQ(10, Test_ROBDD.uniqueTableSize());
 }
 
+
+//Testing ite function new table entry test
+TEST(ROBDD, iteNewLineTest){
+    ClassProject::Manager Test_ROBDD;
+    Test_ROBDD.createVar("a");
+    Test_ROBDD.createVar("b");
+    Test_ROBDD.createVar("c");
+    Test_ROBDD.createVar("d");
+    Test_ROBDD.or2(2,3);
+    Test_ROBDD.and2(4,5);
+    Test_ROBDD.and2(6,7);
+    EXPECT_EQ(1, Test_ROBDD.unique_table[6].high_id);
+    EXPECT_EQ(3, Test_ROBDD.unique_table[6].low_id);
+    EXPECT_EQ(2, Test_ROBDD.unique_table[6].top_var);
+    EXPECT_EQ(5, Test_ROBDD.unique_table[7].high_id);
+    EXPECT_EQ(0, Test_ROBDD.unique_table[7].low_id);
+    EXPECT_EQ(4, Test_ROBDD.unique_table[7].top_var);
+    EXPECT_EQ(7, Test_ROBDD.unique_table[8].high_id);
+    EXPECT_EQ(0, Test_ROBDD.unique_table[8].low_id);
+    EXPECT_EQ(3, Test_ROBDD.unique_table[8].top_var);
+    EXPECT_EQ(7, Test_ROBDD.unique_table[8].high_id);
+    EXPECT_EQ(8, Test_ROBDD.unique_table[8].low_id);
+    EXPECT_EQ(2, Test_ROBDD.unique_table[8].top_var);
+
+}
+
+
 #endif

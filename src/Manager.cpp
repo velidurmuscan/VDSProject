@@ -92,13 +92,13 @@ BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e) {
         if(rHigh == rLow){
             return rHigh;
         } else {
-            struct table_line newLine;
+            /*struct table_line newLine;
             newLine.bdd_id = unique_table.size();
             newLine.high_id = rHigh;
             newLine.low_id = rLow;
             newLine.top_var = topVar(i);
             unique_table.push_back(newLine);
-            return newLine.bdd_id;
+            return newLine.bdd_id;*/ return 0;
         }
    }
 }
@@ -194,7 +194,6 @@ void Manager::findVars(const BDD_ID &root, std::set<BDD_ID> &vars_of_root) {
 }
 
 size_t Manager::uniqueTableSize() {
-//  @TODO: Implement the function !!!
     return unique_table.size();
 }
 
