@@ -63,7 +63,7 @@ BDD_ID Manager::topVar(BDD_ID f) {
 }
 
 BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e) {
-
+    BDD_ID rHigh, rLow;
     //Unique table i already exists in the unique table
     bool Exist = false;
     int ExistingID = 0;
@@ -87,7 +87,19 @@ BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e) {
     } else if (Exist){
         return ExistingID;
     } else{
-        return 0;
+        rHigh = ite(coFactorTrue(i, topVar(i)), coFactorTrue(t, topVar(i)), coFactorTrue(e, topVar(i)));
+        rLow = ite(coFactorFalse(i,topVar(i)), coFactorFalse(t,topVar(i)), coFactorFalse(e,topVar(i)));
+        if(rHigh == rLow){
+            return rHigh;
+        } else {
+            struct table_line newLine;
+            newLine.bdd_id = unique_table.size();
+            newLine.high_id = rHigh;
+            newLine.low_id = rLow;
+            newLine.top_var = topVar(i);
+            unique_table.push_back(newLine);
+            return newLine.bdd_id;
+        }
    }
 }
 
@@ -121,7 +133,7 @@ BDD_ID Manager::coFactorFalse(BDD_ID f, BDD_ID x = 0) {
     if(topVar(f) == x){
         return unique_table[f].low_id;
     } else {
-       T = coFactorFalse(unique_table[f].high_id, x);
+        T = coFactorFalse(unique_table[f].high_id, x);
         F = coFactorFalse(unique_table[f].low_id, x);
         return   ite(unique_table[f].top_var,T,F);
     }
@@ -183,8 +195,7 @@ void Manager::findVars(const BDD_ID &root, std::set<BDD_ID> &vars_of_root) {
 
 size_t Manager::uniqueTableSize() {
 //  @TODO: Implement the function !!!
-    size_t tmp = 0;
-    return tmp;
+    return 0;//unique_table.size();
 }
 
 // Print out the unique table in a table format for debug purposes.

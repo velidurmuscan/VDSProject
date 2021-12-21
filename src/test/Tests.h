@@ -233,5 +233,17 @@ TEST(ROBDD, coFactorFalseFuncTest){
     EXPECT_EQ(5, Test_ROBDD.coFactorFalse(7));
 }
 
+//Testing unique table size function
+TEST(ROBDD, uniqueTableSizeTest){
+    ClassProject::Manager Test_ROBDD;
+    Test_ROBDD.createVar("a");
+    Test_ROBDD.createVar("b");
+    Test_ROBDD.createVar("c");
+    Test_ROBDD.createVar("d");
+    Test_ROBDD.or2(2,3);
+    Test_ROBDD.and2(4,5);
+    Test_ROBDD.and2(6,7);
+    EXPECT_EQ(10, Test_ROBDD.uniqueTableSize());
+}
 
 #endif

@@ -17,22 +17,9 @@ int main(int argc, char* argv[])
     my_ROBDD.createVar("b");
     my_ROBDD.createVar("c");
     my_ROBDD.createVar("d");
-    my_ROBDD.createVar("a and b");
-    my_ROBDD.unique_table[6].low_id = 0;
-    my_ROBDD.unique_table[6].high_id = 3;
-    my_ROBDD.createVar("c or d");
-    my_ROBDD.unique_table[7].low_id = 5;
-    my_ROBDD.unique_table[7].high_id = 1;
-    my_ROBDD.createVar("a and d");
-    my_ROBDD.unique_table[8].low_id = 0;
-    my_ROBDD.unique_table[8].high_id = 5;
-    my_ROBDD.createVar("a and c");
-    my_ROBDD.unique_table[9].low_id = 0;
-    my_ROBDD.unique_table[9].high_id = 4;
+    my_ROBDD.or2(2,3);
+    my_ROBDD.and2(4,5);
+    my_ROBDD.and2(6,7);
     my_ROBDD.print_table();
-    std::cout << my_ROBDD.ite(2, 4, 0) << std::endl;
-
-
-
     return 0;
 }
