@@ -195,7 +195,7 @@ void Manager::findVars(const BDD_ID &root, std::set<BDD_ID> &vars_of_root) {
 
 size_t Manager::uniqueTableSize() {
 //  @TODO: Implement the function !!!
-    return 0;//unique_table.size();
+    return unique_table.size();
 }
 
 // Print out the unique table in a table format for debug purposes.
