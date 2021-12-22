@@ -137,6 +137,7 @@ TEST(ROBDDite, iteTerminalFunTest){
     Test_ROBDD2.and2(Test_ROBDD2.neg(2),Test_ROBDD2.neg(3));
     Test_ROBDD2.print_table();
 
+     // @TODO: Check how to create a unique table the same for different functions implementation (negation mainly)
 
 
 }
