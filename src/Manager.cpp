@@ -11,7 +11,7 @@ using namespace ClassProject;
 // Constructor
 Manager::Manager() {
 
-    std::cout << "An ROBDD has been initialized\r\n";
+    //std::cout << "An ROBDD has been initialized\r\n";
     table_line newLine = {.bdd_id=0, .label="VarFalse", .high_id=0, .low_id=0, .top_var=0};
     unique_table.push_back(newLine);
     newLine = {.bdd_id=1, .label="VarTrue", .high_id=1, .low_id=1, .top_var=1};
@@ -61,41 +61,58 @@ BDD_ID Manager::topVar(BDD_ID f) {
     return unique_table[f].top_var;
 }
 
-BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e) {
-    BDD_ID rHigh, rLow;
+BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e){
+    BDD_ID rHigh, rLow, minTopVar;
     //Unique table i already exists in the unique table
     bool Exist = false;
-    int ExistingID = 0;
-    for(int c = 0 ; c <= unique_table.size() ; c++){
+    BDD_ID ExistingID = 0;
+    for(int c = 0 ; c <= uniqueTableSize() ; c++){
         if(unique_table[c].high_id == t && unique_table[c].low_id == e){
             Exist = true;
             ExistingID = c;
             break;
         }
     }
-   if ( i == 1 ){
+    //Check if ite is a terminal case
+   if ( i == 1 ){                       //ite(1,t,e)
         return t;
     } else if( i == 0){
-        return e;
-    } else if( t == 1 && e == 0 ){
+        return e;                       //ite(0,t,e)
+    } else if( t == 1 && e == 0 ){      //ite(i,1,0)
         return i;
-    } else if( t == e){
+    } else if( t == e){                 //ite(i,t,t)
         return t;
-    } else if( t == 0 && e == 1){
-        return !i;
-    } else if (Exist){
+    } else if( t == 0 && e == 1){       //ite(i,0,1)
+       struct table_line newLine;
+       newLine.bdd_id = uniqueTableSize();
+       newLine.high_id = unique_table[i].low_id;
+       newLine.low_id = unique_table[i].high_id;
+       newLine.top_var = unique_table[i].top_var;
+       unique_table.push_back(newLine);
+       return newLine.bdd_id;
+    } else if (Exist){                  //Check if the unique table has an entry for i,t,e
         return ExistingID;
-    } else{
-        rHigh = ite(coFactorTrue(i, topVar(i)), coFactorTrue(t, topVar(i)), coFactorTrue(e, topVar(i)));
-        rLow = ite(coFactorFalse(i,topVar(i)), coFactorFalse(t,topVar(i)), coFactorFalse(e,topVar(i)));
+    } else{                             //Create a new entry for i,t,e
+       //Find the lowest top variable
+       if((t == 0 || t == 1) && (e == 0 || e == 1)){
+           minTopVar = topVar(i);
+       } else if(t == 0 || t == 1 ){
+           minTopVar = std::min(topVar(i), topVar(e));
+       } else if( e == 0 || e == 1) {
+           minTopVar = std::min(topVar(i), topVar(t));
+       } else {
+           minTopVar = std::min(std::min(topVar(i), topVar(t)), topVar(e));
+       }
+        rHigh = ite(coFactorTrue(i, minTopVar), coFactorTrue(t, minTopVar), coFactorTrue(e, minTopVar));
+        rLow = ite(coFactorFalse(i,minTopVar), coFactorFalse(t,minTopVar), coFactorFalse(e,minTopVar));
         if(rHigh == rLow){
             return rHigh;
         } else {
             struct table_line newLine;
-            newLine.bdd_id = unique_table.size();
+            newLine.bdd_id = uniqueTableSize();
             newLine.high_id = rHigh;
             newLine.low_id = rLow;
-            newLine.top_var = topVar(i);
+            newLine.top_var = minTopVar;
             unique_table.push_back(newLine);
             return newLine.bdd_id;
         }
@@ -210,7 +227,7 @@ void Manager::print_table() {
     std::cout << std::left << std::setw(numWidth) << std::setfill(separator) << "TopVar";
     std::cout << std::endl;
 
-    for (int i=0; i<unique_table.size(); i++ ) {
+    for (int i=0; i<uniqueTableSize(); i++ ) {
         std::cout << std::left << std::setw(numWidth) << std::setfill(separator) << unique_table[i].bdd_id;
         std::cout << std::left << std::setw(labelWidth) << std::setfill(separator) << unique_table[i].label;
         std::cout << std::left << std::setw(numWidth) << std::setfill(separator) << unique_table[i].high_id;

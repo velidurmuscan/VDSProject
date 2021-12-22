@@ -9,6 +9,7 @@
 #include "../Manager.cpp"
 
 //ROBDD initialization test
+
 TEST(ROBDD, ConstructorTest){
     ClassProject::Manager Test_ROBDD;
     //Check if the false node is in the correct position
@@ -107,16 +108,41 @@ TEST(ROBDD, topVarFuncTest){
 }
 
 //Testing ite terminal cases function
-TEST(ROBDD, iteTerminalFunTest){
+TEST(ROBDDite, iteTerminalFunTest){
     ClassProject::Manager Test_ROBDD;
-    EXPECT_EQ(15, Test_ROBDD.ite(1,15,14));
+    ClassProject::Manager Test_ROBDD2;
+   /* EXPECT_EQ(15, Test_ROBDD.ite(1,15,14));
     EXPECT_EQ(14, Test_ROBDD.ite(0,15,14));
     EXPECT_EQ(16, Test_ROBDD.ite(16,1,0));
-    EXPECT_EQ(14, Test_ROBDD.ite(16,14,14) );
+    EXPECT_EQ(14, Test_ROBDD.ite(16,14,14));
+
+    ClassProject::BDD_ID a = Test_ROBDD.createVar("a");
+    ClassProject::BDD_ID b = Test_ROBDD.createVar("b");
+    ClassProject::BDD_ID c = Test_ROBDD.createVar("c");
+    ClassProject::BDD_ID d = Test_ROBDD.createVar("d");
+    ClassProject::BDD_ID ORa_b = Test_ROBDD.or2(a,b);
+    ClassProject::BDD_ID ANDc_d =  Test_ROBDD.and2(c,d);
+    Test_ROBDD.and2(ORa_b,ANDc_d);
+    Test_ROBDD.and2(Test_ROBDD.neg(a),Test_ROBDD.neg(b));
+    //std::cout << Test_ROBDD.neg(8) << std::endl;
+    Test_ROBDD.print_table();
+    //EXPECT_EQ(, Test_ROBDD.ite(16,0,1));
+    */
+    ClassProject::BDD_ID a = Test_ROBDD.createVar("a");
+    ClassProject::BDD_ID b = Test_ROBDD.createVar("b");
+    Test_ROBDD.neg(Test_ROBDD.or2(2,3));
+    Test_ROBDD.print_table();
+    ClassProject::BDD_ID c = Test_ROBDD2.createVar("c");
+    ClassProject::BDD_ID d = Test_ROBDD2.createVar("d");
+    Test_ROBDD2.and2(Test_ROBDD2.neg(2),Test_ROBDD2.neg(3));
+    Test_ROBDD2.print_table();
+
+
+
 }
 
 //Testing ite not recomputing function
-TEST(ROBDD, iteRecompTest){
+TEST(ROBDDite, iteRecompTest){
     ClassProject::Manager Test_ROBDD;
     Test_ROBDD.createVar("a");
     Test_ROBDD.createVar("b");
@@ -136,6 +162,33 @@ TEST(ROBDD, iteRecompTest){
     Test_ROBDD.unique_table[9].low_id = 0;
     Test_ROBDD.unique_table[9].high_id = 4;
     EXPECT_EQ(7, Test_ROBDD.ite(4, 1, 5));
+}
+
+//Testing ite new line function
+TEST(ROBDDite, iteNewLineTest){
+    ClassProject::Manager Test_ROBDD;
+    Test_ROBDD.createVar("a");
+    Test_ROBDD.createVar("b");
+    Test_ROBDD.createVar("c");
+    Test_ROBDD.createVar("d");
+    Test_ROBDD.or2(2,3);
+    Test_ROBDD.and2(4,5);
+    Test_ROBDD.and2(6,7);
+    EXPECT_EQ(1, Test_ROBDD.unique_table[6].high_id);
+    EXPECT_EQ(3, Test_ROBDD.unique_table[6].low_id);
+    EXPECT_EQ(2, Test_ROBDD.unique_table[6].top_var);
+    EXPECT_EQ(5, Test_ROBDD.unique_table[7].high_id);
+    EXPECT_EQ(0, Test_ROBDD.unique_table[7].low_id);
+    EXPECT_EQ(4, Test_ROBDD.unique_table[7].top_var);
+    EXPECT_EQ(7, Test_ROBDD.unique_table[8].high_id);
+    EXPECT_EQ(0, Test_ROBDD.unique_table[8].low_id);
+    EXPECT_EQ(3, Test_ROBDD.unique_table[8].top_var);
+    EXPECT_EQ(7, Test_ROBDD.unique_table[8].high_id);
+    EXPECT_EQ(0, Test_ROBDD.unique_table[8].low_id);
+    EXPECT_EQ(3, Test_ROBDD.unique_table[8].top_var);
+    EXPECT_EQ(7, Test_ROBDD.unique_table[9].high_id);
+    EXPECT_EQ(8, Test_ROBDD.unique_table[9].low_id);
+    EXPECT_EQ(2, Test_ROBDD.unique_table[9].top_var);
 }
 
 //Testing neg function
@@ -252,32 +305,7 @@ TEST(ROBDD, coFactorFalseFuncTest){
     EXPECT_EQ(5, Test_ROBDD.coFactorFalse(7,4));
     EXPECT_EQ(5, Test_ROBDD.coFactorFalse(7));
 }
-//Testing ite new line function
-TEST(ROBDD, iteNewLineTest){
-    ClassProject::Manager Test_ROBDD;
-    Test_ROBDD.createVar("a");
-    Test_ROBDD.createVar("b");
-    Test_ROBDD.createVar("c");
-    Test_ROBDD.createVar("d");
-    Test_ROBDD.or2(2,3);
-    Test_ROBDD.and2(4,5);
-    Test_ROBDD.and2(6,7);
-    EXPECT_EQ(1, Test_ROBDD.unique_table[6].high_id);
-    EXPECT_EQ(3, Test_ROBDD.unique_table[6].low_id);
-    EXPECT_EQ(2, Test_ROBDD.unique_table[6].top_var);
-    EXPECT_EQ(5, Test_ROBDD.unique_table[7].high_id);
-    EXPECT_EQ(0, Test_ROBDD.unique_table[7].low_id);
-    EXPECT_EQ(4, Test_ROBDD.unique_table[7].top_var);
-    EXPECT_EQ(7, Test_ROBDD.unique_table[8].high_id);
-    EXPECT_EQ(0, Test_ROBDD.unique_table[8].low_id);
-    EXPECT_EQ(3, Test_ROBDD.unique_table[8].top_var);
-    EXPECT_EQ(7, Test_ROBDD.unique_table[8].high_id);
-    EXPECT_EQ(0, Test_ROBDD.unique_table[8].low_id);
-    EXPECT_EQ(3, Test_ROBDD.unique_table[8].top_var);
-    EXPECT_EQ(7, Test_ROBDD.unique_table[9].high_id);
-    EXPECT_EQ(8, Test_ROBDD.unique_table[9].low_id);
-    EXPECT_EQ(2, Test_ROBDD.unique_table[9].top_var);
-}
+
 //Testing unique table size function
 /*TEST(ROBDD, uniqueTableSizeTest){
     ClassProject::Manager Test_ROBDD;
