@@ -55,6 +55,25 @@ TEST(ROBDD, isConstantFuncTest){
     }
 }
 
+//Testing isVariable function
+TEST(ROBDD, isVariableFuncTest){
+    ClassProject::Manager Test_ROBDD;
+    ClassProject::BDD_ID a = Test_ROBDD.createVar("a");
+    ClassProject::BDD_ID b = Test_ROBDD.createVar("b");
+    ClassProject::BDD_ID c = Test_ROBDD.createVar("c");
+    ClassProject::BDD_ID d = Test_ROBDD.createVar("d");
+    ClassProject::BDD_ID ORa_b = Test_ROBDD.or2(a,b);
+    ClassProject::BDD_ID ANDc_d =  Test_ROBDD.and2(c,d);
+    Test_ROBDD.and2(ORa_b,ANDc_d);
+    for(int i = 0 ; i < 2 ; i++) {
+        EXPECT_FALSE(Test_ROBDD.isVariable(i));
+    }
+    for(int i = 2 ; i < Test_ROBDD.uniqueTableSize() ; i++) { //
+        EXPECT_TRUE(Test_ROBDD.isVariable(i));
+    }
+    EXPECT_FALSE(Test_ROBDD.isVariable(Test_ROBDD.uniqueTableSize())); //@TODO: Replace uniqueTableSize with Rand() > size
+}
+
 //ROBDD initialization test
 TEST(ROBDD, ConstructorTest){
     ClassProject::Manager Test_ROBDD;
@@ -77,17 +96,7 @@ TEST(ROBDD, ConstructorTest){
 
 
 
-//Testing isVariable function
-TEST(ROBDD, isVariableFuncTest){
-    ClassProject::Manager Test_ROBDD;
-    // @TODO: Further implementation by checking the unique table in isVariable function
-    for(int i = 0 ; i < 2 ; i++) {
-        EXPECT_FALSE(Test_ROBDD.isVariable(i));
-    }
-    for(int i = 2 ; i < 100 ; i++) { // @TODO: Change the 100 later with the size of the ROBDD
-        EXPECT_TRUE(Test_ROBDD.isVariable(i));
-    }
-}
+
 
 //Testing topVar function
 TEST(ROBDD, topVarFuncTest){
