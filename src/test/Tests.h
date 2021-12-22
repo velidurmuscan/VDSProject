@@ -94,6 +94,13 @@ TEST(ROBDD, isVariableFuncTest){
 //Testing topVar function
 TEST(ROBDD, topVarFuncTest){
     ClassProject::Manager Test_ROBDD;
+    ClassProject::BDD_ID a = Test_ROBDD.createVar("a");
+    ClassProject::BDD_ID b = Test_ROBDD.createVar("b");
+    ClassProject::BDD_ID c = Test_ROBDD.createVar("c");
+    ClassProject::BDD_ID d = Test_ROBDD.createVar("d");
+    ClassProject::BDD_ID ORa_b = Test_ROBDD.or2(a,b);
+    ClassProject::BDD_ID ANDc_d =  Test_ROBDD.and2(c,d);
+    Test_ROBDD.and2(ORa_b,ANDc_d);
     for(int i = 0; i < Test_ROBDD.uniqueTableSize(); i++){
         EXPECT_EQ(Test_ROBDD.topVar(i), Test_ROBDD.unique_table[i].top_var);
     }
