@@ -13,13 +13,13 @@ int main(int argc, char* argv[])
 {
     std::cout << "\r\nHello World !!!\r\n";
     ClassProject::Manager my_ROBDD;
-    my_ROBDD.createVar("a");
-    my_ROBDD.createVar("b");
-    my_ROBDD.createVar("c");
-    my_ROBDD.createVar("d");
-    my_ROBDD.or2(2,3);
-    my_ROBDD.and2(4,5);
-    my_ROBDD.and2(6,7);
+    ClassProject::BDD_ID a = my_ROBDD.createVar("a");
+    ClassProject::BDD_ID b = my_ROBDD.createVar("b");
+    ClassProject::BDD_ID c = my_ROBDD.createVar("c");
+    ClassProject::BDD_ID d = my_ROBDD.createVar("d");
+    ClassProject::BDD_ID ORa_b = my_ROBDD.or2(a,b);
+    ClassProject::BDD_ID ANDc_d =  my_ROBDD.and2(c,d);
+    my_ROBDD.and2(ORa_b,ANDc_d);
     my_ROBDD.print_table();
     return 0;
 }

@@ -9,6 +9,20 @@
 #include "../Manager.cpp"
 
 
+//Testing CreateVar function
+TEST(ROBDD, CreateVarFunTest){
+    ClassProject::Manager Test_ROBDD;
+    //100 was chosen arbitrary, and we can use std::rand()
+    for(int i = 2; i < 100; i++) {
+        Test_ROBDD.createVar("TestLabel");
+    }
+    for(int i = 2; i < Test_ROBDD.uniqueTableSize(); i++){
+        EXPECT_EQ(i, Test_ROBDD.unique_table[i].bdd_id);
+        EXPECT_EQ(1, Test_ROBDD.unique_table[i].high_id);
+        EXPECT_EQ(0, Test_ROBDD.unique_table[i].low_id);
+        EXPECT_EQ(i, Test_ROBDD.unique_table[i].top_var);
+    }
+}
 
 //ROBDD initialization test
 TEST(ROBDD, ConstructorTest){
@@ -72,19 +86,7 @@ TEST(ROBDD, topVarFuncTest){
     }
 }
 
-//Testing CreateVar function
-TEST(ROBDD, CreateVarFunTest){
-    ClassProject::Manager Test_ROBDD;
-    BDD_ID TempID;
-    for(int i = 2; i < 100; i++){
-        TempID = Test_ROBDD.createVar("TestLabel");
-        EXPECT_EQ(TempID, Test_ROBDD.unique_table[i].bdd_id);
-        EXPECT_EQ(1, Test_ROBDD.unique_table[i].high_id);
-        EXPECT_EQ(0, Test_ROBDD.unique_table[i].low_id);
-        EXPECT_EQ(TempID, Test_ROBDD.unique_table[i].top_var);
-    }
 
-}
 
 //Testing ite terminal cases function
 TEST(ROBDD, iteTerminalFunTest){
