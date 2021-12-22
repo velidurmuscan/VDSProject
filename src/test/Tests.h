@@ -8,7 +8,24 @@
 #include "gtest/gtest.h"
 #include "../Manager.cpp"
 
-
+//ROBDD initialization test
+TEST(ROBDD, ConstructorTest){
+    ClassProject::Manager Test_ROBDD;
+    //Check if the false node is in the correct position
+    EXPECT_EQ(0,Test_ROBDD.unique_table[0].bdd_id);
+    //EXPECT_EQ("VarFalse",Test_ROBDD.unique_table[0].label);
+    EXPECT_EQ(0,Test_ROBDD.unique_table[0].top_var);
+    EXPECT_EQ(0,Test_ROBDD.unique_table[0].high_id);
+    EXPECT_EQ(0,Test_ROBDD.unique_table[0].low_id);
+    //Check if the true node is in the correct position
+    EXPECT_EQ(1,Test_ROBDD.unique_table[1].bdd_id);
+    //EXPECT_EQ("VarTrue",Test_ROBDD.unique_table[1].label);
+    EXPECT_EQ(1,Test_ROBDD.unique_table[1].top_var);
+    EXPECT_EQ(1,Test_ROBDD.unique_table[1].high_id);
+    EXPECT_EQ(1,Test_ROBDD.unique_table[1].low_id);
+    //Check the size of the unique table if 2
+    EXPECT_EQ(2,Test_ROBDD.unique_table.size());
+}
 
 //Testing CreateVar function
 TEST(ROBDD, CreateVarFunTest){
@@ -74,39 +91,13 @@ TEST(ROBDD, isVariableFuncTest){
     EXPECT_FALSE(Test_ROBDD.isVariable(Test_ROBDD.uniqueTableSize())); //@TODO: Replace uniqueTableSize with Rand() > size
 }
 
-//ROBDD initialization test
-TEST(ROBDD, ConstructorTest){
-    ClassProject::Manager Test_ROBDD;
-    //Check if the false node is in the correct position
-    EXPECT_EQ(0,Test_ROBDD.unique_table[0].bdd_id);
-    //EXPECT_EQ("VarFalse",Test_ROBDD.unique_table[0].label);
-    EXPECT_EQ(0,Test_ROBDD.unique_table[0].top_var);
-    EXPECT_EQ(0,Test_ROBDD.unique_table[0].high_id);
-    EXPECT_EQ(0,Test_ROBDD.unique_table[0].low_id);
-    //Check if the true node is in the correct position
-    EXPECT_EQ(1,Test_ROBDD.unique_table[1].bdd_id);
-    //EXPECT_EQ("VarTrue",Test_ROBDD.unique_table[1].label);
-    EXPECT_EQ(1,Test_ROBDD.unique_table[1].top_var);
-    EXPECT_EQ(1,Test_ROBDD.unique_table[1].high_id);
-    EXPECT_EQ(1,Test_ROBDD.unique_table[1].low_id);
-    //Check the size of the unique table if 2
-    EXPECT_EQ(2,Test_ROBDD.unique_table.size());
-}
-
-
-
-
-
-
 //Testing topVar function
 TEST(ROBDD, topVarFuncTest){
     ClassProject::Manager Test_ROBDD;
-    for(int i = 0; i < Test_ROBDD.unique_table.size(); i++){
+    for(int i = 0; i < Test_ROBDD.uniqueTableSize(); i++){
         EXPECT_EQ(Test_ROBDD.topVar(i), Test_ROBDD.unique_table[i].top_var);
     }
 }
-
-
 
 //Testing ite terminal cases function
 TEST(ROBDD, iteTerminalFunTest){

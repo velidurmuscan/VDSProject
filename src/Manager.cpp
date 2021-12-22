@@ -58,8 +58,7 @@ bool Manager::isVariable(BDD_ID x) {
 }
 
 BDD_ID Manager::topVar(BDD_ID f) {
-//  @TODO: Check again after all functions are ready
-    return unique_table[f].top_var;
+    return 0 ;//unique_table[f].top_var;
 }
 
 BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e) {
