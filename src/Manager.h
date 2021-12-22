@@ -29,6 +29,7 @@ namespace ClassProject {
         // Constructor
         Manager();
 
+
         BDD_ID createVar(const std::string &label);
 
         const BDD_ID &True();
