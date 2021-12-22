@@ -47,14 +47,14 @@ bool Manager::isConstant(BDD_ID f) {
 }
 
 bool Manager::isVariable(BDD_ID x) {
-    /*if(x > uniqueTableSize() - 1){
+    if(x > uniqueTableSize() - 1){
         return false;
     }
     bool isVariableVar = false;
     if(x > 1){
         isVariableVar = true;
     }
-    return isVariableVar;*/ return false;
+    return isVariableVar;
 }
 
 BDD_ID Manager::topVar(BDD_ID f) {
