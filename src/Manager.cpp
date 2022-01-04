@@ -63,7 +63,7 @@ BDD_ID Manager::topVar(BDD_ID f) {
 
 BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e){
     BDD_ID rHigh, rLow, minTopVar;
-    //Unique table entry i already exists in the unique table
+    //Unique table entry i already exists in the unique table:
     bool Exist = false;
     BDD_ID ExistingID = 0;
     for(int c = 0 ; c <= uniqueTableSize() ; c++){
@@ -73,8 +73,12 @@ BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e){
             break;
         }
     }
-    //Check if ite is a terminal case
-    if ( i == 1 ){                       //ite(1,t,e)
+    //Check if the unique table has an entry for i,t,e:
+    if (Exist) {
+        return ExistingID;
+    }
+    //Check if ite is a terminal case:
+    else if ( i == 1 ){                       //ite(1,t,e)
         return t;
     } else if( i == 0){
         return e;                       //ite(0,t,e)
@@ -82,17 +86,15 @@ BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e){
         return i;
     } else if( t == e){                 //ite(i,t,t)
         return t;
-    } else if( t == 0 && e == 1){       //ite(i,0,1)
+    } else if( t == 0 && e == 1){       //ite(i,0,1) = Negation
         struct table_line newLine;
         newLine.bdd_id = uniqueTableSize();
         newLine.high_id = unique_table[i].low_id;
         newLine.low_id = unique_table[i].high_id;
         newLine.top_var = unique_table[i].top_var;
-        newLine.label = "(!" +  unique_table[i].label + ")";
+        newLine.label = "!(" +  unique_table[i].label + ")";    // Negation label
         unique_table.push_back(newLine);
         return newLine.bdd_id;
-    } else if (Exist){                  //Check if the unique table has an entry for i,t,e
-        return ExistingID;
     } else{                             //Create a new entry for i,t,e
         //Find the lowest top variable
         if((t == 0 || t == 1) && (e == 0 || e == 1)){
@@ -169,6 +171,7 @@ BDD_ID Manager::coFactorFalse(BDD_ID f) {
 }
 */
 BDD_ID Manager::neg(BDD_ID a) {
+    // Negation label is added inside ite() function
     return ite(a, 0, 1);
 }
 
