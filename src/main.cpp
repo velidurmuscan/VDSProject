@@ -12,7 +12,8 @@
 int main(int argc, char* argv[])
 {
     std::cout << "\r\nHello World !!!\r\n";
-/*    ClassProject::Manager my_ROBDD;
+
+    ClassProject::Manager my_ROBDD;
     ClassProject::BDD_ID a = my_ROBDD.createVar("a");
     ClassProject::BDD_ID b = my_ROBDD.createVar("b");
     ClassProject::BDD_ID c = my_ROBDD.createVar("c");
@@ -20,20 +21,20 @@ int main(int argc, char* argv[])
     ClassProject::BDD_ID ORa_b = my_ROBDD.or2(a,b);
     ClassProject::BDD_ID ANDc_d =  my_ROBDD.and2(c,d);
     my_ROBDD.and2(ORa_b,ANDc_d);
-    my_ROBDD.print_table();*/
+    my_ROBDD.print_table();
 
-
+/*
     ClassProject::Manager Test_ROBDD;
     ClassProject::Manager Test_ROBDD2;
     ClassProject::BDD_ID a = Test_ROBDD.createVar("a");
     ClassProject::BDD_ID b = Test_ROBDD.createVar("b");
-    /*Test_ROBDD.neg(Test_ROBDD.and2(2,3));
+    Test_ROBDD.neg(Test_ROBDD.and2(2,3));
     Test_ROBDD.neg(Test_ROBDD.nand2(2,3));
     Test_ROBDD.neg(Test_ROBDD.or2(2,3));
-    Test_ROBDD.neg(Test_ROBDD.nor2(2,3));*/
+    Test_ROBDD.neg(Test_ROBDD.nor2(2,3));
     Test_ROBDD.neg(Test_ROBDD.xor2(2,3));
-    //Test_ROBDD.neg(Test_ROBDD.xnor2(2,3));
+    Test_ROBDD.neg(Test_ROBDD.xnor2(2,3));
     Test_ROBDD.print_table();
-
+*/
     return 0;
 }
