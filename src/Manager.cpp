@@ -39,7 +39,7 @@ const BDD_ID& Manager::False() {
 }
 
 bool Manager::isConstant(BDD_ID f) {
-  bool isConstantVar = false;
+    bool isConstantVar = false;
     if(f == 1 || f == 0){
         isConstantVar = true;
     }
@@ -63,7 +63,7 @@ BDD_ID Manager::topVar(BDD_ID f) {
 
 BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e){
     BDD_ID rHigh, rLow, minTopVar;
-    //Unique table i already exists in the unique table
+    //Unique table entry i already exists in the unique table
     bool Exist = false;
     BDD_ID ExistingID = 0;
     for(int c = 0 ; c <= uniqueTableSize() ; c++){
@@ -74,7 +74,7 @@ BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e){
         }
     }
     //Check if ite is a terminal case
-   if ( i == 1 ){                       //ite(1,t,e)
+    if ( i == 1 ){                       //ite(1,t,e)
         return t;
     } else if( i == 0){
         return e;                       //ite(0,t,e)
@@ -83,26 +83,27 @@ BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e){
     } else if( t == e){                 //ite(i,t,t)
         return t;
     } else if( t == 0 && e == 1){       //ite(i,0,1)
-       struct table_line newLine;
-       newLine.bdd_id = uniqueTableSize();
-       newLine.high_id = unique_table[i].low_id;
-       newLine.low_id = unique_table[i].high_id;
-       newLine.top_var = unique_table[i].top_var;
-       unique_table.push_back(newLine);
-       return newLine.bdd_id;
+        struct table_line newLine;
+        newLine.bdd_id = uniqueTableSize();
+        newLine.high_id = unique_table[i].low_id;
+        newLine.low_id = unique_table[i].high_id;
+        newLine.top_var = unique_table[i].top_var;
+        newLine.label = "(!" +  unique_table[i].label + ")";
+        unique_table.push_back(newLine);
+        return newLine.bdd_id;
     } else if (Exist){                  //Check if the unique table has an entry for i,t,e
         return ExistingID;
     } else{                             //Create a new entry for i,t,e
-       //Find the lowest top variable
-       if((t == 0 || t == 1) && (e == 0 || e == 1)){
-           minTopVar = topVar(i);
-       } else if(t == 0 || t == 1 ){
-           minTopVar = std::min(topVar(i), topVar(e));
-       } else if( e == 0 || e == 1) {
-           minTopVar = std::min(topVar(i), topVar(t));
-       } else {
-           minTopVar = std::min(std::min(topVar(i), topVar(t)), topVar(e));
-       }
+        //Find the lowest top variable
+        if((t == 0 || t == 1) && (e == 0 || e == 1)){
+            minTopVar = topVar(i);
+        } else if(t == 0 || t == 1 ){
+            minTopVar = std::min(topVar(i), topVar(e));
+        } else if( e == 0 || e == 1) {
+            minTopVar = std::min(topVar(i), topVar(t));
+        } else {
+            minTopVar = std::min(std::min(topVar(i), topVar(t)), topVar(e));
+        }
         rHigh = ite(coFactorTrue(i, minTopVar), coFactorTrue(t, minTopVar), coFactorTrue(e, minTopVar));
         rLow = ite(coFactorFalse(i,minTopVar), coFactorFalse(t,minTopVar), coFactorFalse(e,minTopVar));
         if(rHigh == rLow){
@@ -116,7 +117,7 @@ BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e){
             unique_table.push_back(newLine);
             return newLine.bdd_id;
         }
-   }
+    }
 }
 
 BDD_ID Manager::coFactorTrue(BDD_ID f, BDD_ID x = 0) {
@@ -138,7 +139,7 @@ BDD_ID Manager::coFactorTrue(BDD_ID f, BDD_ID x = 0) {
 }
 
 BDD_ID Manager::coFactorFalse(BDD_ID f, BDD_ID x = 0) {
-   if(x == 0){
+    if(x == 0){
         x = topVar(f);
     }
 
@@ -172,27 +173,46 @@ BDD_ID Manager::neg(BDD_ID a) {
 }
 
 BDD_ID Manager::and2(BDD_ID a, BDD_ID b) {
-    return ite(a, b, 0);
+    BDD_ID and2_ID;
+    and2_ID = ite(a, b, 0);
+    unique_table[and2_ID].label = "(" +  unique_table[a].label + "*" + unique_table[b].label + ")";
+    return and2_ID;
 }
 
 BDD_ID Manager::or2(BDD_ID a, BDD_ID b) {
-    return ite(a,1, b);
+    BDD_ID or2_ID;
+    or2_ID = ite(a, 1, b);
+    unique_table[or2_ID].label = "(" +  unique_table[a].label + "+" + unique_table[b].label + ")";
+    return or2_ID;
 }
 
 BDD_ID Manager::xor2(BDD_ID a, BDD_ID b) {
-    return ite(a,neg(b),b);
+    BDD_ID xor2_ID, neg_b;
+    neg_b = neg(b);
+    xor2_ID = ite(a,neg_b,b);
+    unique_table[xor2_ID].label = "(" +  unique_table[a].label + "(+)" + unique_table[b].label + ")";
+    return xor2_ID;
 }
 
 BDD_ID Manager::nand2(BDD_ID a, BDD_ID b) {
-    return neg(and2(a,b));
+    BDD_ID nand2_ID;
+    nand2_ID = neg(and2(a,b));
+    unique_table[nand2_ID].label = "(" +  unique_table[a].label + "!*" + unique_table[b].label + ")";
+    return nand2_ID;
 }
 
 BDD_ID Manager::nor2(BDD_ID a, BDD_ID b) {
-    return neg(or2(a,b));
+    BDD_ID nor2_ID;
+    nor2_ID = neg(or2(a,b));
+    unique_table[nor2_ID].label = "(" +  unique_table[a].label + "!+" + unique_table[b].label + ")";
+    return nor2_ID;
 }
 
 BDD_ID Manager::xnor2(BDD_ID a, BDD_ID b) {
-    return neg(xor2(a,b));
+    BDD_ID xnor2_ID;
+    xnor2_ID = neg(xor2(a,b));
+    unique_table[xnor2_ID].label = "(" +  unique_table[a].label + "!(+)" + unique_table[b].label + ")";
+    return xnor2_ID;
 }
 
 std::string Manager::getTopVarName(const BDD_ID &root) {
