@@ -61,105 +61,102 @@ BDD_ID Manager::topVar(BDD_ID f) {
     return unique_table[f].top_var;
 }
 
+// If-Then-Else algorithm taken from slides:
 BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e){
     BDD_ID rHigh, rLow, minTopVar;
-    //Unique table entry i already exists in the unique table:
-    bool Exist = false;
-    BDD_ID ExistingID = 0;
-    for(int c = 0 ; c <= uniqueTableSize() ; c++){
-        if(unique_table[c].high_id == t && unique_table[c].low_id == e){
-            Exist = true;
-            ExistingID = c;
-            break;
-        }
-    }
 
-
-    //Check if the unique table has an entry for i,t,e:
-    if (Exist) {
-        return ExistingID;
-    }
-
-
-    //Check if ite is a terminal case:
-    else if ( i == 1 ){                       //ite(1,t,e)
+    // 1) Check if ite() results in a terminal case:
+    if (i == 1){                    //ite(1,t,e)
         return t;
-    } else if( i == 0){
-        return e;                       //ite(0,t,e)
-    } else if( t == 1 && e == 0 ){      //ite(i,1,0)
+    } else if(i == 0){              //ite(0,t,e)
+        return e;
+    } else if(t == 1 && e == 0){    //ite(i,1,0)
         return i;
-    } else if( t == e){                 //ite(i,t,t)
+    } else if(t == e){              //ite(i,t,t)
         return t;
-    } else if( t == 0 && e == 1){       //ite(i,0,1) = Negation
+    } else if( t == 0 && e == 1){   //ite(i,0,1) = Negation
+        // Check if the negation of the unique table entry i already exists in the unique table:
+        for(int c = 0 ; c <= uniqueTableSize() ; c++){
+            if ((unique_table[c].high_id == unique_table[i].low_id) && (unique_table[c].low_id == unique_table[i].high_id)) {
+                // Negation of i already exists, do not add it to table.
+                return unique_table[c].bdd_id;
+            }
+        }
+        // If not, create the negation of entry i:
         struct table_line newLine;
         newLine.bdd_id = uniqueTableSize();
         newLine.high_id = unique_table[i].low_id;
         newLine.low_id = unique_table[i].high_id;
         newLine.top_var = unique_table[i].top_var;
-        newLine.label = "!(" +  unique_table[i].label + ")";    // Negation label
+        newLine.label = "!" +  unique_table[i].label;    // Negation label
         unique_table.push_back(newLine);
         return newLine.bdd_id;
     }
 
-    /*
-    //Check if the unique table has an entry for i,t,e:
-    else if (Exist) {
-        return ExistingID;
-    }
-    */
-
-    //Create a new entry for i,t,e:
-    else{
-        //Find the lowest top variable
-        if((t == 0 || t == 1) && (e == 0 || e == 1)){
-            minTopVar = topVar(i);
-        } else if(t == 0 || t == 1 ){
-            minTopVar = std::min(topVar(i), topVar(e));
-        } else if( e == 0 || e == 1) {
-            minTopVar = std::min(topVar(i), topVar(t));
-        } else {
-            minTopVar = std::min(std::min(topVar(i), topVar(t)), topVar(e));
-        }
-
-        ClassProject::BDD_ID ct_i = coFactorTrue(i,minTopVar);
-        ClassProject::BDD_ID ct_t = coFactorTrue(t,minTopVar);
-        ClassProject::BDD_ID ct_e = coFactorTrue(e,minTopVar);
-        rHigh = ite(ct_i, ct_t, ct_e);
-        //rHigh = ite(coFactorTrue(i, minTopVar), coFactorTrue(t, minTopVar), coFactorTrue(e, minTopVar));
-
-        ClassProject::BDD_ID cf_i = coFactorFalse(i,minTopVar);
-        ClassProject::BDD_ID cf_t = coFactorFalse(t,minTopVar);
-        ClassProject::BDD_ID cf_e = coFactorFalse(e,minTopVar);
-        rLow = ite(cf_i, cf_t, cf_e);
-        //rLow = ite(coFactorFalse(i,minTopVar), coFactorFalse(t,minTopVar), coFactorFalse(e,minTopVar));
-
-        if(rHigh == rLow){
-            return rHigh;
-        } else {
-            struct table_line newLine;
-            newLine.bdd_id = uniqueTableSize();
-            newLine.high_id = rHigh;
-            newLine.low_id = rLow;
-            newLine.top_var = minTopVar;
-            newLine.label = "TestLabel";
-            unique_table.push_back(newLine);
-            return newLine.bdd_id;
+    // 2) Check if unique table entry i already exists in the unique table:
+    for(int c = 0 ; c <= uniqueTableSize() ; c++){
+        if(unique_table[c].high_id == t && unique_table[c].low_id == e){
+            return unique_table[c].bdd_id;
         }
     }
+
+    // 3) Create a new entry for i,t,e:
+    // 3.1) Find the lowest top variable:
+    if((t == 0 || t == 1) && (e == 0 || e == 1)){
+        minTopVar = topVar(i);
+    } else if(t == 0 || t == 1 ){
+        minTopVar = std::min(topVar(i), topVar(e));
+    } else if( e == 0 || e == 1) {
+        minTopVar = std::min(topVar(i), topVar(t));
+    } else {
+        minTopVar = std::min(std::min(topVar(i), topVar(t)), topVar(e));
+    }
+
+    // 3.2) In order to add a new entry into unique table, calculate the high and low successors of the new entry:
+    //rHigh = ite(coFactorTrue(i, minTopVar), coFactorTrue(t, minTopVar), coFactorTrue(e, minTopVar));
+    ClassProject::BDD_ID ct_i = coFactorTrue(i,minTopVar);
+    ClassProject::BDD_ID ct_t = coFactorTrue(t,minTopVar);
+    ClassProject::BDD_ID ct_e = coFactorTrue(e,minTopVar);
+    rHigh = ite(ct_i, ct_t, ct_e);  // High Successor
+    //rLow = ite(coFactorFalse(i,minTopVar), coFactorFalse(t,minTopVar), coFactorFalse(e,minTopVar));
+    ClassProject::BDD_ID cf_i = coFactorFalse(i,minTopVar);
+    ClassProject::BDD_ID cf_t = coFactorFalse(t,minTopVar);
+    ClassProject::BDD_ID cf_e = coFactorFalse(e,minTopVar);
+    rLow = ite(cf_i, cf_t, cf_e);   // Low Successor
+
+    // 3.3) Check if reduction is possible:
+    if(rHigh == rLow){
+        // Both high and low successors are same. Thus, creation of a new node is unnecessary. Return the current node:
+        return rHigh;
+    }
+
+    // 3.4) Create and add a new entry to the unique table:
+    struct table_line newLine;
+    newLine.bdd_id = uniqueTableSize();
+    newLine.high_id = rHigh;
+    newLine.low_id = rLow;
+    newLine.top_var = minTopVar;
+    newLine.label = "TestLabel";    // @TODO: Is this name edited later or kept like this?
+    unique_table.push_back(newLine);
+    return newLine.bdd_id;
 }
 
 BDD_ID Manager::coFactorTrue(BDD_ID f, BDD_ID x = 0) {
-
+    // If parameter x is not given, choose x as the top variable of f:
     if(x == 0){
         x = topVar(f);
     }
-    if (isConstant(f)){
+    // Check if this is a terminal case:
+    // @TODO: Check if we really cover checking all terminal cases.
+    if(isConstant(f)){
         return f;
     }
     BDD_ID T,F;
+    // Check if x is already the top variable of f:
     if(topVar(f) == x){
         return unique_table[f].high_id;
     } else {
+        // Calculate ite() with respect to variable x:
         T = coFactorTrue(unique_table[f].high_id, x);
         F = coFactorTrue(unique_table[f].low_id, x);
         return  ite(unique_table[f].top_var,T,F);
@@ -167,16 +164,21 @@ BDD_ID Manager::coFactorTrue(BDD_ID f, BDD_ID x = 0) {
 }
 
 BDD_ID Manager::coFactorFalse(BDD_ID f, BDD_ID x = 0) {
+    // If parameter x is not given, choose x as the top variable of f:
     if(x == 0){
         x = topVar(f);
     }
-    if (isConstant(f)){
+    // Check if this is a terminal case:
+    // @TODO: Check if we really cover checking all terminal cases.
+    if(isConstant(f)){
         return f;
     }
     BDD_ID T,F;
+    // Check if x is already the top variable of f:
     if(topVar(f) == x){
         return unique_table[f].low_id;
     } else {
+        // Calculate ite() with respect to variable x:
         T = coFactorFalse(unique_table[f].high_id, x);
         F = coFactorFalse(unique_table[f].low_id, x);
         return   ite(unique_table[f].top_var,T,F);
@@ -196,8 +198,11 @@ BDD_ID Manager::coFactorFalse(BDD_ID f) {
 }
 */
 BDD_ID Manager::neg(BDD_ID a) {
+    BDD_ID neg_ID;
+    neg_ID = ite(a, 0, 1);
     // Negation label is added inside ite() function
-    return ite(a, 0, 1);
+    //unique_table[neg_ID].label = "!(" + unique_table[neg_ID].label + ")";
+    return neg_ID;
 }
 
 BDD_ID Manager::and2(BDD_ID a, BDD_ID b) {
