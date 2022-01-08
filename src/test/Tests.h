@@ -351,8 +351,8 @@ TEST(ROBDDFindNodes, findNodesTest){
     ClassProject::BDD_ID cANDd =Test_ROBDD.and2(c,d);
     ClassProject::BDD_ID aORb_AND_cANDd =Test_ROBDD.and2(aORb,cANDd);
     std::set<BDD_ID> nodes_of_root, PreDef_nodes_of_root;
-    PreDef_nodes_of_root = {0, 1, 3};
-    Test_ROBDD.findNodes(d, nodes_of_root);
+    PreDef_nodes_of_root = {0, 1, 3, 6};
+    Test_ROBDD.findNodes(aORb, nodes_of_root);
     EXPECT_EQ(PreDef_nodes_of_root, nodes_of_root);
 }
 

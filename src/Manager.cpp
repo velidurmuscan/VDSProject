@@ -259,8 +259,12 @@ std::string Manager::getTopVarName(const BDD_ID &root) {
 }
 
 void Manager::findNodes(const BDD_ID &root, std::set<BDD_ID> &nodes_of_root) {
-//  @TODO: Implement the function !!!
+   
+    return;
 }
+
+
+
 
 void Manager::findVars(const BDD_ID &root, std::set<BDD_ID> &vars_of_root) {
 //  @TODO: Implement the function !!!
