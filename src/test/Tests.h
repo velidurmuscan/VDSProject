@@ -151,34 +151,35 @@ TEST(ROBDDite, iteRecompTest){
     EXPECT_EQ(8, Test_ROBDD.ite(a, d, 0));
     EXPECT_EQ(9, Test_ROBDD.ite(a, c, 0));
 }
-/*
+
 //Testing ite new line function
 TEST(ROBDDite, iteNewLineTest){
     ClassProject::Manager Test_ROBDD;
-    Test_ROBDD.createVar("a");
-    Test_ROBDD.createVar("b");
-    Test_ROBDD.createVar("c");
-    Test_ROBDD.createVar("d");
-    Test_ROBDD.or2(2,3);
-    Test_ROBDD.and2(4,5);
-    Test_ROBDD.and2(6,7);
+    ClassProject::BDD_ID a = Test_ROBDD.createVar("a");
+    ClassProject::BDD_ID b =Test_ROBDD.createVar("b");
+    ClassProject::BDD_ID c =Test_ROBDD.createVar("c");
+    ClassProject::BDD_ID d =Test_ROBDD.createVar("d");
+    ClassProject::BDD_ID aORb = Test_ROBDD.or2(2,3);
+    ClassProject::BDD_ID cANDd =Test_ROBDD.and2(4,5);
+    ClassProject::BDD_ID aORb_AND_cANDd = Test_ROBDD.and2(6,7);
     EXPECT_EQ(1, Test_ROBDD.unique_table[6].high_id);
-    EXPECT_EQ(3, Test_ROBDD.unique_table[6].low_id);
-    EXPECT_EQ(2, Test_ROBDD.unique_table[6].top_var);
-    EXPECT_EQ(5, Test_ROBDD.unique_table[7].high_id);
+    EXPECT_EQ(b, Test_ROBDD.unique_table[6].low_id);
+    EXPECT_EQ(a, Test_ROBDD.unique_table[6].top_var);
+    EXPECT_EQ(d, Test_ROBDD.unique_table[7].high_id);
     EXPECT_EQ(0, Test_ROBDD.unique_table[7].low_id);
-    EXPECT_EQ(4, Test_ROBDD.unique_table[7].top_var);
-    EXPECT_EQ(7, Test_ROBDD.unique_table[8].high_id);
+    EXPECT_EQ(c, Test_ROBDD.unique_table[7].top_var);
+    EXPECT_EQ(cANDd, Test_ROBDD.unique_table[8].high_id);
     EXPECT_EQ(0, Test_ROBDD.unique_table[8].low_id);
-    EXPECT_EQ(3, Test_ROBDD.unique_table[8].top_var);
-    EXPECT_EQ(7, Test_ROBDD.unique_table[8].high_id);
+    EXPECT_EQ(b, Test_ROBDD.unique_table[8].top_var);
+    EXPECT_EQ(cANDd, Test_ROBDD.unique_table[8].high_id);
     EXPECT_EQ(0, Test_ROBDD.unique_table[8].low_id);
-    EXPECT_EQ(3, Test_ROBDD.unique_table[8].top_var);
-    EXPECT_EQ(7, Test_ROBDD.unique_table[9].high_id);
-    EXPECT_EQ(8, Test_ROBDD.unique_table[9].low_id);
-    EXPECT_EQ(2, Test_ROBDD.unique_table[9].top_var);
+    EXPECT_EQ(b, Test_ROBDD.unique_table[8].top_var);
+    EXPECT_EQ(cANDd, Test_ROBDD.unique_table[9].high_id);
+    EXPECT_EQ(aORb_AND_cANDd, Test_ROBDD.unique_table[9].low_id);
+    EXPECT_EQ(a, Test_ROBDD.unique_table[9].top_var);
+    Test_ROBDD.print_table();
 }
-
+/*
 //Testing neg function
 TEST(ROBDD, negFuncTest){
     ClassProject::Manager Test_ROBDD;
