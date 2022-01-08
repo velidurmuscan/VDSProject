@@ -109,44 +109,32 @@ TEST(ROBDD, topVarFuncTest){
 
 //Testing ite terminal cases function
 TEST(ROBDDite, iteTerminalFunTest){
-    ClassProject::Manager Test_ROBDD;
-    ClassProject::Manager Test_ROBDD2;
-    /* EXPECT_EQ(15, Test_ROBDD.ite(1,15,14));
+     ClassProject::Manager Test_ROBDD;
+     ClassProject::BDD_ID a = Test_ROBDD.createVar("a");
+     ClassProject::BDD_ID NOTa = Test_ROBDD.ite(a,0,1);
+     EXPECT_EQ(Test_ROBDD.unique_table[a].high_id, Test_ROBDD.unique_table[NOTa].low_id);
+     EXPECT_EQ(Test_ROBDD.unique_table[a].low_id, Test_ROBDD.unique_table[NOTa].high_id);
+
+     ClassProject::BDD_ID b = Test_ROBDD.createVar("b");
+     ClassProject::BDD_ID NOTb = Test_ROBDD.ite(b,0,1);
+     EXPECT_EQ(Test_ROBDD.unique_table[b].high_id, Test_ROBDD.unique_table[NOTb].low_id);
+     EXPECT_EQ(Test_ROBDD.unique_table[b].low_id, Test_ROBDD.unique_table[NOTb].high_id);
+
+     ClassProject::BDD_ID aANDb = Test_ROBDD.and2(a,b);
+     ClassProject::BDD_ID NOTaANDb = Test_ROBDD.ite(aANDb,0,1);
+     EXPECT_EQ(Test_ROBDD.unique_table[aANDb].high_id, Test_ROBDD.unique_table[NOTaANDb].low_id);
+     EXPECT_EQ(Test_ROBDD.unique_table[aANDb].low_id, Test_ROBDD.unique_table[NOTaANDb].high_id);
+
+     EXPECT_EQ(15, Test_ROBDD.ite(1,15,14));
      EXPECT_EQ(14, Test_ROBDD.ite(0,15,14));
      EXPECT_EQ(16, Test_ROBDD.ite(16,1,0));
      EXPECT_EQ(14, Test_ROBDD.ite(16,14,14));
-
-     ClassProject::BDD_ID a = Test_ROBDD.createVar("a");
-     ClassProject::BDD_ID b = Test_ROBDD.createVar("b");
-     ClassProject::BDD_ID c = Test_ROBDD.createVar("c");
-     ClassProject::BDD_ID d = Test_ROBDD.createVar("d");
-     ClassProject::BDD_ID ORa_b = Test_ROBDD.or2(a,b);
-     ClassProject::BDD_ID ANDc_d =  Test_ROBDD.and2(c,d);
-     Test_ROBDD.and2(ORa_b,ANDc_d);
-     Test_ROBDD.and2(Test_ROBDD.neg(a),Test_ROBDD.neg(b));
-     //std::cout << Test_ROBDD.neg(8) << std::endl;
-     Test_ROBDD.print_table();
-     //EXPECT_EQ(, Test_ROBDD.ite(16,0,1));
-     */
-    ClassProject::BDD_ID a = Test_ROBDD.createVar("a");
-    ClassProject::BDD_ID b = Test_ROBDD.createVar("b");
-    Test_ROBDD.neg(Test_ROBDD.and2(2,3));
-    Test_ROBDD.neg(Test_ROBDD.nand2(2,3));
-    Test_ROBDD.neg(Test_ROBDD.or2(2,3));
-    Test_ROBDD.neg(Test_ROBDD.nor2(2,3));
-    //Test_ROBDD.neg(Test_ROBDD.xor2(2,3));
-    //Test_ROBDD.neg(Test_ROBDD.xnor2(2,3));
-    Test_ROBDD.print_table();
-/*    ClassProject::BDD_ID c = Test_ROBDD2.createVar("c");
-    ClassProject::BDD_ID d = Test_ROBDD2.createVar("d");
-    Test_ROBDD2.and2(Test_ROBDD2.neg(2),Test_ROBDD2.neg(3));
-    Test_ROBDD2.print_table();*/
 
     // @TODO: Check how to create a unique table the same for different functions implementation (negation mainly)
 
 
 }
-
+/*
 //Testing ite not recomputing function
 TEST(ROBDDite, iteRecompTest){
     ClassProject::Manager Test_ROBDD;

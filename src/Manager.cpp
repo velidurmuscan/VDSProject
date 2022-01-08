@@ -67,7 +67,8 @@ BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e){
 
     // 1) Check if ite() results in a terminal case:
     if (i == 1){                    //ite(1,t,e)
-        return t;
+        //return t;
+        return 0;
     } else if(i == 0){              //ite(0,t,e)
         return e;
     } else if(t == 1 && e == 0){    //ite(i,1,0)
@@ -136,7 +137,7 @@ BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e){
     newLine.high_id = rHigh;
     newLine.low_id = rLow;
     newLine.top_var = minTopVar;
-    newLine.label = "TestLabel";    // @TODO: Is this name edited later or kept like this?
+    //newLine.label = "TempLabel";
     unique_table.push_back(newLine);
     return newLine.bdd_id;
 }
@@ -148,9 +149,10 @@ BDD_ID Manager::coFactorTrue(BDD_ID f, BDD_ID x = 0) {
     }
     // Check if this is a terminal case:
     // @TODO: Check if we really cover checking all terminal cases.
-    if(isConstant(f)){
+    if(isConstant(f) || topVar(f) > x){
         return f;
     }
+
     BDD_ID T,F;
     // Check if x is already the top variable of f:
     if(topVar(f) == x){
@@ -170,7 +172,7 @@ BDD_ID Manager::coFactorFalse(BDD_ID f, BDD_ID x = 0) {
     }
     // Check if this is a terminal case:
     // @TODO: Check if we really cover checking all terminal cases.
-    if(isConstant(f)){
+    if(isConstant(f) || topVar(f) > x){
         return f;
     }
     BDD_ID T,F;
@@ -230,21 +232,21 @@ BDD_ID Manager::xor2(BDD_ID a, BDD_ID b) {
 BDD_ID Manager::nand2(BDD_ID a, BDD_ID b) {
     BDD_ID nand2_ID;
     nand2_ID = neg(and2(a,b));
-    unique_table[nand2_ID].label = "(" +  unique_table[a].label + "!*" + unique_table[b].label + ")";
+   // unique_table[nand2_ID].label = "(" +  unique_table[a].label + "!*" + unique_table[b].label + ")";
     return nand2_ID;
 }
 
 BDD_ID Manager::nor2(BDD_ID a, BDD_ID b) {
     BDD_ID nor2_ID;
     nor2_ID = neg(or2(a,b));
-    unique_table[nor2_ID].label = "(" +  unique_table[a].label + "!+" + unique_table[b].label + ")";
+   // unique_table[nor2_ID].label = "(" +  unique_table[a].label + "!+" + unique_table[b].label + ")";
     return nor2_ID;
 }
 
 BDD_ID Manager::xnor2(BDD_ID a, BDD_ID b) {
     BDD_ID xnor2_ID;
     xnor2_ID = neg(xor2(a,b));
-    unique_table[xnor2_ID].label = "(" +  unique_table[a].label + "!(+)" + unique_table[b].label + ")";
+   // unique_table[xnor2_ID].label = "(" +  unique_table[a].label + "!(+)" + unique_table[b].label + ")";
     return xnor2_ID;
 }
 
