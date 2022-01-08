@@ -260,19 +260,11 @@ std::string Manager::getTopVarName(const BDD_ID &root) {
 
 void Manager::findNodes(const BDD_ID &root, std::set<BDD_ID> &nodes_of_root) {
     if(unique_table[root].bdd_id < 2 ){
-        //nodes_of_root.insert(unique_table[root].bdd_id);
         return;
     }
-
-    if(nodes_of_root.count(unique_table[root].high_id) == 0 ) {
-        nodes_of_root.insert(unique_table[root].high_id);
-    }
-    if(nodes_of_root.count(unique_table[root].low_id) == 0 ) {
-        nodes_of_root.insert(unique_table[root].low_id);
-    }
-    if(nodes_of_root.count(unique_table[root].bdd_id) == 0 ) {
-        nodes_of_root.insert(unique_table[root].bdd_id);
-    }
+    nodes_of_root.insert(unique_table[root].high_id);
+    nodes_of_root.insert(unique_table[root].low_id);
+    nodes_of_root.insert(unique_table[root].bdd_id);
     findNodes(unique_table[root].high_id, nodes_of_root);
     findNodes(unique_table[root].low_id, nodes_of_root);
 
