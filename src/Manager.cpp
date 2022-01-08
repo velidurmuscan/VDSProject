@@ -144,11 +144,11 @@ BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e){
 
 }
 
-BDD_ID Manager::coFactorTrue(BDD_ID f, BDD_ID x = 0) {
+BDD_ID Manager::coFactorTrue(BDD_ID f, BDD_ID x) {
     // If parameter x is not given, choose x as the top variable of f:
-    if(x == 0){
+  /*  if(x == 0){
         x = topVar(f);
-    }
+    }*/
     // Check if this is a terminal case:
     // @TODO: Check if we really cover checking all terminal cases.
     if(isConstant(f) || topVar(f) > x){
@@ -167,11 +167,11 @@ BDD_ID Manager::coFactorTrue(BDD_ID f, BDD_ID x = 0) {
     }
 }
 
-BDD_ID Manager::coFactorFalse(BDD_ID f, BDD_ID x = 0) {
+BDD_ID Manager::coFactorFalse(BDD_ID f, BDD_ID x) {
     // If parameter x is not given, choose x as the top variable of f:
-    if(x == 0){
+  /*  if(x == 0){
         x = topVar(f);
-    }
+    }*/
     // Check if this is a terminal case:
     // @TODO: Check if we really cover checking all terminal cases.
     if(isConstant(f) || topVar(f) > x){
@@ -188,19 +188,15 @@ BDD_ID Manager::coFactorFalse(BDD_ID f, BDD_ID x = 0) {
         return   ite(unique_table[f].top_var,T,F);
     }
 }
-/*
+
 BDD_ID Manager::coFactorTrue(BDD_ID f) {
-//  @TODO: Implement the function !!!
-    BDD_ID tmp = 0;
-    return tmp;
+    return coFactorTrue(f, topVar(f));
 }
 
 BDD_ID Manager::coFactorFalse(BDD_ID f) {
-//  @TODO: Implement the function !!!
-    BDD_ID tmp = 0;
-    return tmp;
+    return coFactorFalse(f, topVar(f));
 }
-*/
+
 BDD_ID Manager::neg(BDD_ID a) {
     BDD_ID neg_ID;
     neg_ID = ite(a, 0, 1);

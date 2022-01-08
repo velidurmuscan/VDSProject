@@ -293,6 +293,8 @@ TEST(ROBDD, coFactorTrueFuncTest){
     EXPECT_EQ(b, Test_ROBDD.coFactorTrue(aANDb,a));
     ClassProject::BDD_ID cXORd =Test_ROBDD.xor2(c,d);
     EXPECT_EQ(Test_ROBDD.neg(d), Test_ROBDD.coFactorTrue(cXORd,c));
+    ClassProject::BDD_ID cORd =Test_ROBDD.or2(c,d);
+    EXPECT_EQ(1, Test_ROBDD.coFactorTrue(cORd));
 }
 
 //Testing coFactorFalse function
@@ -306,6 +308,8 @@ TEST(ROBDD, coFactorFalseFuncTest){
     EXPECT_EQ(0, Test_ROBDD.coFactorFalse(aANDb,a));
     ClassProject::BDD_ID cXORd =Test_ROBDD.xor2(c,d);
     EXPECT_EQ(d, Test_ROBDD.coFactorFalse(cXORd,c));
+    ClassProject::BDD_ID cORd =Test_ROBDD.or2(c,d);
+    EXPECT_EQ(d, Test_ROBDD.coFactorFalse(cORd));
 
 }
 
