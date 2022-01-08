@@ -359,5 +359,23 @@ TEST(ROBDDFindNodes, findNodesTest){
     EXPECT_EQ(PreDef_nodes_of_root, nodes_of_root);
 }
 
+//Testing findVars function
+TEST(ROBDDFindVars, findVarsTest){
+    ClassProject::Manager Test_ROBDD;
+    ClassProject::BDD_ID a = Test_ROBDD.createVar("a");
+    ClassProject::BDD_ID b =Test_ROBDD.createVar("b");
+    ClassProject::BDD_ID c =Test_ROBDD.createVar("c");
+    ClassProject::BDD_ID d =Test_ROBDD.createVar("d");
+    ClassProject::BDD_ID aORb =Test_ROBDD.or2(a,b);
+    ClassProject::BDD_ID cANDd =Test_ROBDD.and2(c,d);
+    ClassProject::BDD_ID aORb_AND_cANDd =Test_ROBDD.and2(aORb,cANDd);
+    std::set<BDD_ID> vars_of_root, PreDef_vars_of_root;
+    PreDef_vars_of_root = {0, 1, 5, 4, 3, 2};
+    Test_ROBDD.findVars(aORb_AND_cANDd, vars_of_root);
+    /*for(auto i = nodes_of_root.begin() ; i != nodes_of_root.end(); ++i) {
+        std::cout << ' ' << *i;
+    }*/
+    EXPECT_EQ(PreDef_vars_of_root, vars_of_root);
+}
 
 #endif
