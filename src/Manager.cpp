@@ -101,7 +101,47 @@ BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e){
             }
         }
 
-    return 0;
+    // 3) Create a new entry for i,t,e:
+    // 3.1) Find the lowest top variable:
+    if((t == 0 || t == 1) && (e == 0 || e == 1)){
+        minTopVar = topVar(i);
+    } else if(t == 0 || t == 1 ){
+        minTopVar = std::min(topVar(i), topVar(e));
+    } else if( e == 0 || e == 1) {
+        minTopVar = std::min(topVar(i), topVar(t));
+    } else {
+        minTopVar = std::min(std::min(topVar(i), topVar(t)), topVar(e));
+    }
+
+    // 3.2) In order to add a new entry into unique table, calculate the high and low successors of the new entry:
+    //rHigh = ite(coFactorTrue(i, minTopVar), coFactorTrue(t, minTopVar), coFactorTrue(e, minTopVar));
+    ClassProject::BDD_ID ct_i = coFactorTrue(i,minTopVar);
+    ClassProject::BDD_ID ct_t = coFactorTrue(t,minTopVar);
+    ClassProject::BDD_ID ct_e = coFactorTrue(e,minTopVar);
+    rHigh = ite(ct_i, ct_t, ct_e);  // High Successor
+    //rLow = ite(coFactorFalse(i,minTopVar), coFactorFalse(t,minTopVar), coFactorFalse(e,minTopVar));
+    ClassProject::BDD_ID cf_i = coFactorFalse(i,minTopVar);
+    ClassProject::BDD_ID cf_t = coFactorFalse(t,minTopVar);
+    ClassProject::BDD_ID cf_e = coFactorFalse(e,minTopVar);
+    rLow = ite(cf_i, cf_t, cf_e);   // Low Successor
+
+    // 3.3) Check if reduction is possible:
+    if(rHigh == rLow){
+        // Both high and low successors are same. Thus, creation of a new node is unnecessary. Return the current node:
+        return rHigh;
+    }
+
+    // 3.4) Create and add a new entry to the unique table:
+    struct table_line newLine;
+    newLine.bdd_id = uniqueTableSize();
+    newLine.high_id = rHigh;
+    newLine.low_id = rLow;
+    newLine.top_var = minTopVar;
+    //newLine.label = "TempLabel";
+    unique_table.push_back(newLine);
+    return newLine.bdd_id;
+
+
 }
 
 BDD_ID Manager::coFactorTrue(BDD_ID f, BDD_ID x = 0) {

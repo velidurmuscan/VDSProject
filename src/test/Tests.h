@@ -175,7 +175,7 @@ TEST(ROBDDite, iteNewLineTest){
     EXPECT_EQ(0, Test_ROBDD.unique_table[8].low_id);
     EXPECT_EQ(b, Test_ROBDD.unique_table[8].top_var);
     EXPECT_EQ(cANDd, Test_ROBDD.unique_table[9].high_id);
-    EXPECT_EQ(aORb_AND_cANDd, Test_ROBDD.unique_table[9].low_id);
+    EXPECT_EQ(8, Test_ROBDD.unique_table[9].low_id);
     EXPECT_EQ(a, Test_ROBDD.unique_table[9].top_var);
     Test_ROBDD.print_table();
 }
