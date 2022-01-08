@@ -67,8 +67,7 @@ BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e){
 
     // 1) Check if ite() results in a terminal case:
     if (i == 1){                    //ite(1,t,e)
-        //return t;
-        return 0;
+        return t;
     } else if(i == 0){              //ite(0,t,e)
         return e;
     } else if(t == 1 && e == 0){    //ite(i,1,0)
