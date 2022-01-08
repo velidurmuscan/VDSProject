@@ -159,9 +159,9 @@ TEST(ROBDDite, iteNewLineTest){
     ClassProject::BDD_ID b =Test_ROBDD.createVar("b");
     ClassProject::BDD_ID c =Test_ROBDD.createVar("c");
     ClassProject::BDD_ID d =Test_ROBDD.createVar("d");
-    ClassProject::BDD_ID aORb = Test_ROBDD.or2(2,3);
-    ClassProject::BDD_ID cANDd =Test_ROBDD.and2(4,5);
-    ClassProject::BDD_ID aORb_AND_cANDd = Test_ROBDD.and2(6,7);
+    ClassProject::BDD_ID aORb = Test_ROBDD.or2(a,b);
+    ClassProject::BDD_ID cANDd =Test_ROBDD.and2(c,d);
+    ClassProject::BDD_ID aORb_AND_cANDd = Test_ROBDD.and2(aORb,cANDd);
     EXPECT_EQ(1, Test_ROBDD.unique_table[6].high_id);
     EXPECT_EQ(b, Test_ROBDD.unique_table[6].low_id);
     EXPECT_EQ(a, Test_ROBDD.unique_table[6].top_var);
@@ -177,70 +177,111 @@ TEST(ROBDDite, iteNewLineTest){
     EXPECT_EQ(cANDd, Test_ROBDD.unique_table[9].high_id);
     EXPECT_EQ(8, Test_ROBDD.unique_table[9].low_id);
     EXPECT_EQ(a, Test_ROBDD.unique_table[9].top_var);
-    Test_ROBDD.print_table();
 }
-/*
+
 //Testing neg function
 TEST(ROBDD, negFuncTest){
     ClassProject::Manager Test_ROBDD;
+    ClassProject::BDD_ID a = Test_ROBDD.createVar("a");
+    ClassProject::BDD_ID NOTa =Test_ROBDD.neg(a);
     EXPECT_EQ(1, Test_ROBDD.neg(0));
     EXPECT_EQ(0, Test_ROBDD.neg(1));
+    EXPECT_EQ(Test_ROBDD.unique_table[a].high_id, Test_ROBDD.unique_table[NOTa].low_id);
+    EXPECT_EQ(Test_ROBDD.unique_table[a].low_id, Test_ROBDD.unique_table[NOTa].high_id);
 }
 
 //Testing and2 function
 TEST(ROBDD, and2FuncTest){
     ClassProject::Manager Test_ROBDD;
+    ClassProject::BDD_ID a = Test_ROBDD.createVar("a");
+    ClassProject::BDD_ID b =Test_ROBDD.createVar("b");
+    ClassProject::BDD_ID aANDb =Test_ROBDD.and2(a,b);
     EXPECT_EQ(0, Test_ROBDD.and2(0,1));
     EXPECT_EQ(0, Test_ROBDD.and2(1,0));
     EXPECT_EQ(0, Test_ROBDD.and2(0,0));
     EXPECT_EQ(1, Test_ROBDD.and2(1,1));
+    EXPECT_EQ(Test_ROBDD.unique_table[aANDb].top_var, a);
+    EXPECT_EQ(Test_ROBDD.unique_table[aANDb].high_id, b);
+    EXPECT_EQ(Test_ROBDD.unique_table[aANDb].low_id, 0);
+
 }
 
 //Testing nand2 function
 TEST(ROBDD, nand2FuncTest){
     ClassProject::Manager Test_ROBDD;
+    ClassProject::BDD_ID a = Test_ROBDD.createVar("a");
+    ClassProject::BDD_ID b =Test_ROBDD.createVar("b");
+    ClassProject::BDD_ID aNANDb =Test_ROBDD.nand2(a,b);
     EXPECT_EQ(1, Test_ROBDD.nand2(0,1));
     EXPECT_EQ(1, Test_ROBDD.nand2(1,0));
     EXPECT_EQ(1, Test_ROBDD.nand2(0,0));
     EXPECT_EQ(0, Test_ROBDD.nand2(1,1));
+    EXPECT_EQ(Test_ROBDD.unique_table[aNANDb].top_var, a);
+    EXPECT_EQ(Test_ROBDD.unique_table[aNANDb].high_id, 0);
+    EXPECT_EQ(Test_ROBDD.unique_table[aNANDb].low_id, b);
 }
 
 //Testing or2 function
 TEST(ROBDD, or2FuncTest){
     ClassProject::Manager Test_ROBDD;
+    ClassProject::BDD_ID a = Test_ROBDD.createVar("a");
+    ClassProject::BDD_ID b =Test_ROBDD.createVar("b");
+    ClassProject::BDD_ID aORb =Test_ROBDD.or2(a,b);
     EXPECT_EQ(1, Test_ROBDD.or2(0,1));
     EXPECT_EQ(1, Test_ROBDD.or2(1,0));
     EXPECT_EQ(0, Test_ROBDD.or2(0,0));
     EXPECT_EQ(1, Test_ROBDD.or2(1,1));
+    EXPECT_EQ(Test_ROBDD.unique_table[aORb].top_var, a);
+    EXPECT_EQ(Test_ROBDD.unique_table[aORb].high_id, 1);
+    EXPECT_EQ(Test_ROBDD.unique_table[aORb].low_id, b);
 }
 
 //Testing nor2 function
 TEST(ROBDD, nor2FuncTest){
     ClassProject::Manager Test_ROBDD;
+    ClassProject::BDD_ID a = Test_ROBDD.createVar("a");
+    ClassProject::BDD_ID b =Test_ROBDD.createVar("b");
+    ClassProject::BDD_ID aNORb =Test_ROBDD.nor2(a,b);
     EXPECT_EQ(0, Test_ROBDD.nor2(0,1));
     EXPECT_EQ(0, Test_ROBDD.nor2(1,0));
     EXPECT_EQ(1, Test_ROBDD.nor2(0,0));
     EXPECT_EQ(0, Test_ROBDD.nor2(1,1));
+    EXPECT_EQ(Test_ROBDD.unique_table[aNORb].top_var, a);
+    EXPECT_EQ(Test_ROBDD.unique_table[aNORb].high_id, b);
+    EXPECT_EQ(Test_ROBDD.unique_table[aNORb].low_id, 1);
 }
 
 //Testing xor2 function
 TEST(ROBDD, xor2FuncTest){
     ClassProject::Manager Test_ROBDD;
+    ClassProject::BDD_ID a = Test_ROBDD.createVar("a");
+    ClassProject::BDD_ID b =Test_ROBDD.createVar("b");
+    ClassProject::BDD_ID aXORb =Test_ROBDD.xor2(a,b);
     EXPECT_EQ(1, Test_ROBDD.xor2(0,1));
     EXPECT_EQ(1, Test_ROBDD.xor2(1,0));
     EXPECT_EQ(0, Test_ROBDD.xor2(0,0));
     EXPECT_EQ(0, Test_ROBDD.xor2(1,1));
+    EXPECT_EQ(Test_ROBDD.unique_table[aXORb].top_var, a);
+    EXPECT_EQ(Test_ROBDD.unique_table[aXORb].high_id, Test_ROBDD.neg(b));
+    EXPECT_EQ(Test_ROBDD.unique_table[aXORb].low_id, b);
+
 }
 
 //Testing xnor2 function
 TEST(ROBDD, xnor2FuncTest){
     ClassProject::Manager Test_ROBDD;
+    ClassProject::BDD_ID a = Test_ROBDD.createVar("a");
+    ClassProject::BDD_ID b =Test_ROBDD.createVar("b");
+    ClassProject::BDD_ID aXNORb =Test_ROBDD.xnor2(a,b);
     EXPECT_EQ(0, Test_ROBDD.xnor2(0,1));
     EXPECT_EQ(0, Test_ROBDD.xnor2(1,0));
     EXPECT_EQ(1, Test_ROBDD.xnor2(0,0));
     EXPECT_EQ(1, Test_ROBDD.xnor2(1,1));
+    EXPECT_EQ(Test_ROBDD.unique_table[aXNORb].top_var, a);
+    EXPECT_EQ(Test_ROBDD.unique_table[aXNORb].high_id, b);
+    EXPECT_EQ(Test_ROBDD.unique_table[aXNORb].low_id, Test_ROBDD.neg(b));
 }
-
+/*
 //Testing coFactorTrue function
 TEST(ROBDD, coFactorTrueFuncTest){
     ClassProject::Manager Test_ROBDD;

@@ -212,14 +212,18 @@ BDD_ID Manager::neg(BDD_ID a) {
 BDD_ID Manager::and2(BDD_ID a, BDD_ID b) {
     BDD_ID and2_ID;
     and2_ID = ite(a, b, 0);
-    unique_table[and2_ID].label = "(" +  unique_table[a].label + "*" + unique_table[b].label + ")";
+    if(!(a < 2 || b < 2)) {
+        unique_table[and2_ID].label = "(" + unique_table[a].label + "*" + unique_table[b].label + ")";
+    }
     return and2_ID;
 }
 
 BDD_ID Manager::or2(BDD_ID a, BDD_ID b) {
     BDD_ID or2_ID;
     or2_ID = ite(a, 1, b);
-    unique_table[or2_ID].label = "(" +  unique_table[a].label + "+" + unique_table[b].label + ")";
+    if(!(a < 2 || b < 2)) {
+        unique_table[or2_ID].label = "(" + unique_table[a].label + "+" + unique_table[b].label + ")";
+    }
     return or2_ID;
 }
 
@@ -227,7 +231,9 @@ BDD_ID Manager::xor2(BDD_ID a, BDD_ID b) {
     BDD_ID xor2_ID, neg_b;
     neg_b = neg(b);
     xor2_ID = ite(a,neg_b,b);
-    unique_table[xor2_ID].label = "(" +  unique_table[a].label + "(+)" + unique_table[b].label + ")";
+    if(!(a < 2 || b < 2)) {
+        unique_table[xor2_ID].label = "(" + unique_table[a].label + "(+)" + unique_table[b].label + ")";
+    }
     return xor2_ID;
 }
 
