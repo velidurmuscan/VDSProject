@@ -281,73 +281,46 @@ TEST(ROBDD, xnor2FuncTest){
     EXPECT_EQ(Test_ROBDD.unique_table[aXNORb].high_id, b);
     EXPECT_EQ(Test_ROBDD.unique_table[aXNORb].low_id, Test_ROBDD.neg(b));
 }
-/*
+
 //Testing coFactorTrue function
 TEST(ROBDD, coFactorTrueFuncTest){
     ClassProject::Manager Test_ROBDD;
-    Test_ROBDD.createVar("a");
-    Test_ROBDD.createVar("b");
-    Test_ROBDD.createVar("c");
-    Test_ROBDD.createVar("d");
-    Test_ROBDD.createVar("a and b");
-    Test_ROBDD.unique_table[6].low_id = 0;
-    Test_ROBDD.unique_table[6].high_id = 3;
-    Test_ROBDD.unique_table[6].top_var = 2;
-    Test_ROBDD.createVar("c or d");
-    Test_ROBDD.unique_table[7].low_id = 5;
-    Test_ROBDD.unique_table[7].high_id = 1;
-    Test_ROBDD.unique_table[7].top_var = 4;
-    Test_ROBDD.createVar("a and d");
-    Test_ROBDD.unique_table[8].low_id = 0;
-    Test_ROBDD.unique_table[8].high_id = 5;
-    Test_ROBDD.unique_table[8].top_var = 2;
-    Test_ROBDD.createVar("a and c");
-    Test_ROBDD.unique_table[9].low_id = 0;
-    Test_ROBDD.unique_table[9].high_id = 4;
-    Test_ROBDD.unique_table[9].top_var = 2;
-    EXPECT_EQ(1, Test_ROBDD.coFactorTrue(7,4));
-    EXPECT_EQ(1, Test_ROBDD.coFactorTrue(7));
+    ClassProject::BDD_ID a = Test_ROBDD.createVar("a");
+    ClassProject::BDD_ID b =Test_ROBDD.createVar("b");
+    ClassProject::BDD_ID c =Test_ROBDD.createVar("c");
+    ClassProject::BDD_ID d =Test_ROBDD.createVar("d");
+    ClassProject::BDD_ID aANDb =Test_ROBDD.and2(a,b);
+    EXPECT_EQ(b, Test_ROBDD.coFactorTrue(aANDb,a));
+    ClassProject::BDD_ID cXORd =Test_ROBDD.xor2(c,d);
+    EXPECT_EQ(Test_ROBDD.neg(d), Test_ROBDD.coFactorTrue(cXORd,c));
 }
 
 //Testing coFactorFalse function
 TEST(ROBDD, coFactorFalseFuncTest){
     ClassProject::Manager Test_ROBDD;
-    Test_ROBDD.createVar("a");
-    Test_ROBDD.createVar("b");
-    Test_ROBDD.createVar("c");
-    Test_ROBDD.createVar("d");
-    Test_ROBDD.createVar("a and b");
-    Test_ROBDD.unique_table[6].low_id = 0;
-    Test_ROBDD.unique_table[6].high_id = 3;
-    Test_ROBDD.unique_table[6].top_var = 2;
-    Test_ROBDD.createVar("c or d");
-    Test_ROBDD.unique_table[7].low_id = 5;
-    Test_ROBDD.unique_table[7].high_id = 1;
-    Test_ROBDD.unique_table[7].top_var = 4;
-    Test_ROBDD.createVar("a and d");
-    Test_ROBDD.unique_table[8].low_id = 0;
-    Test_ROBDD.unique_table[8].high_id = 5;
-    Test_ROBDD.unique_table[8].top_var = 2;
-    Test_ROBDD.createVar("a and c");
-    Test_ROBDD.unique_table[9].low_id = 0;
-    Test_ROBDD.unique_table[9].high_id = 4;
-    Test_ROBDD.unique_table[9].top_var = 2;
-    EXPECT_EQ(5, Test_ROBDD.coFactorFalse(7,4));
-    EXPECT_EQ(5, Test_ROBDD.coFactorFalse(7));
+    ClassProject::BDD_ID a = Test_ROBDD.createVar("a");
+    ClassProject::BDD_ID b =Test_ROBDD.createVar("b");
+    ClassProject::BDD_ID c =Test_ROBDD.createVar("c");
+    ClassProject::BDD_ID d =Test_ROBDD.createVar("d");
+    ClassProject::BDD_ID aANDb =Test_ROBDD.and2(a,b);
+    EXPECT_EQ(0, Test_ROBDD.coFactorFalse(aANDb,a));
+    ClassProject::BDD_ID cXORd =Test_ROBDD.xor2(c,d);
+    EXPECT_EQ(d, Test_ROBDD.coFactorFalse(cXORd,c));
+
 }
 
 //Testing unique table size function
-/*TEST(ROBDD, uniqueTableSizeTest){
+TEST(ROBDD, uniqueTableSizeTest){
     ClassProject::Manager Test_ROBDD;
-    Test_ROBDD.createVar("a");
-    Test_ROBDD.createVar("b");
-    Test_ROBDD.createVar("c");
-    Test_ROBDD.createVar("d");
-    Test_ROBDD.or2(2,3);
-    Test_ROBDD.and2(4,5);
-    Test_ROBDD.and2(6,7);
+    ClassProject::BDD_ID a = Test_ROBDD.createVar("a");
+    ClassProject::BDD_ID b =Test_ROBDD.createVar("b");
+    ClassProject::BDD_ID c =Test_ROBDD.createVar("c");
+    ClassProject::BDD_ID d =Test_ROBDD.createVar("d");
+    ClassProject::BDD_ID aANDb =Test_ROBDD.and2(a,b);
+    ClassProject::BDD_ID aORb =Test_ROBDD.or2(a,b);
+    ClassProject::BDD_ID aXORb =Test_ROBDD.xor2(a,b);
     EXPECT_EQ(10, Test_ROBDD.uniqueTableSize());
 }
-*/
+
 
 #endif
