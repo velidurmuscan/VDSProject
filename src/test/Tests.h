@@ -150,7 +150,6 @@ TEST(ROBDDite, iteRecompTest){
     EXPECT_EQ(7, Test_ROBDD.ite(c, 1, d));
     EXPECT_EQ(8, Test_ROBDD.ite(a, d, 0));
     EXPECT_EQ(9, Test_ROBDD.ite(a, c, 0));
-    Test_ROBDD.print_table();
 }
 /*
 //Testing ite new line function
