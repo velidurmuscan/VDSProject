@@ -10,13 +10,11 @@ using namespace ClassProject;
 
 // Constructor
 Manager::Manager() {
-
     //std::cout << "An ROBDD has been initialized\r\n";
     table_line newLine = {.bdd_id=0, .label="VarFalse", .high_id=0, .low_id=0, .top_var=0};
     unique_table.push_back(newLine);
     newLine = {.bdd_id=1, .label="VarTrue", .high_id=1, .low_id=1, .top_var=1};
     unique_table.push_back(newLine);
-
 }
 
 BDD_ID Manager::createVar(const std::string &label) {
@@ -64,7 +62,6 @@ BDD_ID Manager::topVar(BDD_ID f) {
 // If-Then-Else algorithm taken from slides:
 BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e){
     BDD_ID rHigh, rLow, minTopVar;
-
     // 1) Check if ite() results in a terminal case:
     if (i == 1){                    //ite(1,t,e)
         return t;
@@ -75,14 +72,13 @@ BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e){
     } else if(t == e){              //ite(i,t,t)
         return t;
     } else if( t == 0 && e == 1){   //ite(i,0,1) = Negation
-
         // Check if the negation of the unique table entry i already exists in the unique table:
         for(int c = 0 ; c <= uniqueTableSize() ; c++){
             if ((unique_table[c].high_id == unique_table[i].low_id) && (unique_table[c].low_id == unique_table[i].high_id)) {
                 // Negation of i already exists, do not add it to table.
                 return unique_table[c].bdd_id;
-            }}
-
+            }
+        }
         // If not, create the negation of entry i:
         struct table_line newLine;
         newLine.bdd_id = uniqueTableSize();
@@ -93,14 +89,12 @@ BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e){
         unique_table.push_back(newLine);
         return newLine.bdd_id;
     }
-
     // 2) Check if unique table entry i already exists in the unique table:
-        for(int c = 0 ; c <= uniqueTableSize() ; c++){
-            if(unique_table[c].high_id == t && unique_table[c].low_id == e){
-                return unique_table[c].bdd_id;
-            }
+    for(int c = 0 ; c <= uniqueTableSize() ; c++){
+        if(unique_table[c].high_id == t && unique_table[c].low_id == e){
+            return unique_table[c].bdd_id;
         }
-
+    }
     // 3) Create a new entry for i,t,e:
     // 3.1) Find the lowest top variable:
     if((t == 0 || t == 1) && (e == 0 || e == 1)){
@@ -112,7 +106,6 @@ BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e){
     } else {
         minTopVar = std::min(std::min(topVar(i), topVar(t)), topVar(e));
     }
-
     // 3.2) In order to add a new entry into unique table, calculate the high and low successors of the new entry:
     //rHigh = ite(coFactorTrue(i, minTopVar), coFactorTrue(t, minTopVar), coFactorTrue(e, minTopVar));
     ClassProject::BDD_ID ct_i = coFactorTrue(i,minTopVar);
@@ -124,13 +117,11 @@ BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e){
     ClassProject::BDD_ID cf_t = coFactorFalse(t,minTopVar);
     ClassProject::BDD_ID cf_e = coFactorFalse(e,minTopVar);
     rLow = ite(cf_i, cf_t, cf_e);   // Low Successor
-
     // 3.3) Check if reduction is possible:
     if(rHigh == rLow){
         // Both high and low successors are same. Thus, creation of a new node is unnecessary. Return the current node:
         return rHigh;
     }
-
     // 3.4) Create and add a new entry to the unique table:
     struct table_line newLine;
     newLine.bdd_id = uniqueTableSize();
@@ -140,21 +131,14 @@ BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e){
     //newLine.label = "TempLabel";
     unique_table.push_back(newLine);
     return newLine.bdd_id;
-
-
 }
 
 BDD_ID Manager::coFactorTrue(BDD_ID f, BDD_ID x) {
-    // If parameter x is not given, choose x as the top variable of f:
-  /*  if(x == 0){
-        x = topVar(f);
-    }*/
     // Check if this is a terminal case:
     // @TODO: Check if we really cover checking all terminal cases.
     if(isConstant(f) || topVar(f) > x){
         return f;
     }
-
     BDD_ID T,F;
     // Check if x is already the top variable of f:
     if(topVar(f) == x){
@@ -168,10 +152,6 @@ BDD_ID Manager::coFactorTrue(BDD_ID f, BDD_ID x) {
 }
 
 BDD_ID Manager::coFactorFalse(BDD_ID f, BDD_ID x) {
-    // If parameter x is not given, choose x as the top variable of f:
-  /*  if(x == 0){
-        x = topVar(f);
-    }*/
     // Check if this is a terminal case:
     // @TODO: Check if we really cover checking all terminal cases.
     if(isConstant(f) || topVar(f) > x){
@@ -236,21 +216,18 @@ BDD_ID Manager::xor2(BDD_ID a, BDD_ID b) {
 BDD_ID Manager::nand2(BDD_ID a, BDD_ID b) {
     BDD_ID nand2_ID;
     nand2_ID = neg(and2(a,b));
-   // unique_table[nand2_ID].label = "(" +  unique_table[a].label + "!*" + unique_table[b].label + ")";
     return nand2_ID;
 }
 
 BDD_ID Manager::nor2(BDD_ID a, BDD_ID b) {
     BDD_ID nor2_ID;
     nor2_ID = neg(or2(a,b));
-   // unique_table[nor2_ID].label = "(" +  unique_table[a].label + "!+" + unique_table[b].label + ")";
     return nor2_ID;
 }
 
 BDD_ID Manager::xnor2(BDD_ID a, BDD_ID b) {
     BDD_ID xnor2_ID;
     xnor2_ID = neg(xor2(a,b));
-   // unique_table[xnor2_ID].label = "(" +  unique_table[a].label + "!(+)" + unique_table[b].label + ")";
     return xnor2_ID;
 }
 
@@ -267,13 +244,11 @@ void Manager::findNodes(const BDD_ID &root, std::set<BDD_ID> &nodes_of_root) {
     nodes_of_root.insert(unique_table[root].bdd_id);
     findNodes(unique_table[root].high_id, nodes_of_root);
     findNodes(unique_table[root].low_id, nodes_of_root);
-
 }
 
 void Manager::findVars(const BDD_ID &root, std::set<BDD_ID> &vars_of_root) {
     std::set<BDD_ID> nodes_of_root;
     findNodes(root,nodes_of_root);
-
     std::set<BDD_ID>::iterator setIt = nodes_of_root.begin();
     for(int i = 0; i < nodes_of_root.size(); i++) {
         vars_of_root.insert(topVar(*setIt));
@@ -290,7 +265,6 @@ void Manager::print_table() {
     const char separator    = ' ';
     const int labelWidth    = 20;
     const int numWidth      = 10;
-
     std::cout << "\r\nUnique Table:\r\n";
     std::cout << std::left << std::setw(numWidth) << std::setfill(separator) << "BDD_ID";
     std::cout << std::left << std::setw(labelWidth) << std::setfill(separator) << "Label";
@@ -298,7 +272,6 @@ void Manager::print_table() {
     std::cout << std::left << std::setw(numWidth) << std::setfill(separator) << "Low";
     std::cout << std::left << std::setw(numWidth) << std::setfill(separator) << "TopVar";
     std::cout << std::endl;
-
     for (int i=0; i<uniqueTableSize(); i++ ) {
         std::cout << std::left << std::setw(numWidth) << std::setfill(separator) << unique_table[i].bdd_id;
         std::cout << std::left << std::setw(labelWidth) << std::setfill(separator) << unique_table[i].label;
