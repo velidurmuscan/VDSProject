@@ -340,5 +340,21 @@ TEST(ROBDDTopVarName, getTopVarNameTest){
     EXPECT_EQ("b", Test_ROBDD.getTopVarName(bANDc_ORd));
 }
 
+//Testing findNodes function
+TEST(ROBDDFindNodes, findNodesTest){
+    ClassProject::Manager Test_ROBDD;
+    ClassProject::BDD_ID a = Test_ROBDD.createVar("a");
+    ClassProject::BDD_ID b =Test_ROBDD.createVar("b");
+    ClassProject::BDD_ID c =Test_ROBDD.createVar("c");
+    ClassProject::BDD_ID d =Test_ROBDD.createVar("d");
+    ClassProject::BDD_ID aORb =Test_ROBDD.or2(a,b);
+    ClassProject::BDD_ID cANDd =Test_ROBDD.and2(c,d);
+    ClassProject::BDD_ID aORb_AND_cANDd =Test_ROBDD.and2(aORb,cANDd);
+    std::set<BDD_ID> nodes_of_root, PreDef_nodes_of_root;
+    PreDef_nodes_of_root = {0, 1, 3};
+    Test_ROBDD.findNodes(d, nodes_of_root);
+    EXPECT_EQ(PreDef_nodes_of_root, nodes_of_root);
+}
+
 
 #endif
