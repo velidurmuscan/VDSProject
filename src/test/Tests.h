@@ -326,5 +326,19 @@ TEST(ROBDD, uniqueTableSizeTest){
     EXPECT_EQ(10, Test_ROBDD.uniqueTableSize());
 }
 
+//Testing getTopVarName function
+TEST(ROBDDTopVarName, getTopVarNameTest){
+    ClassProject::Manager Test_ROBDD;
+    ClassProject::BDD_ID a = Test_ROBDD.createVar("a");
+    ClassProject::BDD_ID b =Test_ROBDD.createVar("b");
+    ClassProject::BDD_ID c =Test_ROBDD.createVar("c");
+    ClassProject::BDD_ID d =Test_ROBDD.createVar("d");
+    ClassProject::BDD_ID aANDb =Test_ROBDD.and2(a,b);
+    EXPECT_EQ("a", Test_ROBDD.getTopVarName(aANDb));
+    ClassProject::BDD_ID bANDc =Test_ROBDD.and2(b,c);
+    ClassProject::BDD_ID bANDc_ORd =Test_ROBDD.or2(bANDc,d);
+    EXPECT_EQ("b", Test_ROBDD.getTopVarName(bANDc_ORd));
+}
+
 
 #endif
