@@ -215,7 +215,7 @@ TEST(ROBDDnand2FuncTest, nand2FuncTest){
     EXPECT_EQ(Test_ROBDD.unique_table[aNANDb].top_var, a);
     //EXPECT_EQ(Test_ROBDD.unique_table[aNANDb].high_id, 0);
     //EXPECT_EQ(Test_ROBDD.unique_table[aNANDb].low_id, b);
-    EXPECT_EQ(Test_ROBDD.unique_table[aNANDb].high_id, 5);
+    EXPECT_EQ(Test_ROBDD.unique_table[aNANDb].high_id, Test_ROBDD.neg(b));
     EXPECT_EQ(Test_ROBDD.unique_table[aNANDb].low_id, 1);
 }
 
@@ -240,7 +240,6 @@ TEST(ROBDDnor2FuncTest, nor2FuncTest){
     ClassProject::BDD_ID a = Test_ROBDD.createVar("a");
     ClassProject::BDD_ID b = Test_ROBDD.createVar("b");
     ClassProject::BDD_ID aNORb = Test_ROBDD.nor2(a,b);
-    Test_ROBDD.print_table();
     EXPECT_EQ(0, Test_ROBDD.nor2(0,1));
     EXPECT_EQ(0, Test_ROBDD.nor2(1,0));
     EXPECT_EQ(1, Test_ROBDD.nor2(0,0));

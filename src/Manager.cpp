@@ -144,6 +144,7 @@ BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e){
     newLine.low_id = rLow;
     newLine.top_var = minTopVar;
     //newLine.label = "TempLabel";
+    newLine.label = "!" +  unique_table[i].label; //Added recently
     unique_table.push_back(newLine);
     return newLine.bdd_id;
 }
@@ -196,7 +197,7 @@ BDD_ID Manager::neg(BDD_ID a) {
     BDD_ID neg_ID;
     neg_ID = ite(a, 0, 1);
     // Negation label is added inside ite() function
-    //unique_table[neg_ID].label = "!(" + unique_table[neg_ID].label + ")";
+    unique_table[neg_ID].label = "!(" + unique_table[a].label + ")";
     return neg_ID;
 }
 
@@ -231,18 +232,27 @@ BDD_ID Manager::xor2(BDD_ID a, BDD_ID b) {
 BDD_ID Manager::nand2(BDD_ID a, BDD_ID b) {
     BDD_ID nand2_ID;
     nand2_ID = neg(and2(a,b));
+    if(!(a < 2 || b < 2)) {
+        unique_table[nand2_ID].label = "!(" + unique_table[a].label + "*" + unique_table[b].label + ")";
+    }
     return nand2_ID;
 }
 
 BDD_ID Manager::nor2(BDD_ID a, BDD_ID b) {
     BDD_ID nor2_ID;
     nor2_ID = neg(or2(a,b));
+    if(!(a < 2 || b < 2)) {
+        unique_table[nor2_ID].label = "!(" + unique_table[a].label + "+" + unique_table[b].label + ")";
+    }
     return nor2_ID;
 }
 
 BDD_ID Manager::xnor2(BDD_ID a, BDD_ID b) {
     BDD_ID xnor2_ID;
     xnor2_ID = neg(xor2(a,b));
+    if(!(a < 2 || b < 2)) {
+        unique_table[xnor2_ID].label = "!(" + unique_table[a].label + "(+)" + unique_table[b].label + ")";
+    }
     return xnor2_ID;
 }
 
