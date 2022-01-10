@@ -121,10 +121,10 @@ TEST(ROBDDiteTerminalFunTest, iteTerminalFunTest){
      ClassProject::BDD_ID NOTb = Test_ROBDD.ite(b,0,1);
      EXPECT_EQ(Test_ROBDD.unique_table[b].high_id, Test_ROBDD.unique_table[NOTb].low_id);
      EXPECT_EQ(Test_ROBDD.unique_table[b].low_id, Test_ROBDD.unique_table[NOTb].high_id);
-     ClassProject::BDD_ID aANDb = Test_ROBDD.and2(a,b);
+    /* ClassProject::BDD_ID aANDb = Test_ROBDD.and2(a,b);
      ClassProject::BDD_ID NOTaANDb = Test_ROBDD.ite(aANDb,0,1);
      EXPECT_EQ(Test_ROBDD.unique_table[aANDb].high_id, Test_ROBDD.unique_table[NOTaANDb].low_id);
-     EXPECT_EQ(Test_ROBDD.unique_table[aANDb].low_id, Test_ROBDD.unique_table[NOTaANDb].high_id);
+     EXPECT_EQ(Test_ROBDD.unique_table[aANDb].low_id, Test_ROBDD.unique_table[NOTaANDb].high_id);*/
      EXPECT_EQ(15, Test_ROBDD.ite(1,15,14));
      EXPECT_EQ(14, Test_ROBDD.ite(0,15,14));
      EXPECT_EQ(16, Test_ROBDD.ite(16,1,0));
@@ -213,8 +213,10 @@ TEST(ROBDDnand2FuncTest, nand2FuncTest){
     EXPECT_EQ(1, Test_ROBDD.nand2(0,0));
     EXPECT_EQ(0, Test_ROBDD.nand2(1,1));
     EXPECT_EQ(Test_ROBDD.unique_table[aNANDb].top_var, a);
-    EXPECT_EQ(Test_ROBDD.unique_table[aNANDb].high_id, 0);
-    EXPECT_EQ(Test_ROBDD.unique_table[aNANDb].low_id, b);
+    //EXPECT_EQ(Test_ROBDD.unique_table[aNANDb].high_id, 0);
+    //EXPECT_EQ(Test_ROBDD.unique_table[aNANDb].low_id, b);
+    EXPECT_EQ(Test_ROBDD.unique_table[aNANDb].high_id, 5);
+    EXPECT_EQ(Test_ROBDD.unique_table[aNANDb].low_id, 1);
 }
 
 //Testing or2 function
@@ -238,13 +240,16 @@ TEST(ROBDDnor2FuncTest, nor2FuncTest){
     ClassProject::BDD_ID a = Test_ROBDD.createVar("a");
     ClassProject::BDD_ID b = Test_ROBDD.createVar("b");
     ClassProject::BDD_ID aNORb = Test_ROBDD.nor2(a,b);
+    Test_ROBDD.print_table();
     EXPECT_EQ(0, Test_ROBDD.nor2(0,1));
     EXPECT_EQ(0, Test_ROBDD.nor2(1,0));
     EXPECT_EQ(1, Test_ROBDD.nor2(0,0));
     EXPECT_EQ(0, Test_ROBDD.nor2(1,1));
     EXPECT_EQ(Test_ROBDD.unique_table[aNORb].top_var, a);
-    EXPECT_EQ(Test_ROBDD.unique_table[aNORb].high_id, b);
-    EXPECT_EQ(Test_ROBDD.unique_table[aNORb].low_id, 1);
+   // EXPECT_EQ(Test_ROBDD.unique_table[aNORb].high_id, b);
+   // EXPECT_EQ(Test_ROBDD.unique_table[aNORb].low_id, 1);
+    EXPECT_EQ(Test_ROBDD.unique_table[aNORb].high_id, 0);
+    EXPECT_EQ(Test_ROBDD.unique_table[aNORb].low_id, Test_ROBDD.neg(b));
 }
 
 //Testing xor2 function
@@ -260,6 +265,7 @@ TEST(ROBDDxor2FuncTest, xor2FuncTest){
     EXPECT_EQ(Test_ROBDD.unique_table[aXORb].top_var, a);
     EXPECT_EQ(Test_ROBDD.unique_table[aXORb].high_id, Test_ROBDD.neg(b));
     EXPECT_EQ(Test_ROBDD.unique_table[aXORb].low_id, b);
+
 }
 
 //Testing xnor2 function

@@ -74,7 +74,7 @@ BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e){
         return i;
     } else if(t == e){              //ite(i,t,t)
         return t;
-    } else if( t == 0 && e == 1){   //ite(i,0,1) = Negation
+    } /*else if( t == 0 && e == 1){   //ite(i,0,1) = Negation
         // Check if the negation of the unique table entry i already exists in the unique table:
         for(int c = 0 ; c <= uniqueTableSize() ; c++){
             if ((unique_table[c].high_id == unique_table[i].low_id) && (unique_table[c].low_id == unique_table[i].high_id)) {
@@ -91,13 +91,17 @@ BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e){
         newLine.label = "!" +  unique_table[i].label;    // Negation label
         unique_table.push_back(newLine);
         return newLine.bdd_id;
-    }
+    }*/
+
+
     // 2) Check if unique table entry i already exists in the unique table:
    /* for(int c = 0 ; c <= uniqueTableSize() ; c++){
         if(unique_table[c].high_id == t && unique_table[c].low_id == e){
             return unique_table[c].bdd_id;
         }
     }*/
+
+
     // 3) Create a new entry for i,t,e:
     // 3.1) Find the lowest top variable:
     if((t == 0 || t == 1) && (e == 0 || e == 1)){
