@@ -49,9 +49,12 @@ bool Manager::isVariable(BDD_ID x) {
         return false;
     }
     bool isVariableVar = false;
-    if(x > 1){
+    if(x > 1 && unique_table[x].high_id == 1 && unique_table[x].low_id == 0 ){
         isVariableVar = true;
     }
+   /* if(x > 1){
+        isVariableVar = true;
+    }*/
     return isVariableVar;
 }
 

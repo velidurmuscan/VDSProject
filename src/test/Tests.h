@@ -86,8 +86,11 @@ TEST(ROBDDisVariableFuncTest, isVariableFuncTest){
     for(int i = 0 ; i < 2 ; i++) {
         EXPECT_FALSE(Test_ROBDD.isVariable(i));
     }
-    for(int i = 2 ; i < Test_ROBDD.uniqueTableSize() ; i++) { //
+    for(int i = 2 ; i < 6 ; i++) { //
         EXPECT_TRUE(Test_ROBDD.isVariable(i));
+    }
+    for(int i = 6 ; i < Test_ROBDD.uniqueTableSize() ; i++) { //
+        EXPECT_FALSE(Test_ROBDD.isVariable(i));
     }
     EXPECT_FALSE(Test_ROBDD.isVariable(Test_ROBDD.uniqueTableSize())); //@TODO: Replace uniqueTableSize with Rand() > size
 }
