@@ -93,11 +93,11 @@ BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e){
         return newLine.bdd_id;
     }
     // 2) Check if unique table entry i already exists in the unique table:
-    for(int c = 0 ; c <= uniqueTableSize() ; c++){
+   /* for(int c = 0 ; c <= uniqueTableSize() ; c++){
         if(unique_table[c].high_id == t && unique_table[c].low_id == e){
             return unique_table[c].bdd_id;
         }
-    }
+    }*/
     // 3) Create a new entry for i,t,e:
     // 3.1) Find the lowest top variable:
     if((t == 0 || t == 1) && (e == 0 || e == 1)){
@@ -125,7 +125,15 @@ BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e){
         // Both high and low successors are same. Thus, creation of a new node is unnecessary. Return the current node:
         return rHigh;
     }
-    // 3.4) Create and add a new entry to the unique table:
+    //////////////////Added Recently ///////////////////////////
+    // 3.4) Check if unique table entry i already exists in the unique table:
+     for(int c = 0 ; c <= uniqueTableSize() ; c++){
+         if(unique_table[c].high_id == rHigh && unique_table[c].low_id == rLow && unique_table[c].top_var == minTopVar ){
+             return unique_table[c].bdd_id;
+         }
+     }
+    ////////////////////////////////////////////////////////////
+    // 3.5) Create and add a new entry to the unique table:
     struct table_line newLine;
     newLine.bdd_id = uniqueTableSize();
     newLine.high_id = rHigh;
