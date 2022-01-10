@@ -364,7 +364,8 @@ TEST(ROBDDfindVarsTest, findVarsTest){
     ClassProject::BDD_ID cANDd = Test_ROBDD.and2(c,d);
     ClassProject::BDD_ID aORb_AND_cANDd = Test_ROBDD.and2(aORb,cANDd);
     std::set<BDD_ID> vars_of_root, PreDef_vars_of_root;
-    PreDef_vars_of_root = {0, 1, 5, 4, 3, 2};
+    //PreDef_vars_of_root = {0, 1, 5, 4, 3, 2};
+    PreDef_vars_of_root = {5, 4, 3, 2};
     Test_ROBDD.findVars(aORb_AND_cANDd, vars_of_root);
     /*for(auto i = vars_of_root.begin() ; i != vars_of_root.end(); ++i) {
         std::cout << ' ' << *i;

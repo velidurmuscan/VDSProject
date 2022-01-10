@@ -254,7 +254,9 @@ void Manager::findVars(const BDD_ID &root, std::set<BDD_ID> &vars_of_root) {
     findNodes(root,nodes_of_root);
     std::set<BDD_ID>::iterator setIt = nodes_of_root.begin();
     for(int i = 0; i < nodes_of_root.size(); i++) {
-        vars_of_root.insert(topVar(*setIt));
+        if(!(topVar(*setIt) == 1 || topVar(*setIt) == 0)) { //Added recently
+            vars_of_root.insert(topVar(*setIt));
+        }
         setIt++;
     }
 }
