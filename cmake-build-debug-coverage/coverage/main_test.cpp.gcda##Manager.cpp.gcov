@@ -1,0 +1,1062 @@
+        -:    0:Source:C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/src/Manager.cpp
+        -:    0:Graph:C:\Users\osama\Desktop\Folders\University\TUK\Courses\VDS\Project\VDSProject\cmake-build-debug-coverage\CMakeFiles\VDSProject_tests.dir\src\test\main_test.cpp.gcno
+        -:    0:Data:C:\Users\osama\Desktop\Folders\University\TUK\Courses\VDS\Project\VDSProject\cmake-build-debug-coverage\CMakeFiles\VDSProject_tests.dir\src\test\main_test.cpp.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:#include "Manager.h"
+        -:    2:#include <iostream>
+        -:    3:#include <string.h>
+        -:    4:#include <cstring>  // For strcpy()
+        -:    5:#include <vector>
+        -:    6:#include <iomanip>
+        -:    7:
+        -:    8:using namespace ClassProject;
+        -:    9://using namespace std;
+        -:   10:
+        -:   11:// Constructor
+function _ZN12ClassProject7ManagerC2Ev called 23 returned 100% blocks executed 60%
+       23:   12:Manager::Manager() {
+       23:   12-block  0
+call    0 returned 23
+call    1 returned 23
+    $$$$$:   12-block  1
+call    2 never executed
+        -:   13:    //std::cout << "An ROBDD has been initialized\r\n";
+       46:   14:    table_line newLine = {.bdd_id=0, .label="VarFalse", .high_id=0, .low_id=0, .top_var=0};
+call    0 returned 23
+call    1 returned 23
+branch  2 taken 23 (fallthrough)
+branch  3 taken 0 (throw)
+       23:   14-block  0
+call    4 returned 23
+       23:   14-block  1
+call    5 returned 23
+    $$$$$:   14-block  2
+call    6 never executed
+    $$$$$:   14-block  3
+    $$$$$:   14-block  4
+call    7 never executed
+       23:   15:    unique_table.push_back(newLine);
+call    0 returned 23
+branch  1 taken 23 (fallthrough)
+branch  2 taken 0 (throw)
+       23:   16:    newLine = {.bdd_id=1, .label="VarTrue", .high_id=1, .low_id=1, .top_var=1};
+       23:   16-block  0
+call    0 returned 23
+call    1 returned 23
+branch  2 taken 23 (fallthrough)
+branch  3 taken 0 (throw)
+       23:   16-block  1
+call    4 returned 23
+call    5 returned 23
+call    6 returned 23
+    $$$$$:   16-block  2
+call    7 never executed
+    $$$$$:   16-block  3
+       23:   17:    unique_table.push_back(newLine);
+call    0 returned 23
+branch  1 taken 23 (fallthrough)
+branch  2 taken 0 (throw)
+       23:   18:}
+        -:   19:
+function _ZN12ClassProject7Manager9createVarERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE called 157 returned 100% blocks executed 82%
+      157:   20:BDD_ID Manager::createVar(const std::string &label) {
+      157:   21:    struct table_line newLine;
+      157:   21-block  0
+call    0 returned 157
+    $$$$$:   21-block  1
+call    1 never executed
+      157:   22:    newLine.bdd_id = unique_table.size();
+call    0 returned 157
+      157:   23:    newLine.label = label;
+call    0 returned 157
+branch  1 taken 157 (fallthrough)
+branch  2 taken 0 (throw)
+      157:   24:    newLine.high_id = 1;
+      157:   25:    newLine.low_id = 0;
+      157:   26:    newLine.top_var = unique_table.size();
+      157:   26-block  0
+call    0 returned 157
+      157:   27:    unique_table.push_back(newLine);
+call    0 returned 157
+branch  1 taken 157 (fallthrough)
+branch  2 taken 0 (throw)
+      314:   28:    return newLine.bdd_id;
+      157:   28-block  0
+call    0 returned 157
+      157:   28-block  1
+        -:   29:}
+        -:   30:
+function _ZN12ClassProject7Manager4TrueEv called 1 returned 100% blocks executed 100%
+        1:   31:const BDD_ID& Manager::True() {
+        1:   32:    return unique_table[1].bdd_id;
+        1:   32-block  0
+call    0 returned 1
+        -:   33:}
+        -:   34:
+function _ZN12ClassProject7Manager5FalseEv called 1 returned 100% blocks executed 100%
+        1:   35:const BDD_ID& Manager::False() {
+        1:   36:    return unique_table[0].bdd_id;
+        1:   36-block  0
+call    0 returned 1
+        -:   37:}
+        -:   38:
+function _ZN12ClassProject7Manager10isConstantEj called 702 returned 100% blocks executed 100%
+      702:   39:bool Manager::isConstant(BDD_ID f) {
+      702:   40:    bool isConstantVar = false;
+      702:   41:    if(f == 1 || f == 0){
+      702:   41-block  0
+branch  0 taken 631 (fallthrough)
+branch  1 taken 71
+      631:   41-block  1
+branch  2 taken 103 (fallthrough)
+branch  3 taken 528
+      174:   42:        isConstantVar = true;
+      174:   42-block  0
+        -:   43:    }
+      702:   44:    return isConstantVar;
+      702:   44-block  0
+        -:   45:}
+        -:   46:
+function _ZN12ClassProject7Manager10isVariableEj called 11 returned 100% blocks executed 100%
+       11:   47:bool Manager::isVariable(BDD_ID x) {
+       11:   48:    if(x > uniqueTableSize() - 1){
+       11:   48-block  0
+call    0 returned 11
+branch  1 taken 1 (fallthrough)
+branch  2 taken 10
+        1:   49:        return false;
+        1:   49-block  0
+        -:   50:    }
+       10:   51:    bool isVariableVar = false;
+       10:   52:    if(x > 1 && unique_table[x].high_id == 1 && unique_table[x].low_id == 0 ){
+       10:   52-block  0
+branch  0 taken 8 (fallthrough)
+branch  1 taken 2
+        8:   52-block  1
+call    2 returned 8
+branch  3 taken 5 (fallthrough)
+branch  4 taken 3
+        5:   52-block  2
+call    5 returned 5
+branch  6 taken 4 (fallthrough)
+branch  7 taken 1
+        4:   52-block  3
+        6:   52-block  4
+       10:   52-block  5
+branch  8 taken 4 (fallthrough)
+branch  9 taken 6
+        4:   53:        isVariableVar = true;
+        4:   53-block  0
+        -:   54:    }
+        -:   55:   /* if(x > 1){
+        -:   56:        isVariableVar = true;
+        -:   57:    }*/
+       10:   58:    return isVariableVar;
+       10:   58-block  0
+        -:   59:}
+        -:   60:
+function _ZN12ClassProject7Manager6topVarEj called 564 returned 100% blocks executed 100%
+      564:   61:BDD_ID Manager::topVar(BDD_ID f) {
+      564:   62:    return unique_table[f].top_var;
+      564:   62-block  0
+call    0 returned 564
+        -:   63:}
+        -:   64:
+        -:   65:// If-Then-Else algorithm taken from slides:
+function _ZN12ClassProject7Manager3iteEjjj called 252 returned 100% blocks executed 90%
+      252:   66:BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e){
+        -:   67:    BDD_ID rHigh, rLow, minTopVar;
+        -:   68:    // 1) Check if ite() results in a terminal case:
+      252:   69:    if (i == 1){                    //ite(1,t,e)
+      252:   69-block  0
+branch  0 taken 92 (fallthrough)
+branch  1 taken 160
+       92:   70:        return t;
+       92:   70-block  0
+      160:   71:    } else if(i == 0){              //ite(0,t,e)
+      160:   71-block  0
+branch  0 taken 87 (fallthrough)
+branch  1 taken 73
+       87:   72:        return e;
+       87:   72-block  0
+       73:   73:    } else if(t == 1 && e == 0){    //ite(i,1,0)
+       73:   73-block  0
+branch  0 taken 16 (fallthrough)
+branch  1 taken 57
+       16:   73-block  1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 15
+        1:   74:        return i;
+        1:   74-block  0
+       72:   75:    } else if(t == e){              //ite(i,t,t)
+       72:   75-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 71
+        1:   76:        return t;
+        1:   76-block  0
+        -:   77:    } /*else if( t == 0 && e == 1){   //ite(i,0,1) = Negation
+        -:   78:        // Check if the negation of the unique table entry i already exists in the unique table:
+        -:   79:        for(int c = 0 ; c <= uniqueTableSize() ; c++){
+        -:   80:            if ((unique_table[c].high_id == unique_table[i].low_id) && (unique_table[c].low_id == unique_table[i].high_id)) {
+        -:   81:                // Negation of i already exists, do not add it to table.
+        -:   82:                return unique_table[c].bdd_id;
+        -:   83:            }
+        -:   84:        }
+        -:   85:        // If not, create the negation of entry i:
+        -:   86:        struct table_line newLine;
+        -:   87:        newLine.bdd_id = uniqueTableSize();
+        -:   88:        newLine.high_id = unique_table[i].low_id;
+        -:   89:        newLine.low_id = unique_table[i].high_id;
+        -:   90:        newLine.top_var = unique_table[i].top_var;
+        -:   91:        newLine.label = "!" +  unique_table[i].label;    // Negation label
+        -:   92:        unique_table.push_back(newLine);
+        -:   93:        return newLine.bdd_id;
+        -:   94:    }*/
+        -:   95:
+        -:   96:
+        -:   97:    // 2) Check if unique table entry i already exists in the unique table:
+        -:   98:   /* for(int c = 0 ; c <= uniqueTableSize() ; c++){
+        -:   99:        if(unique_table[c].high_id == t && unique_table[c].low_id == e){
+        -:  100:            return unique_table[c].bdd_id;
+        -:  101:        }
+        -:  102:    }*/
+        -:  103:
+        -:  104:
+        -:  105:    // 3) Create a new entry for i,t,e:
+        -:  106:    // 3.1) Find the lowest top variable:
+       71:  107:    if((t == 0 || t == 1) && (e == 0 || e == 1)){
+       71:  107-block  0
+branch  0 taken 51 (fallthrough)
+branch  1 taken 20
+       51:  107-block  1
+branch  2 taken 15 (fallthrough)
+branch  3 taken 36
+       35:  107-block  2
+branch  4 taken 35 (fallthrough)
+branch  5 taken 0
+       35:  107-block  3
+branch  6 taken 20 (fallthrough)
+branch  7 taken 15
+       20:  108:        minTopVar = topVar(i);
+       20:  108-block  0
+call    0 returned 20
+branch  1 taken 20 (fallthrough)
+branch  2 taken 0 (throw)
+       20:  108-block  1
+       51:  109:    } else if(t == 0 || t == 1 ){
+       51:  109-block  0
+branch  0 taken 51 (fallthrough)
+branch  1 taken 0
+       51:  109-block  1
+branch  2 taken 15 (fallthrough)
+branch  3 taken 36
+       15:  110:        minTopVar = std::min(topVar(i), topVar(e));
+       15:  110-block  0
+call    0 returned 15
+branch  1 taken 15 (fallthrough)
+branch  2 taken 0 (throw)
+       15:  110-block  1
+call    3 returned 15
+branch  4 taken 15 (fallthrough)
+branch  5 taken 0 (throw)
+       15:  110-block  2
+call    6 returned 15
+    $$$$$:  110-block  3
+       36:  111:    } else if( e == 0 || e == 1) {
+       36:  111-block  0
+branch  0 taken 5 (fallthrough)
+branch  1 taken 31
+        5:  111-block  1
+branch  2 taken 0 (fallthrough)
+branch  3 taken 5
+       31:  112:        minTopVar = std::min(topVar(i), topVar(t));
+       31:  112-block  0
+call    0 returned 31
+branch  1 taken 31 (fallthrough)
+branch  2 taken 0 (throw)
+       31:  112-block  1
+call    3 returned 31
+branch  4 taken 31 (fallthrough)
+branch  5 taken 0 (throw)
+       31:  112-block  2
+call    6 returned 31
+    $$$$$:  112-block  3
+        -:  113:    } else {
+        5:  114:        minTopVar = std::min(std::min(topVar(i), topVar(t)), topVar(e));
+        5:  114-block  0
+call    0 returned 5
+branch  1 taken 5 (fallthrough)
+branch  2 taken 0 (throw)
+        5:  114-block  1
+call    3 returned 5
+branch  4 taken 5 (fallthrough)
+branch  5 taken 0 (throw)
+        5:  114-block  2
+call    6 returned 5
+branch  7 taken 5 (fallthrough)
+branch  8 taken 0 (throw)
+        5:  114-block  3
+call    9 returned 5
+call   10 returned 5
+    $$$$$:  114-block  4
+    $$$$$:  114-block  5
+        -:  115:    }
+        -:  116:    // 3.2) In order to add a new entry into unique table, calculate the high and low successors of the new entry:
+        -:  117:    //rHigh = ite(coFactorTrue(i, minTopVar), coFactorTrue(t, minTopVar), coFactorTrue(e, minTopVar));
+       71:  118:    ClassProject::BDD_ID ct_i = coFactorTrue(i,minTopVar);
+       71:  118-block  0
+call    0 returned 71
+branch  1 taken 71 (fallthrough)
+branch  2 taken 0 (throw)
+       71:  119:    ClassProject::BDD_ID ct_t = coFactorTrue(t,minTopVar);
+       71:  119-block  0
+call    0 returned 71
+branch  1 taken 71 (fallthrough)
+branch  2 taken 0 (throw)
+       71:  120:    ClassProject::BDD_ID ct_e = coFactorTrue(e,minTopVar);
+       71:  120-block  0
+call    0 returned 71
+branch  1 taken 71 (fallthrough)
+branch  2 taken 0 (throw)
+       71:  121:    rHigh = ite(ct_i, ct_t, ct_e);  // High Successor
+       71:  121-block  0
+call    0 returned 71
+branch  1 taken 71 (fallthrough)
+branch  2 taken 0 (throw)
+        -:  122:    //rLow = ite(coFactorFalse(i,minTopVar), coFactorFalse(t,minTopVar), coFactorFalse(e,minTopVar));
+       71:  123:    ClassProject::BDD_ID cf_i = coFactorFalse(i,minTopVar);
+       71:  123-block  0
+call    0 returned 71
+branch  1 taken 71 (fallthrough)
+branch  2 taken 0 (throw)
+       71:  124:    ClassProject::BDD_ID cf_t = coFactorFalse(t,minTopVar);
+       71:  124-block  0
+call    0 returned 71
+branch  1 taken 71 (fallthrough)
+branch  2 taken 0 (throw)
+       71:  125:    ClassProject::BDD_ID cf_e = coFactorFalse(e,minTopVar);
+       71:  125-block  0
+call    0 returned 71
+branch  1 taken 71 (fallthrough)
+branch  2 taken 0 (throw)
+       71:  126:    rLow = ite(cf_i, cf_t, cf_e);   // Low Successor
+       71:  126-block  0
+call    0 returned 71
+branch  1 taken 71 (fallthrough)
+branch  2 taken 0 (throw)
+        -:  127:    // 3.3) Check if reduction is possible:
+       71:  128:    if(rHigh == rLow){
+       71:  128-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 71
+        -:  129:        // Both high and low successors are same. Thus, creation of a new node is unnecessary. Return the current node:
+    #####:  130:        return rHigh;
+    %%%%%:  130-block  0
+        -:  131:    }
+        -:  132:    //////////////////Added Recently ///////////////////////////
+        -:  133:    // 3.4) Check if unique table entry i already exists in the unique table:
+      536:  134:     for(int c = 0 ; c < uniqueTableSize() ; c++){
+       71:  134-block  0
+      536:  134-block  1
+call    0 returned 536
+branch  1 taken 536 (fallthrough)
+branch  2 taken 0 (throw)
+      536:  134-block  2
+branch  3 taken 476 (fallthrough)
+branch  4 taken 60
+      465:  134-block  3
+      476:  135:         if(unique_table[c].high_id == rHigh && unique_table[c].low_id == rLow && unique_table[c].top_var == minTopVar ){
+      476:  135-block  0
+call    0 returned 476
+branch  1 taken 104 (fallthrough)
+branch  2 taken 372
+      104:  135-block  1
+call    3 returned 104
+branch  4 taken 13 (fallthrough)
+branch  5 taken 91
+       13:  135-block  2
+call    6 returned 13
+branch  7 taken 11 (fallthrough)
+branch  8 taken 2
+       11:  135-block  3
+      465:  135-block  4
+      476:  135-block  5
+branch  9 taken 11 (fallthrough)
+branch 10 taken 465
+       11:  136:             return unique_table[c].bdd_id;
+       11:  136-block  0
+call    0 returned 11
+        -:  137:         }
+        -:  138:     }
+        -:  139:    ////////////////////////////////////////////////////////////
+        -:  140:    // 3.5) Create and add a new entry to the unique table:
+       60:  141:    struct table_line newLine;
+       60:  141-block  0
+call    0 returned 60
+    $$$$$:  141-block  1
+call    1 never executed
+       60:  142:    newLine.bdd_id = uniqueTableSize();
+call    0 returned 60
+branch  1 taken 60 (fallthrough)
+branch  2 taken 0 (throw)
+       60:  143:    newLine.high_id = rHigh;
+       60:  144:    newLine.low_id = rLow;
+       60:  145:    newLine.top_var = minTopVar;
+       60:  146:    newLine.label = "TempLabel";
+       60:  146-block  0
+call    0 returned 60
+branch  1 taken 60 (fallthrough)
+branch  2 taken 0 (throw)
+        -:  147:    //newLine.label = "!" +  unique_table[i].label; //Added recently
+       60:  148:    unique_table.push_back(newLine);
+       60:  148-block  0
+call    0 returned 60
+branch  1 taken 60 (fallthrough)
+branch  2 taken 0 (throw)
+       60:  149:    return newLine.bdd_id;
+       60:  149-block  0
+call    0 returned 60
+        -:  150:}
+        -:  151:
+function _ZN12ClassProject7Manager12coFactorTrueEjj called 216 returned 100% blocks executed 68%
+      216:  152:BDD_ID Manager::coFactorTrue(BDD_ID f, BDD_ID x) {
+        -:  153:    // Check if this is a terminal case:
+        -:  154:    // @TODO: Check if we really cover checking all terminal cases.
+      216:  155:    if(isConstant(f) || isConstant(x) || topVar(f) > x){
+      216:  155-block  0
+call    0 returned 216
+branch  1 taken 130 (fallthrough)
+branch  2 taken 86
+      130:  155-block  1
+call    3 returned 130
+branch  4 taken 130 (fallthrough)
+branch  5 taken 0
+      130:  155-block  2
+call    6 returned 130
+branch  7 taken 56 (fallthrough)
+branch  8 taken 74
+      142:  155-block  3
+       74:  155-block  4
+      216:  155-block  5
+branch  9 taken 142 (fallthrough)
+branch 10 taken 74
+      142:  156:        return f;
+      142:  156-block  0
+        -:  157:    }
+        -:  158:    BDD_ID T,F;
+        -:  159:    // Check if x is already the top variable of f:
+       74:  160:    if(topVar(f) == x){
+       74:  160-block  0
+call    0 returned 74
+branch  1 taken 74 (fallthrough)
+branch  2 taken 0
+       74:  161:        return unique_table[f].high_id;
+       74:  161-block  0
+call    0 returned 74
+        -:  162:    } else {
+        -:  163:        // Calculate ite() with respect to variable x:
+    #####:  164:        T = coFactorTrue(unique_table[f].high_id, x);
+    %%%%%:  164-block  0
+call    0 never executed
+call    1 never executed
+    #####:  165:        F = coFactorTrue(unique_table[f].low_id, x);
+call    0 never executed
+call    1 never executed
+    #####:  166:        return  ite(unique_table[f].top_var,T,F);
+call    0 never executed
+call    1 never executed
+        -:  167:    }
+        -:  168:}
+        -:  169:
+function _ZN12ClassProject7Manager13coFactorFalseEjj called 216 returned 100% blocks executed 68%
+      216:  170:BDD_ID Manager::coFactorFalse(BDD_ID f, BDD_ID x) {
+        -:  171:    // Check if this is a terminal case:
+        -:  172:    // @TODO: Check if we really cover checking all terminal cases.
+      216:  173:    if(isConstant(f) || isConstant(x) || topVar(f) > x){
+      216:  173-block  0
+call    0 returned 216
+branch  1 taken 130 (fallthrough)
+branch  2 taken 86
+      130:  173-block  1
+call    3 returned 130
+branch  4 taken 130 (fallthrough)
+branch  5 taken 0
+      130:  173-block  2
+call    6 returned 130
+branch  7 taken 56 (fallthrough)
+branch  8 taken 74
+      142:  173-block  3
+       74:  173-block  4
+      216:  173-block  5
+branch  9 taken 142 (fallthrough)
+branch 10 taken 74
+      142:  174:        return f;
+      142:  174-block  0
+        -:  175:    }
+        -:  176:    BDD_ID T,F;
+        -:  177:    // Check if x is already the top variable of f:
+       74:  178:    if(topVar(f) == x){
+       74:  178-block  0
+call    0 returned 74
+branch  1 taken 74 (fallthrough)
+branch  2 taken 0
+       74:  179:        return unique_table[f].low_id;
+       74:  179-block  0
+call    0 returned 74
+        -:  180:    } else {
+        -:  181:        // Calculate ite() with respect to variable x:
+    #####:  182:        T = coFactorFalse(unique_table[f].high_id, x);
+    %%%%%:  182-block  0
+call    0 never executed
+call    1 never executed
+    #####:  183:        F = coFactorFalse(unique_table[f].low_id, x);
+call    0 never executed
+call    1 never executed
+    #####:  184:        return   ite(unique_table[f].top_var,T,F);
+call    0 never executed
+call    1 never executed
+        -:  185:    }
+        -:  186:}
+        -:  187:
+function _ZN12ClassProject7Manager12coFactorTrueEj called 1 returned 100% blocks executed 100%
+        1:  188:BDD_ID Manager::coFactorTrue(BDD_ID f) {
+        1:  189:    return coFactorTrue(f, topVar(f));
+        1:  189-block  0
+call    0 returned 1
+call    1 returned 1
+        -:  190:}
+        -:  191:
+function _ZN12ClassProject7Manager13coFactorFalseEj called 1 returned 100% blocks executed 100%
+        1:  192:BDD_ID Manager::coFactorFalse(BDD_ID f) {
+        1:  193:    return coFactorFalse(f, topVar(f));
+        1:  193-block  0
+call    0 returned 1
+call    1 returned 1
+        -:  194:}
+        -:  195:
+function _ZN12ClassProject7Manager3negEj called 36 returned 100% blocks executed 85%
+       36:  196:BDD_ID Manager::neg(BDD_ID a) {
+        -:  197:    BDD_ID neg_ID;
+       36:  198:    neg_ID = ite(a, 0, 1);
+       36:  198-block  0
+call    0 returned 36
+        -:  199:    // Negation label is added inside ite() function
+       36:  200:    unique_table[neg_ID].label = "!(" + unique_table[a].label + ")";
+call    0 returned 36
+call    1 returned 36
+call    2 returned 36
+branch  3 taken 36 (fallthrough)
+branch  4 taken 0 (throw)
+       36:  200-block  0
+call    5 returned 36
+call    6 returned 36
+call    7 returned 36
+call    8 returned 36
+    $$$$$:  200-block  1
+call    9 never executed
+       36:  201:    return neg_ID;
+       36:  201-block  0
+        -:  202:}
+        -:  203:
+function _ZN12ClassProject7Manager4and2Ejj called 30 returned 100% blocks executed 70%
+       30:  204:BDD_ID Manager::and2(BDD_ID a, BDD_ID b) {
+        -:  205:    BDD_ID and2_ID;
+       30:  206:    and2_ID = ite(a, b, 0);
+       30:  206-block  0
+call    0 returned 30
+       30:  207:    if(!(a < 2 || b < 2)) {
+branch  0 taken 22 (fallthrough)
+branch  1 taken 8
+       22:  207-block  0
+branch  2 taken 22 (fallthrough)
+branch  3 taken 0
+       22:  208:        unique_table[and2_ID].label = "(" + unique_table[a].label + "*" + unique_table[b].label + ")";
+       22:  208-block  0
+call    0 returned 22
+call    1 returned 22
+call    2 returned 22
+call    3 returned 22
+branch  4 taken 22 (fallthrough)
+branch  5 taken 0 (throw)
+       22:  208-block  1
+call    6 returned 22
+branch  7 taken 22 (fallthrough)
+branch  8 taken 0 (throw)
+       22:  208-block  2
+call    9 returned 22
+branch 10 taken 22 (fallthrough)
+branch 11 taken 0 (throw)
+       22:  208-block  3
+call   12 returned 22
+call   13 returned 22
+call   14 returned 22
+call   15 returned 22
+call   16 returned 22
+call   17 returned 22
+    $$$$$:  208-block  4
+call   18 never executed
+    $$$$$:  208-block  5
+    $$$$$:  208-block  6
+call   19 never executed
+    $$$$$:  208-block  7
+    $$$$$:  208-block  8
+call   20 never executed
+        -:  209:    }
+       30:  210:    return and2_ID;
+       30:  210-block  0
+       30:  210-block  1
+        -:  211:}
+        -:  212:
+function _ZN12ClassProject7Manager3or2Ejj called 21 returned 100% blocks executed 70%
+       21:  213:BDD_ID Manager::or2(BDD_ID a, BDD_ID b) {
+        -:  214:    BDD_ID or2_ID;
+       21:  215:    or2_ID = ite(a, 1, b);
+       21:  215-block  0
+call    0 returned 21
+       21:  216:    if(!(a < 2 || b < 2)) {
+branch  0 taken 13 (fallthrough)
+branch  1 taken 8
+       13:  216-block  0
+branch  2 taken 13 (fallthrough)
+branch  3 taken 0
+       13:  217:        unique_table[or2_ID].label = "(" + unique_table[a].label + "+" + unique_table[b].label + ")";
+       13:  217-block  0
+call    0 returned 13
+call    1 returned 13
+call    2 returned 13
+call    3 returned 13
+branch  4 taken 13 (fallthrough)
+branch  5 taken 0 (throw)
+       13:  217-block  1
+call    6 returned 13
+branch  7 taken 13 (fallthrough)
+branch  8 taken 0 (throw)
+       13:  217-block  2
+call    9 returned 13
+branch 10 taken 13 (fallthrough)
+branch 11 taken 0 (throw)
+       13:  217-block  3
+call   12 returned 13
+call   13 returned 13
+call   14 returned 13
+call   15 returned 13
+call   16 returned 13
+call   17 returned 13
+    $$$$$:  217-block  4
+call   18 never executed
+    $$$$$:  217-block  5
+    $$$$$:  217-block  6
+call   19 never executed
+    $$$$$:  217-block  7
+    $$$$$:  217-block  8
+call   20 never executed
+        -:  218:    }
+       21:  219:    return or2_ID;
+       21:  219-block  0
+       21:  219-block  1
+        -:  220:}
+        -:  221:
+function _ZN12ClassProject7Manager4xor2Ejj called 13 returned 100% blocks executed 71%
+       13:  222:BDD_ID Manager::xor2(BDD_ID a, BDD_ID b) {
+        -:  223:    BDD_ID xor2_ID, neg_b;
+       13:  224:    neg_b = neg(b);
+       13:  224-block  0
+call    0 returned 13
+       13:  225:    xor2_ID = ite(a,neg_b,b);
+call    0 returned 13
+       13:  226:    if(!(a < 2 || b < 2)) {
+branch  0 taken 5 (fallthrough)
+branch  1 taken 8
+        5:  226-block  0
+branch  2 taken 5 (fallthrough)
+branch  3 taken 0
+        5:  227:        unique_table[xor2_ID].label = "(" + unique_table[a].label + "(+)" + unique_table[b].label + ")";
+        5:  227-block  0
+call    0 returned 5
+call    1 returned 5
+call    2 returned 5
+call    3 returned 5
+branch  4 taken 5 (fallthrough)
+branch  5 taken 0 (throw)
+        5:  227-block  1
+call    6 returned 5
+branch  7 taken 5 (fallthrough)
+branch  8 taken 0 (throw)
+        5:  227-block  2
+call    9 returned 5
+branch 10 taken 5 (fallthrough)
+branch 11 taken 0 (throw)
+        5:  227-block  3
+call   12 returned 5
+call   13 returned 5
+call   14 returned 5
+call   15 returned 5
+call   16 returned 5
+call   17 returned 5
+    $$$$$:  227-block  4
+call   18 never executed
+    $$$$$:  227-block  5
+    $$$$$:  227-block  6
+call   19 never executed
+    $$$$$:  227-block  7
+    $$$$$:  227-block  8
+call   20 never executed
+        -:  228:    }
+       13:  229:    return xor2_ID;
+       13:  229-block  0
+       13:  229-block  1
+        -:  230:}
+        -:  231:
+function _ZN12ClassProject7Manager5nand2Ejj called 5 returned 100% blocks executed 71%
+        5:  232:BDD_ID Manager::nand2(BDD_ID a, BDD_ID b) {
+        -:  233:    BDD_ID nand2_ID;
+        5:  234:    nand2_ID = neg(and2(a,b));
+        5:  234-block  0
+call    0 returned 5
+call    1 returned 5
+        5:  235:    if(!(a < 2 || b < 2)) {
+branch  0 taken 1 (fallthrough)
+branch  1 taken 4
+        1:  235-block  0
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0
+        1:  236:        unique_table[nand2_ID].label = "!(" + unique_table[a].label + "*" + unique_table[b].label + ")";
+        1:  236-block  0
+call    0 returned 1
+call    1 returned 1
+call    2 returned 1
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:  236-block  1
+call    6 returned 1
+branch  7 taken 1 (fallthrough)
+branch  8 taken 0 (throw)
+        1:  236-block  2
+call    9 returned 1
+branch 10 taken 1 (fallthrough)
+branch 11 taken 0 (throw)
+        1:  236-block  3
+call   12 returned 1
+call   13 returned 1
+call   14 returned 1
+call   15 returned 1
+call   16 returned 1
+call   17 returned 1
+    $$$$$:  236-block  4
+call   18 never executed
+    $$$$$:  236-block  5
+    $$$$$:  236-block  6
+call   19 never executed
+    $$$$$:  236-block  7
+    $$$$$:  236-block  8
+call   20 never executed
+        -:  237:    }
+        5:  238:    return nand2_ID;
+        5:  238-block  0
+        5:  238-block  1
+        -:  239:}
+        -:  240:
+function _ZN12ClassProject7Manager4nor2Ejj called 5 returned 100% blocks executed 71%
+        5:  241:BDD_ID Manager::nor2(BDD_ID a, BDD_ID b) {
+        -:  242:    BDD_ID nor2_ID;
+        5:  243:    nor2_ID = neg(or2(a,b));
+        5:  243-block  0
+call    0 returned 5
+call    1 returned 5
+        5:  244:    if(!(a < 2 || b < 2)) {
+branch  0 taken 1 (fallthrough)
+branch  1 taken 4
+        1:  244-block  0
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0
+        1:  245:        unique_table[nor2_ID].label = "!(" + unique_table[a].label + "+" + unique_table[b].label + ")";
+        1:  245-block  0
+call    0 returned 1
+call    1 returned 1
+call    2 returned 1
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:  245-block  1
+call    6 returned 1
+branch  7 taken 1 (fallthrough)
+branch  8 taken 0 (throw)
+        1:  245-block  2
+call    9 returned 1
+branch 10 taken 1 (fallthrough)
+branch 11 taken 0 (throw)
+        1:  245-block  3
+call   12 returned 1
+call   13 returned 1
+call   14 returned 1
+call   15 returned 1
+call   16 returned 1
+call   17 returned 1
+    $$$$$:  245-block  4
+call   18 never executed
+    $$$$$:  245-block  5
+    $$$$$:  245-block  6
+call   19 never executed
+    $$$$$:  245-block  7
+    $$$$$:  245-block  8
+call   20 never executed
+        -:  246:    }
+        5:  247:    return nor2_ID;
+        5:  247-block  0
+        5:  247-block  1
+        -:  248:}
+        -:  249:
+function _ZN12ClassProject7Manager5xnor2Ejj called 5 returned 100% blocks executed 71%
+        5:  250:BDD_ID Manager::xnor2(BDD_ID a, BDD_ID b) {
+        -:  251:    BDD_ID xnor2_ID;
+        5:  252:    xnor2_ID = neg(xor2(a,b));
+        5:  252-block  0
+call    0 returned 5
+call    1 returned 5
+        5:  253:    if(!(a < 2 || b < 2)) {
+branch  0 taken 1 (fallthrough)
+branch  1 taken 4
+        1:  253-block  0
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0
+        1:  254:        unique_table[xnor2_ID].label = "!(" + unique_table[a].label + "(+)" + unique_table[b].label + ")";
+        1:  254-block  0
+call    0 returned 1
+call    1 returned 1
+call    2 returned 1
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:  254-block  1
+call    6 returned 1
+branch  7 taken 1 (fallthrough)
+branch  8 taken 0 (throw)
+        1:  254-block  2
+call    9 returned 1
+branch 10 taken 1 (fallthrough)
+branch 11 taken 0 (throw)
+        1:  254-block  3
+call   12 returned 1
+call   13 returned 1
+call   14 returned 1
+call   15 returned 1
+call   16 returned 1
+call   17 returned 1
+    $$$$$:  254-block  4
+call   18 never executed
+    $$$$$:  254-block  5
+    $$$$$:  254-block  6
+call   19 never executed
+    $$$$$:  254-block  7
+    $$$$$:  254-block  8
+call   20 never executed
+        -:  255:    }
+        5:  256:    return xnor2_ID;
+        5:  256-block  0
+        5:  256-block  1
+        -:  257:}
+        -:  258:
+function _ZN12ClassProject7Manager13getTopVarNameB5cxx11ERKj called 2 returned 100% blocks executed 100%
+        2:  259:std::string Manager::getTopVarName(const BDD_ID &root) {
+        2:  260:    return unique_table[topVar(root)].label;
+        2:  260-block  0
+call    0 returned 2
+call    1 returned 2
+call    2 returned 2
+        -:  261:}
+        -:  262:
+function _ZN12ClassProject7Manager9findNodesERKjRSt3setIjSt4lessIjESaIjEE called 26 returned 100% blocks executed 100%
+       26:  263:void Manager::findNodes(const BDD_ID &root, std::set<BDD_ID> &nodes_of_root) {
+       26:  264:    if(unique_table[root].bdd_id < 2 ){
+       26:  264-block  0
+call    0 returned 26
+branch  1 taken 14 (fallthrough)
+branch  2 taken 12
+       14:  265:        return;
+       14:  265-block  0
+        -:  266:    }
+       12:  267:    nodes_of_root.insert(unique_table[root].high_id);
+       12:  267-block  0
+call    0 returned 12
+call    1 returned 12
+       12:  268:    nodes_of_root.insert(unique_table[root].low_id);
+call    0 returned 12
+call    1 returned 12
+       12:  269:    nodes_of_root.insert(unique_table[root].bdd_id);
+call    0 returned 12
+call    1 returned 12
+       12:  270:    findNodes(unique_table[root].high_id, nodes_of_root);
+call    0 returned 12
+call    1 returned 12
+       12:  271:    findNodes(unique_table[root].low_id, nodes_of_root);
+call    0 returned 12
+call    1 returned 12
+        -:  272:}
+        -:  273:
+function _ZN12ClassProject7Manager8findVarsERKjRSt3setIjSt4lessIjESaIjEE called 1 returned 100% blocks executed 89%
+        1:  274:void Manager::findVars(const BDD_ID &root, std::set<BDD_ID> &vars_of_root) {
+        2:  275:    std::set<BDD_ID> nodes_of_root;
+        1:  275-block  0
+call    0 returned 1
+        1:  275-block  1
+call    1 returned 1
+    $$$$$:  275-block  2
+call    2 never executed
+        1:  276:    findNodes(root,nodes_of_root);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:  277:    std::set<BDD_ID>::iterator setIt = nodes_of_root.begin();
+        1:  277-block  0
+call    0 returned 1
+        7:  278:    for(int i = 0; i < nodes_of_root.size(); i++) {
+        7:  278-block  0
+call    0 returned 7
+branch  1 taken 6 (fallthrough)
+branch  2 taken 1
+        6:  279:        if(!(topVar(*setIt) == 1 || topVar(*setIt) == 0)) { //Added recently
+        6:  279-block  0
+call    0 returned 6
+call    1 returned 6
+branch  2 taken 6 (fallthrough)
+branch  3 taken 0 (throw)
+        6:  279-block  1
+branch  4 taken 5 (fallthrough)
+branch  5 taken 1
+        5:  279-block  2
+call    6 returned 5
+call    7 returned 5
+branch  8 taken 5 (fallthrough)
+branch  9 taken 0 (throw)
+        5:  279-block  3
+branch 10 taken 4 (fallthrough)
+branch 11 taken 1
+        4:  279-block  4
+        2:  279-block  5
+        6:  279-block  6
+branch 12 taken 4 (fallthrough)
+branch 13 taken 2
+        4:  280:            vars_of_root.insert(topVar(*setIt));
+        4:  280-block  0
+call    0 returned 4
+call    1 returned 4
+branch  2 taken 4 (fallthrough)
+branch  3 taken 0 (throw)
+        4:  280-block  1
+call    4 returned 4
+branch  5 taken 4 (fallthrough)
+branch  6 taken 0 (throw)
+        4:  280-block  2
+    $$$$$:  280-block  3
+        -:  281:        }
+        6:  282:        setIt++;
+        6:  282-block  0
+call    0 returned 6
+        -:  283:    }
+        1:  284:}
+        -:  285:
+function _ZN12ClassProject7Manager15uniqueTableSizeEv called 733 returned 100% blocks executed 100%
+      733:  286:size_t Manager::uniqueTableSize() {
+      733:  287:    return unique_table.size();
+      733:  287-block  0
+call    0 returned 733
+        -:  288:}
+        -:  289:
+        -:  290:// Print out the unique table in a table format for debug purposes.
+function _ZN12ClassProject7Manager11print_tableEv called 0 returned 0% blocks executed 0%
+    #####:  291:void Manager::print_table() {
+    #####:  292:    const char separator    = ' ';
+    #####:  293:    const int labelWidth    = 20;
+    #####:  294:    const int numWidth      = 10;
+    #####:  295:    std::cout << "\r\nUnique Table:\r\n";
+    %%%%%:  295-block  0
+call    0 never executed
+    #####:  296:    std::cout << std::left << std::setw(numWidth) << std::setfill(separator) << "BDD_ID";
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+call    4 never executed
+call    5 never executed
+    #####:  297:    std::cout << std::left << std::setw(labelWidth) << std::setfill(separator) << "Label";
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+call    4 never executed
+call    5 never executed
+    #####:  298:    std::cout << std::left << std::setw(numWidth) << std::setfill(separator) << "High";
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+call    4 never executed
+call    5 never executed
+    #####:  299:    std::cout << std::left << std::setw(numWidth) << std::setfill(separator) << "Low";
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+call    4 never executed
+call    5 never executed
+    #####:  300:    std::cout << std::left << std::setw(numWidth) << std::setfill(separator) << "TopVar";
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+call    4 never executed
+call    5 never executed
+    #####:  301:    std::cout << std::endl;
+call    0 never executed
+    #####:  302:    for (int i=0; i<uniqueTableSize(); i++ ) {
+    %%%%%:  302-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  303:        std::cout << std::left << std::setw(numWidth) << std::setfill(separator) << unique_table[i].bdd_id;
+    %%%%%:  303-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+call    4 never executed
+call    5 never executed
+call    6 never executed
+    #####:  304:        std::cout << std::left << std::setw(labelWidth) << std::setfill(separator) << unique_table[i].label;
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+call    4 never executed
+call    5 never executed
+call    6 never executed
+    #####:  305:        std::cout << std::left << std::setw(numWidth) << std::setfill(separator) << unique_table[i].high_id;
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+call    4 never executed
+call    5 never executed
+call    6 never executed
+    #####:  306:        std::cout << std::left << std::setw(numWidth) << std::setfill(separator) << unique_table[i].low_id;
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+call    4 never executed
+call    5 never executed
+call    6 never executed
+    #####:  307:        std::cout << std::left << std::setw(numWidth) << std::setfill(separator) << unique_table[i].top_var;
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+call    4 never executed
+call    5 never executed
+call    6 never executed
+    #####:  308:        std::cout << std::endl;
+call    0 never executed
+        -:  309:    }
+    #####:  310:}

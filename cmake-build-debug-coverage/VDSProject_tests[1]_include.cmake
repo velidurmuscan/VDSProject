@@ -1,0 +1,5 @@
+if(EXISTS "C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/cmake-build-debug-coverage/VDSProject_tests[1]_tests.cmake")
+  include("C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/cmake-build-debug-coverage/VDSProject_tests[1]_tests.cmake")
+else()
+  add_test(VDSProject_tests_NOT_BUILT VDSProject_tests_NOT_BUILT)
+endif()

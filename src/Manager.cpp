@@ -131,7 +131,7 @@ BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e){
     }
     //////////////////Added Recently ///////////////////////////
     // 3.4) Check if unique table entry i already exists in the unique table:
-     for(int c = 0 ; c <= uniqueTableSize() ; c++){
+     for(int c = 0 ; c < uniqueTableSize() ; c++){
          if(unique_table[c].high_id == rHigh && unique_table[c].low_id == rLow && unique_table[c].top_var == minTopVar ){
              return unique_table[c].bdd_id;
          }
@@ -143,7 +143,7 @@ BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e){
     newLine.high_id = rHigh;
     newLine.low_id = rLow;
     newLine.top_var = minTopVar;
-    newLine.label = "TempLabel";
+    //newLine.label = "TempLabel";
     //newLine.label = "!" +  unique_table[i].label; //Added recently
     unique_table.push_back(newLine);
     return newLine.bdd_id;
@@ -152,7 +152,7 @@ BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e){
 BDD_ID Manager::coFactorTrue(BDD_ID f, BDD_ID x) {
     // Check if this is a terminal case:
     // @TODO: Check if we really cover checking all terminal cases.
-    if(isConstant(f) || topVar(f) > x){
+    if(isConstant(f) || isConstant(x) || topVar(f) > x){
         return f;
     }
     BDD_ID T,F;
@@ -170,7 +170,7 @@ BDD_ID Manager::coFactorTrue(BDD_ID f, BDD_ID x) {
 BDD_ID Manager::coFactorFalse(BDD_ID f, BDD_ID x) {
     // Check if this is a terminal case:
     // @TODO: Check if we really cover checking all terminal cases.
-    if(isConstant(f) || topVar(f) > x){
+    if(isConstant(f) || isConstant(x) || topVar(f) > x){
         return f;
     }
     BDD_ID T,F;

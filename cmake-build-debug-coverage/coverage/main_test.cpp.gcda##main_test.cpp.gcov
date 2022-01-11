@@ -1,0 +1,21 @@
+        -:    0:Source:C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/src/test/main_test.cpp
+        -:    0:Graph:C:\Users\osama\Desktop\Folders\University\TUK\Courses\VDS\Project\VDSProject\cmake-build-debug-coverage\CMakeFiles\VDSProject_tests.dir\src\test\main_test.cpp.gcno
+        -:    0:Data:C:\Users\osama\Desktop\Folders\University\TUK\Courses\VDS\Project\VDSProject\cmake-build-debug-coverage\CMakeFiles\VDSProject_tests.dir\src\test\main_test.cpp.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1://
+        -:    2:// Created by ludwig on 22.11.16.
+        -:    3://
+        -:    4:
+        -:    5:
+        -:    6:#include "Tests.h"
+        -:    7:
+function main called 1 returned 100% blocks executed 100%
+        1:    8:int main(int argc, char* argv[])
+        -:    9:{
+        1:   10:    ::testing::InitGoogleTest(&argc, argv);
+        1:   10-block  0
+call    0 returned 1
+        1:   11:    return RUN_ALL_TESTS();
+call    0 returned 1
+        -:   12:}

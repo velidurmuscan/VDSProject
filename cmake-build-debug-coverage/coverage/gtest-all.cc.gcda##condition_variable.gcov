@@ -1,0 +1,337 @@
+        -:    0:Source:C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++/condition_variable
+        -:    0:Graph:C:\Users\osama\Desktop\Folders\University\TUK\Courses\VDS\Project\VDSProject\cmake-build-debug-coverage\src\test\Google_tests\lib\googletest\CMakeFiles\gtest.dir\src\gtest-all.cc.gcno
+        -:    0:Data:C:\Users\osama\Desktop\Folders\University\TUK\Courses\VDS\Project\VDSProject\cmake-build-debug-coverage\src\test\Google_tests\lib\googletest\CMakeFiles\gtest.dir\src\gtest-all.cc.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:// <condition_variable> -*- C++ -*-
+        -:    2:
+        -:    3:// Copyright (C) 2008-2018 Free Software Foundation, Inc.
+        -:    4://
+        -:    5:// This file is part of the GNU ISO C++ Library.  This library is free
+        -:    6:// software; you can redistribute it and/or modify it under the
+        -:    7:// terms of the GNU General Public License as published by the
+        -:    8:// Free Software Foundation; either version 3, or (at your option)
+        -:    9:// any later version.
+        -:   10:
+        -:   11:// This library is distributed in the hope that it will be useful,
+        -:   12:// but WITHOUT ANY WARRANTY; without even the implied warranty of
+        -:   13:// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        -:   14:// GNU General Public License for more details.
+        -:   15:
+        -:   16:// Under Section 7 of GPL version 3, you are granted additional
+        -:   17:// permissions described in the GCC Runtime Library Exception, version
+        -:   18:// 3.1, as published by the Free Software Foundation.
+        -:   19:
+        -:   20:// You should have received a copy of the GNU General Public License and
+        -:   21:// a copy of the GCC Runtime Library Exception along with this program;
+        -:   22:// see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
+        -:   23:// <http://www.gnu.org/licenses/>.
+        -:   24:
+        -:   25:/** @file include/condition_variable
+        -:   26: *  This is a Standard C++ Library header.
+        -:   27: */
+        -:   28:
+        -:   29:#ifndef _GLIBCXX_CONDITION_VARIABLE
+        -:   30:#define _GLIBCXX_CONDITION_VARIABLE 1
+        -:   31:
+        -:   32:#pragma GCC system_header
+        -:   33:
+        -:   34:#if __cplusplus < 201103L
+        -:   35:# include <bits/c++0x_warning.h>
+        -:   36:#else
+        -:   37:
+        -:   38:#include <chrono>
+        -:   39:#include <bits/std_mutex.h>
+        -:   40:#include <ext/concurrence.h>
+        -:   41:#include <bits/alloc_traits.h>
+        -:   42:#include <bits/allocator.h>
+        -:   43:#include <bits/unique_ptr.h>
+        -:   44:#include <bits/shared_ptr.h>
+        -:   45:#include <bits/cxxabi_forced.h>
+        -:   46:
+        -:   47:#if defined(_GLIBCXX_HAS_GTHREADS) && defined(_GLIBCXX_USE_C99_STDINT_TR1)
+        -:   48:
+        -:   49:namespace std _GLIBCXX_VISIBILITY(default)
+        -:   50:{
+        -:   51:_GLIBCXX_BEGIN_NAMESPACE_VERSION
+        -:   52:
+        -:   53:  /**
+        -:   54:   * @defgroup condition_variables Condition Variables
+        -:   55:   * @ingroup concurrency
+        -:   56:   *
+        -:   57:   * Classes for condition_variable support.
+        -:   58:   * @{
+        -:   59:   */
+        -:   60:
+        -:   61:  /// cv_status
+        -:   62:  enum class cv_status { no_timeout, timeout };
+        -:   63:
+        -:   64:  /// condition_variable
+        -:   65:  class condition_variable
+        -:   66:  {
+        -:   67:    typedef chrono::system_clock	__clock_t;
+        -:   68:    typedef __gthread_cond_t		__native_type;
+        -:   69:
+        -:   70:#ifdef __GTHREAD_COND_INIT
+        -:   71:    __native_type			_M_cond = __GTHREAD_COND_INIT;
+        -:   72:#else
+        -:   73:    __native_type			_M_cond;
+        -:   74:#endif
+        -:   75:
+        -:   76:  public:
+        -:   77:    typedef __native_type* 		native_handle_type;
+        -:   78:
+        -:   79:    condition_variable() noexcept;
+        -:   80:    ~condition_variable() noexcept;
+        -:   81:
+        -:   82:    condition_variable(const condition_variable&) = delete;
+        -:   83:    condition_variable& operator=(const condition_variable&) = delete;
+        -:   84:
+        -:   85:    void
+        -:   86:    notify_one() noexcept;
+        -:   87:
+        -:   88:    void
+        -:   89:    notify_all() noexcept;
+        -:   90:
+        -:   91:    void
+        -:   92:    wait(unique_lock<mutex>& __lock) noexcept;
+        -:   93:
+        -:   94:    template<typename _Predicate>
+        -:   95:      void
+function _ZNSt18condition_variable4waitIZN7testing8internal12Notification19WaitForNotificationEvEUlvE_EEvRSt11unique_lockISt5mutexET_ called 0 returned 0% blocks executed 0%
+    #####:   96:      wait(unique_lock<mutex>& __lock, _Predicate __p)
+        -:   97:      {
+    #####:   98:	while (!__p())
+    %%%%%:   98-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   99:	  wait(__lock);
+    %%%%%:   99-block  0
+call    0 never executed
+    #####:  100:      }
+        -:  101:
+        -:  102:    template<typename _Duration>
+        -:  103:      cv_status
+        -:  104:      wait_until(unique_lock<mutex>& __lock,
+        -:  105:		 const chrono::time_point<__clock_t, _Duration>& __atime)
+        -:  106:      { return __wait_until_impl(__lock, __atime); }
+        -:  107:
+        -:  108:    template<typename _Clock, typename _Duration>
+        -:  109:      cv_status
+        -:  110:      wait_until(unique_lock<mutex>& __lock,
+        -:  111:		 const chrono::time_point<_Clock, _Duration>& __atime)
+        -:  112:      {
+        -:  113:	// DR 887 - Sync unknown clock to known clock.
+        -:  114:	const typename _Clock::time_point __c_entry = _Clock::now();
+        -:  115:	const __clock_t::time_point __s_entry = __clock_t::now();
+        -:  116:	const auto __delta = __atime - __c_entry;
+        -:  117:	const auto __s_atime = __s_entry + __delta;
+        -:  118:
+        -:  119:	return __wait_until_impl(__lock, __s_atime);
+        -:  120:      }
+        -:  121:
+        -:  122:    template<typename _Clock, typename _Duration, typename _Predicate>
+        -:  123:      bool
+        -:  124:      wait_until(unique_lock<mutex>& __lock,
+        -:  125:		 const chrono::time_point<_Clock, _Duration>& __atime,
+        -:  126:		 _Predicate __p)
+        -:  127:      {
+        -:  128:	while (!__p())
+        -:  129:	  if (wait_until(__lock, __atime) == cv_status::timeout)
+        -:  130:	    return __p();
+        -:  131:	return true;
+        -:  132:      }
+        -:  133:
+        -:  134:    template<typename _Rep, typename _Period>
+        -:  135:      cv_status
+        -:  136:      wait_for(unique_lock<mutex>& __lock,
+        -:  137:	       const chrono::duration<_Rep, _Period>& __rtime)
+        -:  138:      {
+        -:  139:	using __dur = typename __clock_t::duration;
+        -:  140:	auto __reltime = chrono::duration_cast<__dur>(__rtime);
+        -:  141:	if (__reltime < __rtime)
+        -:  142:	  ++__reltime;
+        -:  143:	return wait_until(__lock, __clock_t::now() + __reltime);
+        -:  144:      }
+        -:  145:
+        -:  146:    template<typename _Rep, typename _Period, typename _Predicate>
+        -:  147:      bool
+        -:  148:      wait_for(unique_lock<mutex>& __lock,
+        -:  149:	       const chrono::duration<_Rep, _Period>& __rtime,
+        -:  150:	       _Predicate __p)
+        -:  151:      {
+        -:  152:	using __dur = typename __clock_t::duration;
+        -:  153:	auto __reltime = chrono::duration_cast<__dur>(__rtime);
+        -:  154:	if (__reltime < __rtime)
+        -:  155:	  ++__reltime;
+        -:  156:	return wait_until(__lock, __clock_t::now() + __reltime, std::move(__p));
+        -:  157:      }
+        -:  158:
+        -:  159:    native_handle_type
+        -:  160:    native_handle()
+        -:  161:    { return &_M_cond; }
+        -:  162:
+        -:  163:  private:
+        -:  164:    template<typename _Dur>
+        -:  165:      cv_status
+        -:  166:      __wait_until_impl(unique_lock<mutex>& __lock,
+        -:  167:			const chrono::time_point<__clock_t, _Dur>& __atime)
+        -:  168:      {
+        -:  169:	auto __s = chrono::time_point_cast<chrono::seconds>(__atime);
+        -:  170:	auto __ns = chrono::duration_cast<chrono::nanoseconds>(__atime - __s);
+        -:  171:
+        -:  172:	__gthread_time_t __ts =
+        -:  173:	  {
+        -:  174:	    static_cast<std::time_t>(__s.time_since_epoch().count()),
+        -:  175:	    static_cast<long>(__ns.count())
+        -:  176:	  };
+        -:  177:
+        -:  178:	__gthread_cond_timedwait(&_M_cond, __lock.mutex()->native_handle(),
+        -:  179:				 &__ts);
+        -:  180:
+        -:  181:	return (__clock_t::now() < __atime
+        -:  182:		? cv_status::no_timeout : cv_status::timeout);
+        -:  183:      }
+        -:  184:  };
+        -:  185:
+        -:  186:  void
+        -:  187:  notify_all_at_thread_exit(condition_variable&, unique_lock<mutex>);
+        -:  188:
+        -:  189:  struct __at_thread_exit_elt
+        -:  190:  {
+        -:  191:    __at_thread_exit_elt* _M_next;
+        -:  192:    void (*_M_cb)(void*);
+        -:  193:  };
+        -:  194:
+        -:  195:  inline namespace _V2 {
+        -:  196:
+        -:  197:  /// condition_variable_any
+        -:  198:  // Like above, but mutex is not required to have try_lock.
+        -:  199:  class condition_variable_any
+        -:  200:  {
+        -:  201:    typedef chrono::system_clock	__clock_t;
+        -:  202:    condition_variable			_M_cond;
+        -:  203:    shared_ptr<mutex>			_M_mutex;
+        -:  204:
+        -:  205:    // scoped unlock - unlocks in ctor, re-locks in dtor
+        -:  206:    template<typename _Lock>
+        -:  207:      struct _Unlock
+        -:  208:      {
+        -:  209:	explicit _Unlock(_Lock& __lk) : _M_lock(__lk) { __lk.unlock(); }
+        -:  210:
+        -:  211:	~_Unlock() noexcept(false)
+        -:  212:	{
+        -:  213:	  if (uncaught_exception())
+        -:  214:	    {
+        -:  215:	      __try
+        -:  216:	      { _M_lock.lock(); }
+        -:  217:	      __catch(const __cxxabiv1::__forced_unwind&)
+        -:  218:	      { __throw_exception_again; }
+        -:  219:	      __catch(...)
+        -:  220:	      { }
+        -:  221:	    }
+        -:  222:	  else
+        -:  223:	    _M_lock.lock();
+        -:  224:	}
+        -:  225:
+        -:  226:	_Unlock(const _Unlock&) = delete;
+        -:  227:	_Unlock& operator=(const _Unlock&) = delete;
+        -:  228:
+        -:  229:	_Lock& _M_lock;
+        -:  230:      };
+        -:  231:
+        -:  232:  public:
+        -:  233:    condition_variable_any() : _M_mutex(std::make_shared<mutex>()) { }
+        -:  234:    ~condition_variable_any() = default;
+        -:  235:
+        -:  236:    condition_variable_any(const condition_variable_any&) = delete;
+        -:  237:    condition_variable_any& operator=(const condition_variable_any&) = delete;
+        -:  238:
+        -:  239:    void
+        -:  240:    notify_one() noexcept
+        -:  241:    {
+        -:  242:      lock_guard<mutex> __lock(*_M_mutex);
+        -:  243:      _M_cond.notify_one();
+        -:  244:    }
+        -:  245:
+        -:  246:    void
+        -:  247:    notify_all() noexcept
+        -:  248:    {
+        -:  249:      lock_guard<mutex> __lock(*_M_mutex);
+        -:  250:      _M_cond.notify_all();
+        -:  251:    }
+        -:  252:
+        -:  253:    template<typename _Lock>
+        -:  254:      void
+        -:  255:      wait(_Lock& __lock)
+        -:  256:      {
+        -:  257:	shared_ptr<mutex> __mutex = _M_mutex;
+        -:  258:	unique_lock<mutex> __my_lock(*__mutex);
+        -:  259:	_Unlock<_Lock> __unlock(__lock);
+        -:  260:	// *__mutex must be unlocked before re-locking __lock so move
+        -:  261:	// ownership of *__mutex lock to an object with shorter lifetime.
+        -:  262:	unique_lock<mutex> __my_lock2(std::move(__my_lock));
+        -:  263:	_M_cond.wait(__my_lock2);
+        -:  264:      }
+        -:  265:
+        -:  266:
+        -:  267:    template<typename _Lock, typename _Predicate>
+        -:  268:      void
+        -:  269:      wait(_Lock& __lock, _Predicate __p)
+        -:  270:      {
+        -:  271:	while (!__p())
+        -:  272:	  wait(__lock);
+        -:  273:      }
+        -:  274:
+        -:  275:    template<typename _Lock, typename _Clock, typename _Duration>
+        -:  276:      cv_status
+        -:  277:      wait_until(_Lock& __lock,
+        -:  278:		 const chrono::time_point<_Clock, _Duration>& __atime)
+        -:  279:      {
+        -:  280:	shared_ptr<mutex> __mutex = _M_mutex;
+        -:  281:	unique_lock<mutex> __my_lock(*__mutex);
+        -:  282:	_Unlock<_Lock> __unlock(__lock);
+        -:  283:	// *__mutex must be unlocked before re-locking __lock so move
+        -:  284:	// ownership of *__mutex lock to an object with shorter lifetime.
+        -:  285:	unique_lock<mutex> __my_lock2(std::move(__my_lock));
+        -:  286:	return _M_cond.wait_until(__my_lock2, __atime);
+        -:  287:      }
+        -:  288:
+        -:  289:    template<typename _Lock, typename _Clock,
+        -:  290:	     typename _Duration, typename _Predicate>
+        -:  291:      bool
+        -:  292:      wait_until(_Lock& __lock,
+        -:  293:		 const chrono::time_point<_Clock, _Duration>& __atime,
+        -:  294:		 _Predicate __p)
+        -:  295:      {
+        -:  296:	while (!__p())
+        -:  297:	  if (wait_until(__lock, __atime) == cv_status::timeout)
+        -:  298:	    return __p();
+        -:  299:	return true;
+        -:  300:      }
+        -:  301:
+        -:  302:    template<typename _Lock, typename _Rep, typename _Period>
+        -:  303:      cv_status
+        -:  304:      wait_for(_Lock& __lock, const chrono::duration<_Rep, _Period>& __rtime)
+        -:  305:      { return wait_until(__lock, __clock_t::now() + __rtime); }
+        -:  306:
+        -:  307:    template<typename _Lock, typename _Rep,
+        -:  308:	     typename _Period, typename _Predicate>
+        -:  309:      bool
+        -:  310:      wait_for(_Lock& __lock,
+        -:  311:	       const chrono::duration<_Rep, _Period>& __rtime, _Predicate __p)
+        -:  312:      { return wait_until(__lock, __clock_t::now() + __rtime, std::move(__p)); }
+        -:  313:  };
+        -:  314:
+        -:  315:  } // end inline namespace
+        -:  316:
+        -:  317:  // @} group condition_variables
+        -:  318:_GLIBCXX_END_NAMESPACE_VERSION
+        -:  319:} // namespace
+        -:  320:
+        -:  321:#endif // _GLIBCXX_HAS_GTHREADS && _GLIBCXX_USE_C99_STDINT_TR1
+        -:  322:
+        -:  323:#endif // C++11
+        -:  324:
+        -:  325:#endif // _GLIBCXX_CONDITION_VARIABLE
