@@ -143,8 +143,8 @@ BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e){
     newLine.high_id = rHigh;
     newLine.low_id = rLow;
     newLine.top_var = minTopVar;
-    //newLine.label = "TempLabel";
-    newLine.label = "!" +  unique_table[i].label; //Added recently
+    newLine.label = "TempLabel";
+    //newLine.label = "!" +  unique_table[i].label; //Added recently
     unique_table.push_back(newLine);
     return newLine.bdd_id;
 }
