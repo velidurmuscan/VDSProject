@@ -5,6 +5,7 @@
 #include <vector>
 #include <iomanip>
 
+
 using namespace ClassProject;
 //using namespace std;
 
@@ -15,6 +16,10 @@ Manager::Manager() {
     unique_table.push_back(newLine);
     newLine = {.bdd_id=1, .label="VarTrue", .high_id=1, .low_id=1, .top_var=1};
     unique_table.push_back(newLine);
+
+    Inverted_Table.insert({{0,0,0},0});
+    Inverted_Table.insert({{1,1,1},1});
+
 }
 
 BDD_ID Manager::createVar(const std::string &label) {
@@ -25,6 +30,7 @@ BDD_ID Manager::createVar(const std::string &label) {
     newLine.low_id = 0;
     newLine.top_var = unique_table.size();
     unique_table.push_back(newLine);
+    Inverted_Table.insert({{newLine.low_id,newLine.high_id,newLine.top_var},newLine.bdd_id});
     return newLine.bdd_id;
 }
 
@@ -94,13 +100,25 @@ BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e){
     }*/
 
 
-    // 2) Check if unique table entry i already exists in the unique table:
-   /* for(int c = 0 ; c <= uniqueTableSize() ; c++){
-        if(unique_table[c].high_id == t && unique_table[c].low_id == e){
-            return unique_table[c].bdd_id;
-        }
-    }*/
+    // 2) Check if unique table entry i already exists in the unique table: computed table
+    computed_table_input tableRand = {i,t,e};
+    //std::unordered_map<computed_table_input,BDD_ID>::const_iterator
+    auto got = mapping.find (tableRand);
+    if ( !(got == mapping.end()) )
+        return got->second;
 
+  /*  key tableRand = {i,t,e};
+    std::unordered_map<key,BDD_ID>::const_iterator got = mapping.find (tableRand);
+    if ( !(got == mapping.end()) )
+        return got->second;
+*/
+
+
+   /* Check ITE in the computed table, if we already have an entry we will return the bdd_id
+    *
+    * I     T       E       BDD_ID
+    *
+    * */
 
     // 3) Create a new entry for i,t,e:
     // 3.1) Find the lowest top variable:
@@ -119,23 +137,43 @@ BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e){
     ClassProject::BDD_ID ct_t = coFactorTrue(t,minTopVar);
     ClassProject::BDD_ID ct_e = coFactorTrue(e,minTopVar);
     rHigh = ite(ct_i, ct_t, ct_e);  // High Successor
+    mapping.insert({{ct_i,ct_t,ct_e},rHigh});
     //rLow = ite(coFactorFalse(i,minTopVar), coFactorFalse(t,minTopVar), coFactorFalse(e,minTopVar));
     ClassProject::BDD_ID cf_i = coFactorFalse(i,minTopVar);
     ClassProject::BDD_ID cf_t = coFactorFalse(t,minTopVar);
     ClassProject::BDD_ID cf_e = coFactorFalse(e,minTopVar);
     rLow = ite(cf_i, cf_t, cf_e);   // Low Successor
+    mapping.insert({{cf_i,cf_t,cf_e},rLow});
     // 3.3) Check if reduction is possible:
     if(rHigh == rLow){
         // Both high and low successors are same. Thus, creation of a new node is unnecessary. Return the current node:
         return rHigh;
     }
+
+
     //////////////////Added Recently ///////////////////////////
-    // 3.4) Check if unique table entry i already exists in the unique table:
-     for(int c = 0 ; c < uniqueTableSize() ; c++){
+    // 3.4) Check if unique table entry i already exists in the unique table: Inverted table
+    /* for(int c = 0 ; c < uniqueTableSize() ; c++){
          if(unique_table[c].high_id == rHigh && unique_table[c].low_id == rLow && unique_table[c].top_var == minTopVar ){
              return unique_table[c].bdd_id;
          }
-     }
+     }*/
+
+    invU_table_input invtableRand = {rLow,rHigh,minTopVar};
+    //std::unordered_map<invU_table_input,BDD_ID>::const_iterator
+    auto invgot = Inverted_Table.find (invtableRand);
+    if ( !(invgot == Inverted_Table.end()) )
+        return invgot->second;
+
+   /* key invtableRand = {rLow,rHigh,minTopVar};
+    std::unordered_map<key,BDD_ID>::const_iterator invgot = Inverted_Table.find (invtableRand);
+    if ( !(invgot == Inverted_Table.end()) )
+        return invgot->second;
+
+*/
+     /* Inverse table should be checked here instead of the current algorithm */
+
+
     ////////////////////////////////////////////////////////////
     // 3.5) Create and add a new entry to the unique table:
     struct table_line newLine;
@@ -146,6 +184,12 @@ BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e){
     //newLine.label = "TempLabel";
     //newLine.label = "!" +  unique_table[i].label; //Added recently
     unique_table.push_back(newLine);
+    /*********************/
+   // Computed_Table mapping{{{i,t,e},newLine.bdd_id}};
+    mapping.insert({{i,t,e},newLine.bdd_id});
+    Inverted_Table.insert({{rLow,rHigh,minTopVar},newLine.bdd_id});
+    /********************/
+    //Computed_Table[i,t,e] = newLine.bdd_id;
     return newLine.bdd_id;
 }
 
@@ -197,7 +241,7 @@ BDD_ID Manager::neg(BDD_ID a) {
     BDD_ID neg_ID;
     neg_ID = ite(a, 0, 1);
     // Negation label is added inside ite() function
-    unique_table[neg_ID].label = "!(" + unique_table[a].label + ")";
+   // unique_table[neg_ID].label = "!(" + unique_table[a].label + ")";
     return neg_ID;
 }
 
@@ -205,7 +249,7 @@ BDD_ID Manager::and2(BDD_ID a, BDD_ID b) {
     BDD_ID and2_ID;
     and2_ID = ite(a, b, 0);
     if(!(a < 2 || b < 2)) {
-        unique_table[and2_ID].label = "(" + unique_table[a].label + "*" + unique_table[b].label + ")";
+       // unique_table[and2_ID].label = "(" + unique_table[a].label + "*" + unique_table[b].label + ")";
     }
     return and2_ID;
 }
@@ -214,7 +258,7 @@ BDD_ID Manager::or2(BDD_ID a, BDD_ID b) {
     BDD_ID or2_ID;
     or2_ID = ite(a, 1, b);
     if(!(a < 2 || b < 2)) {
-        unique_table[or2_ID].label = "(" + unique_table[a].label + "+" + unique_table[b].label + ")";
+       // unique_table[or2_ID].label = "(" + unique_table[a].label + "+" + unique_table[b].label + ")";
     }
     return or2_ID;
 }
@@ -224,7 +268,7 @@ BDD_ID Manager::xor2(BDD_ID a, BDD_ID b) {
     neg_b = neg(b);
     xor2_ID = ite(a,neg_b,b);
     if(!(a < 2 || b < 2)) {
-        unique_table[xor2_ID].label = "(" + unique_table[a].label + "(+)" + unique_table[b].label + ")";
+       // unique_table[xor2_ID].label = "(" + unique_table[a].label + "(+)" + unique_table[b].label + ")";
     }
     return xor2_ID;
 }
@@ -233,7 +277,7 @@ BDD_ID Manager::nand2(BDD_ID a, BDD_ID b) {
     BDD_ID nand2_ID;
     nand2_ID = neg(and2(a,b));
     if(!(a < 2 || b < 2)) {
-        unique_table[nand2_ID].label = "!(" + unique_table[a].label + "*" + unique_table[b].label + ")";
+       // unique_table[nand2_ID].label = "!(" + unique_table[a].label + "*" + unique_table[b].label + ")";
     }
     return nand2_ID;
 }
@@ -242,7 +286,7 @@ BDD_ID Manager::nor2(BDD_ID a, BDD_ID b) {
     BDD_ID nor2_ID;
     nor2_ID = neg(or2(a,b));
     if(!(a < 2 || b < 2)) {
-        unique_table[nor2_ID].label = "!(" + unique_table[a].label + "+" + unique_table[b].label + ")";
+        //unique_table[nor2_ID].label = "!(" + unique_table[a].label + "+" + unique_table[b].label + ")";
     }
     return nor2_ID;
 }
@@ -251,7 +295,7 @@ BDD_ID Manager::xnor2(BDD_ID a, BDD_ID b) {
     BDD_ID xnor2_ID;
     xnor2_ID = neg(xor2(a,b));
     if(!(a < 2 || b < 2)) {
-        unique_table[xnor2_ID].label = "!(" + unique_table[a].label + "(+)" + unique_table[b].label + ")";
+        //unique_table[xnor2_ID].label = "!(" + unique_table[a].label + "(+)" + unique_table[b].label + ")";
     }
     return xnor2_ID;
 }

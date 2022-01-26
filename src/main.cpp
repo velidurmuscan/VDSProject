@@ -5,6 +5,7 @@
 #include <iostream>
 #include <string>
 #include "Manager.h"
+#include <unordered_map>
 
 //using namespace std;
 //using namespace ClassProject;
@@ -20,6 +21,12 @@ int main(int argc, char* argv[])
     ClassProject::BDD_ID ANDc_d =  my_ROBDD.and2(c,d);
     my_ROBDD.and2(ORa_b,ANDc_d);
     my_ROBDD.print_table();
+   /* for (auto &kv : my_ROBDD.mapping) {
+        std::cout << "I:" << kv.first
+             << " T:" << kv.first
+                << " E:" << kv.first
+             << " BDD_ID:" << kv.second << std::endl;
+    }*/
 
 /*
     ClassProject::Manager Test_ROBDD;

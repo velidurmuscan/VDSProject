@@ -16,6 +16,7 @@ set(CMAKE_CXX_COMPILER_ID "GNU")
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../src"
   "../src/test"
+  "../src/bench"
   )
 
 # The set of dependency files which are needed:

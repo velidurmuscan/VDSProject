@@ -26,6 +26,7 @@
 				<Compiler>
 					<Add directory="C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/src"/>
 					<Add directory="C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/src/test"/>
+					<Add directory="C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/src/bench"/>
 					<Add directory="C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/src/test/Google_tests/lib/googlemock/include"/>
 					<Add directory="C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/src/test/Google_tests/lib/googlemock"/>
 					<Add directory="C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/src/test/Google_tests/lib/googletest/include"/>
@@ -53,6 +54,7 @@
 				<Compiler>
 					<Add directory="C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/src"/>
 					<Add directory="C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/src/test"/>
+					<Add directory="C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/src/bench"/>
 					<Add directory="C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/src/test/Google_tests/lib/googlemock/include"/>
 					<Add directory="C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/src/test/Google_tests/lib/googlemock"/>
 					<Add directory="C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/src/test/Google_tests/lib/googletest/include"/>
@@ -80,6 +82,7 @@
 				<Compiler>
 					<Add directory="C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/src"/>
 					<Add directory="C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/src/test"/>
+					<Add directory="C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/src/bench"/>
 					<Add directory="C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/src/test/Google_tests/lib/googlemock/include"/>
 					<Add directory="C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/src/test/Google_tests/lib/googlemock"/>
 					<Add directory="C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/src/test/Google_tests/lib/googletest/include"/>
@@ -107,6 +110,7 @@
 				<Compiler>
 					<Add directory="C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/src"/>
 					<Add directory="C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/src/test"/>
+					<Add directory="C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/src/bench"/>
 					<Add directory="C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/src/test/Google_tests/lib/googlemock/include"/>
 					<Add directory="C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/src/test/Google_tests/lib/googlemock"/>
 					<Add directory="C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/src/test/Google_tests/lib/googletest/include"/>
@@ -134,6 +138,7 @@
 				<Compiler>
 					<Add directory="C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/src"/>
 					<Add directory="C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/src/test"/>
+					<Add directory="C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/src/bench"/>
 					<Add directory="C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/src/test/Google_tests/lib/googletest/include"/>
 					<Add directory="C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/src/test/Google_tests/lib/googletest"/>
 					<Add directory="C:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++"/>
@@ -159,6 +164,7 @@
 				<Compiler>
 					<Add directory="C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/src"/>
 					<Add directory="C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/src/test"/>
+					<Add directory="C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/src/bench"/>
 					<Add directory="C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/src/test/Google_tests/lib/googletest/include"/>
 					<Add directory="C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/src/test/Google_tests/lib/googletest"/>
 					<Add directory="C:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++"/>
@@ -184,6 +190,7 @@
 				<Compiler>
 					<Add directory="C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/src"/>
 					<Add directory="C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/src/test"/>
+					<Add directory="C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/src/bench"/>
 					<Add directory="C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/src/test/Google_tests/lib/googletest/include"/>
 					<Add directory="C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/src/test/Google_tests/lib/googletest"/>
 					<Add directory="C:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++"/>
@@ -209,6 +216,7 @@
 				<Compiler>
 					<Add directory="C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/src"/>
 					<Add directory="C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/src/test"/>
+					<Add directory="C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/src/bench"/>
 					<Add directory="C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/src/test/Google_tests/lib/googletest/include"/>
 					<Add directory="C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/src/test/Google_tests/lib/googletest"/>
 					<Add directory="C:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++"/>

@@ -273,6 +273,7 @@ TEST(ROBDDxnor2FuncTest, xnor2FuncTest){
     ClassProject::BDD_ID a = Test_ROBDD.createVar("a");
     ClassProject::BDD_ID b = Test_ROBDD.createVar("b");
     ClassProject::BDD_ID aXNORb = Test_ROBDD.xnor2(a,b);
+    Test_ROBDD.print_table();
     EXPECT_EQ(0, Test_ROBDD.xnor2(0,1));
     EXPECT_EQ(0, Test_ROBDD.xnor2(1,0));
     EXPECT_EQ(1, Test_ROBDD.xnor2(0,0));

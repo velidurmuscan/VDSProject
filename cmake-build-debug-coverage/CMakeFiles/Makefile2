@@ -207,8 +207,8 @@ CMakeFiles/VDSProject.dir/clean:
 # Target rules for target CMakeFiles/VDSProject_tests.dir
 
 # All Build rule for target.
-CMakeFiles/VDSProject_tests.dir/all: src/test/Google_tests/lib/googletest/CMakeFiles/gtest.dir/all
 CMakeFiles/VDSProject_tests.dir/all: src/test/Google_tests/lib/googletest/CMakeFiles/gtest_main.dir/all
+CMakeFiles/VDSProject_tests.dir/all: src/test/Google_tests/lib/googletest/CMakeFiles/gtest.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\VDSProject_tests.dir\build.make CMakeFiles/VDSProject_tests.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\VDSProject_tests.dir\build.make CMakeFiles/VDSProject_tests.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\osama\Desktop\Folders\University\TUK\Courses\VDS\Project\VDSProject\cmake-build-debug-coverage\CMakeFiles --progress-num=7,8 "Built target VDSProject_tests"
@@ -260,9 +260,9 @@ src/CMakeFiles/Manager.dir/clean:
 # Target rules for target src/test/CMakeFiles/VDSProject_test.dir
 
 # All Build rule for target.
-src/test/CMakeFiles/VDSProject_test.dir/all: src/test/Google_tests/lib/googletest/CMakeFiles/gtest.dir/all
-src/test/CMakeFiles/VDSProject_test.dir/all: src/test/Google_tests/lib/googletest/CMakeFiles/gtest_main.dir/all
 src/test/CMakeFiles/VDSProject_test.dir/all: src/CMakeFiles/Manager.dir/all
+src/test/CMakeFiles/VDSProject_test.dir/all: src/test/Google_tests/lib/googletest/CMakeFiles/gtest_main.dir/all
+src/test/CMakeFiles/VDSProject_test.dir/all: src/test/Google_tests/lib/googletest/CMakeFiles/gtest.dir/all
 	$(MAKE) $(MAKESILENT) -f src\test\CMakeFiles\VDSProject_test.dir\build.make src/test/CMakeFiles/VDSProject_test.dir/depend
 	$(MAKE) $(MAKESILENT) -f src\test\CMakeFiles\VDSProject_test.dir\build.make src/test/CMakeFiles/VDSProject_test.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\osama\Desktop\Folders\University\TUK\Courses\VDS\Project\VDSProject\cmake-build-debug-coverage\CMakeFiles --progress-num=5,6 "Built target VDSProject_test"
