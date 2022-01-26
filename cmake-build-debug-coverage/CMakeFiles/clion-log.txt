@@ -1,5 +1,0 @@
-"C:\Program Files\JetBrains\CLion 2021.2.3\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS=--coverage -DCMAKE_C_FLAGS=--coverage -DCMAKE_DEPENDS_USE_COMPILER=FALSE -G "CodeBlocks - MinGW Makefiles" C:\Users\osama\Desktop\Folders\University\TUK\Courses\VDS\Project\VDSProject
--- Could NOT find Python (missing: Python_EXECUTABLE Interpreter) 
--- Configuring done
--- Generating done
--- Build files have been written to: C:/Users/osama/Desktop/Folders/University/TUK/Courses/VDS/Project/VDSProject/cmake-build-debug-coverage

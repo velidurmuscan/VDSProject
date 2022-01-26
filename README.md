@@ -91,6 +91,32 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
+In the course of this Lab assignment students are going to implement a minimal BDD package in C++. This package implements the fundamental manipulation methods for ROBDDs as they were introduced in the lecture Verification of Digital Systems by Prof. Kunz. The package will be implemented using the Test Driven Development (TDD) paradigm presented by Dr. Wedler.
+
+The project is split into three parts:
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+#### Part1:
+Implementation of the basic functionality of the BDD package using the TDD methodology. This is the biggest part of the project.
+
+Main tasks in this part:
+* Set up and maintain a Git repository
+* Use CMake as a build system of the project
+* Verify the code using GTest
+* Set up a Continuous Integration (CI) pipeline with GitHub Actions
+* Use Doxygen (or a similar tool) to generate documentation for the API. _(Optional)_
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+#### Part2:
+Improvement of the performance of the implementation via provided benchmarks.
+
+Main tasks in this part:
+* Learning how to identify performance bottlenecks within the code.
+* Analyzing benchmark results.
+* How to overcome bottlenecks.
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+#### Part3:
 
 _Will be updated later._
 <!--
@@ -113,7 +139,10 @@ Use the `BLANK_README.md` to get started.
 
 ### Built With
 
+* [WSL](https://docs.microsoft.com/en-us/windows/wsl/install)
+
 _Will be updated later._
+
 <!--
 This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
 
@@ -191,21 +220,34 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 <!-- ROADMAP -->
 ## Roadmap
-
-_Will be updated later._
-
+#### Part-1
 - [X] README implementation
-- [ ] CI reading&understanding
-- [ ] ROBDD algorithm reading&understanding
-- [ ] C++ functions reading&understanding
-- [ ] How to write basic test functions in C++ properly
-- [ ] Doxygen reading&understanding
-- [ ] Google Test reading&understanding
-- [ ] Doxygen implementation
-- [ ] CI implementation
-- [ ] Function implementations
-- [ ] Test code implementations
-- [ ] Google Test implementation
+- [X] CI reading&understanding
+- [X] ROBDD algorithm reading&understanding
+- [X] C++ functions reading&understanding
+- [X] How to write basic test functions in C++ properly
+- [X] Doxygen reading&understanding
+- [X] Google Test reading&understanding
+- [ ] ~~Doxygen implementation~~
+- [X] CI implementation
+- [X] Function implementations
+- [X] Test code implementations
+- [X] Google Test implementation
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+#### Part-2
+- [X] Setting up new file directory in the project files
+- [X] Installing WSL
+- [X] Setting up Boost library via WSL integration
+- [X] Understanding the scientific paper (Brace et al., 1990)
+- [X] Implementing hashed tables in C++
+- [X] Successful benchmarks results
+- [X] Successful verification results
+- [X] README update
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+#### Part-3
+_Will be updated later._
 
 <!--
 - [x] Add Changelog
@@ -298,6 +340,8 @@ You might find helpful links below.
 * [GitHub Pages](https://pages.github.com)
 * [Font Awesome](https://fontawesome.com)
 * [React Icons](https://react-icons.github.io/react-icons/search)
+* [WSL Integration for CLion](https://www.jetbrains.com/help/clion/how-to-use-wsl-development-environment-in-product.html#wsl-tooclhain)
+* [How to install Boost library in Ubuntu](https://stackoverflow.com/questions/12578499/how-to-install-boost-on-ubuntu)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

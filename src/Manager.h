@@ -21,49 +21,50 @@ namespace ClassProject {
         BDD_ID top_var;
     };
 
-    struct computed_table_input {
+    // Input struct for "Computed Table" hashing:
+    struct ct_input {
         BDD_ID I;
         BDD_ID T;
         BDD_ID E;
-        // equality
-        bool operator == (const computed_table_input &other) const {
+        // Equality operator:
+        bool operator == (const ct_input &other) const {
             return (I == other.I) && (T == other.T) && (E == other.E);
         }
     };
 
-    struct invU_table_input {
+    // Input struct for "Inverse Unique Table" hashing:
+    struct iut_input {
         BDD_ID Low;
         BDD_ID High;
         BDD_ID TopVar;
-        // equality
-        bool operator == (const invU_table_input &other) const {
+        // Equality operator:
+        bool operator == (const iut_input &other) const {
             return (Low == other.Low) && (High == other.High) && (TopVar == other.TopVar);
         }
     };
 
-    struct hash_fn
-    {
-        std::size_t operator () (const computed_table_input &line) const
-        {
+    // Hash function for "Computed Table":
+    struct hash_func_ct {
+        std::size_t operator () (const ct_input &line) const {
             std::size_t seed = 0;
-            /*boost::hash_combine(seed, boost::hash_value(line.I));
+/*
+            boost::hash_combine(seed, boost::hash_value(line.I));
             boost::hash_combine(seed, boost::hash_value(line.T));
-            boost::hash_combine(seed, boost::hash_value(line.E));*/
-
+            boost::hash_combine(seed, boost::hash_value(line.E));
+*/
             boost::hash_combine(seed, std::hash<BDD_ID>{}(line.I));
             boost::hash_combine(seed, std::hash<BDD_ID>{}(line.T));
             boost::hash_combine(seed, std::hash<BDD_ID>{}(line.E));
-
             return seed;
         }
     };
 
-    struct invUhash_fn
-    {
-        std::size_t operator () (const invU_table_input &line) const
-        {
+    // Hash function for "Inverse Unique Table":
+    struct hash_func_iut {
+        std::size_t operator () (const iut_input &line) const {
             std::size_t seed = 0;
-            /*boost::hash_combine(seed, boost::hash_value(line.Low));
+/*
+            boost::hash_combine(seed, boost::hash_value(line.Low));
             boost::hash_combine(seed, boost::hash_value(line.High));
             boost::hash_combine(seed, boost::hash_value(line.TopVar));
 */
@@ -81,15 +82,15 @@ namespace ClassProject {
     public:
 
         std::vector<table_line> unique_table;
-        //std::unordered_map<key, BDD_ID, boost::hash<key>> mapping;
-        //std::unordered_map<key, BDD_ID, boost::hash<key>> Inverted_Table;
-        typedef std::unordered_map<computed_table_input,BDD_ID,hash_fn> Computed_Table;
-        Computed_Table mapping;
+        //std::unordered_map<key, BDD_ID, boost::hash<key>> computed_table;
+        //std::unordered_map<key, BDD_ID, boost::hash<key>> inverse_unique_table;
+        typedef std::unordered_map<ct_input, BDD_ID, hash_func_ct> computed_table_t;
+        computed_table_t computed_table;
 
-        typedef std::unordered_map<invU_table_input,BDD_ID,invUhash_fn> InvU_Table;
-        InvU_Table Inverted_Table;
+        typedef std::unordered_map<iut_input, BDD_ID, hash_func_iut> inverse_unique_table_t;
+        inverse_unique_table_t inverse_unique_table;
 
-        // Constructor
+        // Constructor:
         Manager();
 
         BDD_ID createVar(const std::string &label);
