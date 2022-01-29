@@ -9,6 +9,10 @@
 #include <gtest/gtest.h>
 #include "Reachability.h"
 
+TEST(TestingOfTest, TestingTesting){
 
+    EXPECT_EQ(1,1);
+  
+}
 
 #endif
