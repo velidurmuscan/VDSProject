@@ -12,7 +12,7 @@
 TEST(TestingOfTest, TestingTesting){
 
     EXPECT_EQ(1,1);
-  
+
 }
 
 #endif
