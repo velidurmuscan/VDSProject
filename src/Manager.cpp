@@ -5,7 +5,7 @@
 #include <vector>
 #include <iomanip>
 
-//#define include_labels 1
+#define include_labels 1
 
 using namespace ClassProject;
 //using namespace std;
@@ -20,7 +20,6 @@ Manager::Manager() {
 
     inverse_unique_table.insert({{0, 0, 0}, 0});
     inverse_unique_table.insert({{1, 1, 1}, 1});
-
 }
 
 BDD_ID Manager::createVar(const std::string &label) {

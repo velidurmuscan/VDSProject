@@ -10,8 +10,9 @@ link_directories(${CMAKE_SOURCE_DIR}/src/test/)
 
 #include_directories(${CMAKE_SOURCE_DIR}/src/reachability/)
 #link_directories(${CMAKE_SOURCE_DIR}/src/reachability/)
+################################
 add_subdirectory(src/reachability/)
-
+################################
 include_directories(${CMAKE_SOURCE_DIR}/src/bench/)
 link_directories(${CMAKE_SOURCE_DIR}/src/bench/)
 

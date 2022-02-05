@@ -7,7 +7,6 @@
 #define VDSPROJECT_REACHABILITY_H
 
 #include "ReachabilityInterface.h"
-#include <iostream>
 
 namespace ClassProject {
 
@@ -17,12 +16,17 @@ namespace ClassProject {
         // ReachabilityInterface() = delete;
         // virtual ~ReachabilityInterface() = default;
 
+        std::vector<BDD_ID> StateBits;
+        std::vector<BDD_ID> transitionFunctions;
+        std::vector<bool> InitStateVector;
+
         Reachability(unsigned int stateSize);
 
         ~Reachability();
 
-        // const std::vector<BDD_ID> &getStates() const;
-        const std::vector<BDD_ID> &getStates();
+        // Putting const after a function declaration makes the function constant,
+        // meaning it cannot alter anything in the object that contains the function.
+        const std::vector<BDD_ID> &getStates() const;
 
         bool isReachable(const std::vector<bool> &stateVector);
 

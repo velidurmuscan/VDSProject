@@ -5,6 +5,7 @@
 #include <iostream>
 #include <string>
 #include "Manager.h"
+#include "reachability/Reachability.h"
 #include <unordered_map>
 //using namespace std;
 //using namespace ClassProject;
@@ -22,6 +23,22 @@ int main(int argc, char* argv[])
     my_ROBDD.print_table();
 
 
+
+  /*  ClassProject::Manager Transition_Function;
+    ClassProject::BDD_ID S0 = Transition_Function.createVar("S0");
+    ClassProject::BDD_ID S1 = Transition_Function.createVar("S1");
+    ClassProject::BDD_ID S0_ = Transition_Function.neg(S0);
+    ClassProject::BDD_ID S1_ = Transition_Function.neg(S1);
+    ClassProject::Manager Transition_Relation;
+    ClassProject::BDD_ID tS0 = Transition_Relation.createVar("S0");
+    ClassProject::BDD_ID tS1 = Transition_Relation.createVar("S1");
+    ClassProject::BDD_ID tS0_ = Transition_Relation.neg(S0);
+    ClassProject::BDD_ID tS1_ = Transition_Relation.neg(S1);
+    ClassProject::BDD_ID Tau = Transition_Relation.
+
+    (S0' xnor s0BAR) AND (S1' xnor S1BAR)
+    (tS0_ xnor s0BAR) AND (tS1_ xnor S1BAR)
+*/
 /*
     *for (auto &kv : my_ROBDD.mapping) {
         std::cout   << "I:" << kv.first
