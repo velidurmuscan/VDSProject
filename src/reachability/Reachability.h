@@ -17,8 +17,10 @@ namespace ClassProject {
         // virtual ~ReachabilityInterface() = default;
 
         std::vector<BDD_ID> StateBits;
+        std::vector<BDD_ID> NextStates;
         std::vector<BDD_ID> transitionFunctions;
         std::vector<bool> InitStateVector;
+
 
         Reachability(unsigned int stateSize);
 

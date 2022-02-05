@@ -5,7 +5,7 @@
 #include <vector>
 #include <iomanip>
 
-#define include_labels 1
+//#define include_labels 1
 
 using namespace ClassProject;
 //using namespace std;
@@ -250,7 +250,15 @@ BDD_ID Manager::neg(BDD_ID a) {
     neg_ID = ite(a, 0, 1);
     // Negation label is added inside ite() function
     #ifdef include_labels
-        unique_table[neg_ID].label = "!(" + unique_table[a].label + ")";
+        std::string label = unique_table[neg_ID].label;
+        if (label.front() == '!') {
+            unique_table[neg_ID].label = label.substr(2,label.size()-3);
+        }
+        else {
+            unique_table[neg_ID].label = "!(" + unique_table[a].label + ")";
+        }
+
+        //unique_table[neg_ID].label = "!(" + unique_table[a].label + ")";
     #endif
     return neg_ID;
 }
