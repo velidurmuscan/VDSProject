@@ -4,7 +4,8 @@
 //
 
 #include "Reachability.h"
-
+#include <iostream>
+using  namespace std;
 using namespace ClassProject;
 //using namespace std;
 
@@ -22,17 +23,19 @@ Reachability::Reachability(unsigned int stateSize) : ReachabilityInterface(state
     for(int i = 0 ; i < stateSize ; i++){
         NextStates.push_back(Reachability::createVar("s" + std::to_string(i) + "'")); //Creating the next state variables s'
     }
-    //Defining the transition function to its default value as identity function
-    Reachability::setTransitionFunctions(transitionFunctions);
-    //Defining the initial state to its default value as 0
-    Reachability::setInitState(InitStateVector);
-    //@TODO: Hence, after calling the constructor, the only reachable state should be the initial state.
 
     for(int i = 0; i < stateSize + 2; i++){
         if(Reachability::isVariable(i)){
             StateBits.push_back(i);
         }
     }
+    //Defining the transition function to its default value as identity function
+    Reachability::setTransitionFunctions(transitionFunctions);
+    //Defining the initial state to its default value as 0
+    Reachability::setInitState(InitStateVector);
+    //@TODO: Hence, after calling the constructor, the only reachable state should be the initial state.
+
+
 }
 
 Reachability::~Reachability() {

@@ -61,8 +61,8 @@ TEST(ReachsetTransitionFunctions, setTransitionFunctions){
 
 TEST(ReachSetTransitionFunctionsStateSize, SetTransitionFunctionsStateSize) {
     ClassProject::Reachability Test_Reach(2);
-    EXPECT_THROW(Test_Reach.setTransitionFunctions({1,1,1}), std::runtime_error);
-    EXPECT_NO_THROW(Test_Reach.setTransitionFunctions({1,1}));
+    EXPECT_THROW(Test_Reach.setTransitionFunctions({Test_Reach.neg(2),Test_Reach.neg(3),Test_Reach.neg(4)}), std::runtime_error);
+    EXPECT_NO_THROW(Test_Reach.setTransitionFunctions({Test_Reach.neg(2),Test_Reach.neg(3)}));
 }
 
 TEST(ReachisReachable, isReachable){
