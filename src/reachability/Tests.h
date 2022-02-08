@@ -77,7 +77,7 @@ TEST(ReachSetTransitionFunctions, SetTransitionFunctions){
     ClassProject::Reachability Test_Reach(2);
     std::vector<BDD_ID> transitionFunctions = {Test_Reach.neg(2),Test_Reach.neg(3)};
     Test_Reach.setTransitionFunctions(transitionFunctions);
-    EXPECT_EQ(Test_Reach.transitionFunctions,transitionFunctions);
+    EXPECT_EQ(Test_Reach.getTransitionFunctions(),transitionFunctions);
 }
 
 //Check if the exception std::runtime_error is thrown if size of input transition function vector does not match with number of state bits
@@ -99,7 +99,7 @@ TEST(ReachSetInitState, SetInitState){
     ClassProject::Reachability Test_Reach(2);
     std::vector<bool> InitialState = {true,false};
     Test_Reach.setInitState(InitialState);
-    EXPECT_EQ(Test_Reach.InitStateVector,InitialState);
+    EXPECT_EQ(Test_Reach.getInitStateVector(),InitialState);
 }
 
 //Check if the exception std::runtime_error is thrown if size of input state vector does not match with number of state bits
@@ -107,6 +107,27 @@ TEST(ReachSetInitStateStateSize, SetInitStateStateSize) {
     ClassProject::Reachability Test_Reach(2);
     EXPECT_THROW(Test_Reach.setInitState({true,true,true}), std::runtime_error);
     EXPECT_NO_THROW(Test_Reach.setInitState({true,true}));
+}
+
+//Testing the getNextStates function
+TEST(ReachGetNextStatesTest, GetNextStatesTest){
+    ClassProject::Reachability Test_Reach(5);
+    std::vector<BDD_ID> Expected_States = {7,8,9,10,11};
+    EXPECT_EQ(Test_Reach.getNextStates(), Expected_States);
+}
+
+//Testing the getTransitionFunctions function
+TEST(ReachGetTransitionFunctionsTest, GetTransitionFunctionsTest){
+    ClassProject::Reachability Test_Reach(5);
+    std::vector<BDD_ID> Expected_States = {2,3,4,5,6};
+    EXPECT_EQ(Test_Reach.getTransitionFunctions(), Expected_States);
+}
+
+//Testing the getInitStateVector function
+TEST(ReachGetInitStateVectorTest, GetInitStateVectorTest){
+    ClassProject::Reachability Test_Reach(5);
+    std::vector<bool> Expected_States = {false,false,false,false,false};
+    EXPECT_EQ(Test_Reach.getInitStateVector(), Expected_States);
 }
 
 #endif

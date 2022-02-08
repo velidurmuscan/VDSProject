@@ -12,14 +12,16 @@ namespace ClassProject {
 
     class Reachability : public ReachabilityInterface {
 
-    public:
-        // ReachabilityInterface() = delete;
-        // virtual ~ReachabilityInterface() = default;
+    private:
 
         std::vector<BDD_ID> StateBits;
         std::vector<BDD_ID> NextStates;
         std::vector<BDD_ID> transitionFunctions;
         std::vector<bool> InitStateVector;
+
+    public:
+        // ReachabilityInterface() = delete;
+        // virtual ~ReachabilityInterface() = default;
 
 
         Reachability(unsigned int stateSize);
@@ -35,6 +37,12 @@ namespace ClassProject {
         void setTransitionFunctions(const std::vector<BDD_ID> &transitionFunctions);
 
         void setInitState(const std::vector<bool> &stateVector);
+
+        const std::vector<BDD_ID> &getNextStates() const;
+
+        const std::vector<BDD_ID> &getTransitionFunctions() const;
+
+        const std::vector<bool> &getInitStateVector() const;
     };
 }
 #endif

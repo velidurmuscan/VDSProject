@@ -124,3 +124,15 @@ void Reachability::setInitState(const std::vector<bool> &stateVector){
     }
     InitStateVector = stateVector;
 }
+
+const std::vector<BDD_ID>& Reachability::getNextStates() const{
+    return NextStates;
+}
+
+const std::vector<BDD_ID>& Reachability::getTransitionFunctions() const{
+    return transitionFunctions;
+}
+
+const std::vector<bool>& Reachability::getInitStateVector() const{
+    return InitStateVector;
+}
