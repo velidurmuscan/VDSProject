@@ -87,6 +87,13 @@ TEST(ReachSetTransitionFunctionsStateSize, SetTransitionFunctionsStateSize) {
     EXPECT_NO_THROW(Test_Reach.setTransitionFunctions({Test_Reach.neg(2),Test_Reach.neg(3)}));
 }
 
+//Check if the exception std::runtime_error is thrown if BDD_ID given in the input transition function vector is not present in the unique table
+TEST(ReachSetTransitionFunctionsInvBDDID, SetTransitionFunctionsInvBDDID) {
+    ClassProject::Reachability Test_Reach(2);
+    EXPECT_THROW(Test_Reach.setTransitionFunctions({Test_Reach.neg(2),7}), std::runtime_error); //Last added BDD_ID to unique table would be 6 
+    EXPECT_NO_THROW(Test_Reach.setTransitionFunctions({Test_Reach.neg(2),Test_Reach.neg(2)}));
+}
+
 //Testing the setInitState function
 TEST(ReachSetInitState, SetInitState){
     ClassProject::Reachability Test_Reach(2);

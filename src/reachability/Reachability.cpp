@@ -104,10 +104,16 @@ bool Reachability::isReachable(const std::vector<bool> &stateVector){
 }
 
 void Reachability::setTransitionFunctions(const std::vector<BDD_ID> &transitionFunctions){
-    // Exception std::runtime_error to be thrown if size of input tracnstion function vector does not match with number of state bits
+    // Exception std::runtime_error to be thrown if size of input transition function vector does not match with number of state bits
     if(transitionFunctions.size() != StateBits.size()){
         throw std::runtime_error("The number of transition functions inserted doesn't match the number of the transition functions allowed");
     }   
+    // Exception std::runtime_error to be thrown if BDD_ID given in the input transition function vector is not present in the unique table
+    for(const auto& value: transitionFunctions) {
+        if(value >= uniqueTableSize()){
+           throw std::runtime_error("BDD_ID in the given transition function vector is invalid"); 
+        }
+    }
     this -> transitionFunctions = transitionFunctions;
 }
 
