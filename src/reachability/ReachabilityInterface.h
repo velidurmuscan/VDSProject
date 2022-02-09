@@ -26,7 +26,6 @@ namespace ClassProject {
          * @throws std::runtime_error if stateSize is zero
          */
         explicit ReachabilityInterface(unsigned int stateSize) {};
-        // ReachabilityInterface(unsigned int stateSize) {};
 
         /**
          * Returns a vector containing all state bits of the state machine.

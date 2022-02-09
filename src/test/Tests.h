@@ -8,7 +8,7 @@
 #include "gtest/gtest.h"
 #include "../Manager.cpp"
 
-//ROBDD initialization test:
+// ROBDD initialization test:
 TEST(ROBDDConstructorTest, ConstructorTest){
     ClassProject::Manager Test_ROBDD;
     //Check if the false node is in the correct position

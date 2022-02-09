@@ -117,8 +117,8 @@ Main tasks in this part:
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 #### Part3:
+Extending the existing implementation by a practical application of BDD. Using BDDs, it is possible to symbolically represent a state-space. This representation allows to check quickly, whether a specific state is within the reachable state space or not.
 
-_Will be updated later._
 <!--
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
@@ -247,17 +247,15 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 #### Part-3
-_Will be updated later._
+- [X] Setting up new file directory in the project files
+- [X] Implementation of tests
+- [X] Implementation of functions
+- [X] Successful test results
+- [X] README update
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-<!--
-- [x] Add Changelog
-- [x] Add back to top links
-- [ ] Add Additional Templates w/ Examples
-- [ ] Add "components" document to easily copy & paste sections of the readme
-- [ ] Multi-language Support
-    - [ ] Chinese
-    - [ ] Spanish
--->
+
+
 See the [open issues](https://github.com/velidurmuscan/VDSProject_Group6/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#top">back to top</a>)</p>

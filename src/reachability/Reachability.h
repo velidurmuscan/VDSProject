@@ -20,9 +20,6 @@ namespace ClassProject {
         std::vector<bool> InitStateVector;
 
     public:
-        // ReachabilityInterface() = delete;
-        // virtual ~ReachabilityInterface() = default;
-
 
         Reachability(unsigned int stateSize);
 
